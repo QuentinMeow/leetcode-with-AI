@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "leetcode": {
+      "command": "/ABSOLUTE/PATH/TO/node",
+      "args": [
+        "/ABSOLUTE/PATH/TO/THIS-REPO/node_modules/@jinzcdev/leetcode-mcp-server/build/index.js",
+        "--site",
+        "global"
+      ],
+      "env": {
+        "LEETCODE_SITE": "global",
+        "LEETCODE_SESSION": "",
+        "PATH": "/ABSOLUTE/PATH/TO/node-directory:/usr/local/bin:/usr/bin:/bin"
+      }
+    }
+  }
+}

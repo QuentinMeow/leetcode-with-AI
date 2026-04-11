@@ -1,0 +1,45 @@
+# MCP config (local secrets and machine paths — not committed)
+.cursor/mcp.json
+
+# Memory (local, cross-session — not committed)
+.cursor/MEMORY.md
+
+# Skill runtime artifacts
+.cursor/skills/*/logs/
+
+# Worklog
+.agents/worklog/
+
+# Environment and secrets
+.env
+.env.local
+
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Go
+solutions/golang/bin/
+solutions/golang/pkg/
+
+# Java
+*.class
+*.jar
+
+# C++
+*.o
+*.out
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
