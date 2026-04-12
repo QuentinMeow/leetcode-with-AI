@@ -1,0 +1,6 @@
+# LeetCode 603 — Consecutive Available Seats
+# https://leetcode.com/problems/consecutive-available-seats/
+
+class Solution:
+    pass
+

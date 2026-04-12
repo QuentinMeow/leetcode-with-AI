@@ -1,0 +1,9 @@
+# LeetCode 947 — Most Stones Removed with Same Row or Column
+# https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/
+
+from typing import List
+
+class Solution:
+    def removeStones(self, stones: List[List[int]]) -> int:
+        pass
+        

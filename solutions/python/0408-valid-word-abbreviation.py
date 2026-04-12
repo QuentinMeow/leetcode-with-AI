@@ -1,0 +1,6 @@
+# LeetCode 408 — Valid Word Abbreviation
+# https://leetcode.com/problems/valid-word-abbreviation/
+
+class Solution:
+    pass
+

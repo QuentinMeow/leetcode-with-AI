@@ -6,7 +6,7 @@
     "skip": 3801,
     "limit": 100,
     "totalInCategory": 3901,
-    "fetchedAt": "2026-04-12T12:33:14.610Z",
+    "fetchedAt": "2026-04-12T14:58:26.117Z",
     "submissionLanguages": [
       "python3",
       "golang"
@@ -14,21 +14,6 @@
     "note": "LeetCode problem catalog is the same for all supported languages; Python 3 and Go are standard judge languages."
   },
   "problems": [
-    {
-      "frontendId": "3801",
-      "title": "Minimum Cost to Merge Sorted Lists",
-      "titleSlug": "minimum-cost-to-merge-sorted-lists",
-      "difficulty": "Hard",
-      "acRate": 34.083655299848814,
-      "isPaidOnly": false,
-      "topicTags": [
-        "array",
-        "two-pointers",
-        "binary-search",
-        "dynamic-programming",
-        "bit-manipulation"
-      ]
-    },
     {
       "frontendId": "3802",
       "title": "Number of Ways to Paint Sheets",
@@ -43,7 +28,7 @@
       "title": "Count Residue Prefixes",
       "titleSlug": "count-residue-prefixes",
       "difficulty": "Easy",
-      "acRate": 65.54881082694796,
+      "acRate": 65.54979031914138,
       "isPaidOnly": false,
       "topicTags": [
         "hash-table",
@@ -68,7 +53,7 @@
       "title": "Count Caesar Cipher Pairs",
       "titleSlug": "count-caesar-cipher-pairs",
       "difficulty": "Medium",
-      "acRate": 51.10628558013968,
+      "acRate": 51.10611246943765,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -83,7 +68,7 @@
       "title": "Maximum Bitwise AND After Increment Operations",
       "titleSlug": "maximum-bitwise-and-after-increment-operations",
       "difficulty": "Hard",
-      "acRate": 31.492516304602823,
+      "acRate": 31.49920255183413,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -110,7 +95,7 @@
       "title": "Find Emotionally Consistent Users",
       "titleSlug": "find-emotionally-consistent-users",
       "difficulty": "Medium",
-      "acRate": 50.61050061050061,
+      "acRate": 50.59196875381423,
       "isPaidOnly": false,
       "topicTags": []
     },
@@ -119,7 +104,7 @@
       "title": "Best Reachable Tower",
       "titleSlug": "best-reachable-tower",
       "difficulty": "Medium",
-      "acRate": 55.874026893135174,
+      "acRate": 55.87459972046778,
       "isPaidOnly": false,
       "topicTags": [
         "array"
@@ -130,7 +115,7 @@
       "title": "Minimum Operations to Reach Target Array",
       "titleSlug": "minimum-operations-to-reach-target-array",
       "difficulty": "Medium",
-      "acRate": 63.4101987725103,
+      "acRate": 63.4111228974087,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -143,7 +128,7 @@
       "title": "Number of Alternating XOR Partitions",
       "titleSlug": "number-of-alternating-xor-partitions",
       "difficulty": "Medium",
-      "acRate": 26.881686986812642,
+      "acRate": 26.883961061176255,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -157,7 +142,7 @@
       "title": "Minimum Edge Toggles on a Tree",
       "titleSlug": "minimum-edge-toggles-on-a-tree",
       "difficulty": "Hard",
-      "acRate": 68.92956441149212,
+      "acRate": 68.93316344260396,
       "isPaidOnly": false,
       "topicTags": [
         "tree",
@@ -172,7 +157,7 @@
       "title": "Vowel-Consonant Score",
       "titleSlug": "vowel-consonant-score",
       "difficulty": "Easy",
-      "acRate": 53.950592533190765,
+      "acRate": 53.94930280215618,
       "isPaidOnly": false,
       "topicTags": [
         "string",
@@ -184,7 +169,7 @@
       "title": "Maximum Capacity Within Budget",
       "titleSlug": "maximum-capacity-within-budget",
       "difficulty": "Medium",
-      "acRate": 20.19170267209195,
+      "acRate": 20.191904362416107,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -198,7 +183,7 @@
       "title": "Design Auction System",
       "titleSlug": "design-auction-system",
       "difficulty": "Medium",
-      "acRate": 42.14255045083727,
+      "acRate": 42.142972146192236,
       "isPaidOnly": false,
       "topicTags": [
         "hash-table",
@@ -212,7 +197,7 @@
       "title": "Lexicographically Smallest String After Deleting Duplicate Characters",
       "titleSlug": "lexicographically-smallest-string-after-deleting-duplicate-characters",
       "difficulty": "Hard",
-      "acRate": 19.662075298438936,
+      "acRate": 19.665026078013664,
       "isPaidOnly": false,
       "topicTags": [
         "hash-table",
@@ -250,7 +235,7 @@
       "title": "Rotate Non Negative Elements",
       "titleSlug": "rotate-non-negative-elements",
       "difficulty": "Medium",
-      "acRate": 47.94241015757851,
+      "acRate": 47.94304694319431,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -299,7 +284,7 @@
       "title": "Reverse Letters Then Special Characters in a String",
       "titleSlug": "reverse-letters-then-special-characters-in-a-string",
       "difficulty": "Easy",
-      "acRate": 81.9163567030288,
+      "acRate": 81.91918244890306,
       "isPaidOnly": false,
       "topicTags": [
         "two-pointers",
@@ -324,7 +309,7 @@
       "title": "Longest Strictly Increasing Subsequence With Non-Zero Bitwise AND",
       "titleSlug": "longest-strictly-increasing-subsequence-with-non-zero-bitwise-and",
       "difficulty": "Medium",
-      "acRate": 50.60919307254015,
+      "acRate": 50.60688630170919,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -338,7 +323,7 @@
       "title": "Minimum Partition Score",
       "titleSlug": "minimum-partition-score",
       "difficulty": "Hard",
-      "acRate": 33.82338082247146,
+      "acRate": 33.819963629015966,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -354,7 +339,7 @@
       "title": "Count Monobit Integers",
       "titleSlug": "count-monobit-integers",
       "difficulty": "Easy",
-      "acRate": 66.32377870241947,
+      "acRate": 66.32421117517883,
       "isPaidOnly": false,
       "topicTags": [
         "bit-manipulation",
@@ -366,7 +351,7 @@
       "title": "Final Element After Subarray Deletions",
       "titleSlug": "final-element-after-subarray-deletions",
       "difficulty": "Medium",
-      "acRate": 40.36414957596409,
+      "acRate": 40.365666043661236,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -380,7 +365,7 @@
       "title": "Design Ride Sharing System",
       "titleSlug": "design-ride-sharing-system",
       "difficulty": "Medium",
-      "acRate": 63.52786329362423,
+      "acRate": 63.527259748371556,
       "isPaidOnly": false,
       "topicTags": [
         "hash-table",
@@ -394,7 +379,7 @@
       "title": "Longest Alternating Subarray After Removing At Most One Element",
       "titleSlug": "longest-alternating-subarray-after-removing-at-most-one-element",
       "difficulty": "Hard",
-      "acRate": 30.821678998954017,
+      "acRate": 30.824358875029056,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -407,7 +392,7 @@
       "title": "Median of a Binary Search Tree Level",
       "titleSlug": "median-of-a-binary-search-tree-level",
       "difficulty": "Medium",
-      "acRate": 88.04243008678881,
+      "acRate": 88.0539499036609,
       "isPaidOnly": true,
       "topicTags": [
         "tree",
@@ -422,7 +407,7 @@
       "title": "Find Users with Persistent Behavior Patterns",
       "titleSlug": "find-users-with-persistent-behavior-patterns",
       "difficulty": "Hard",
-      "acRate": 63.25262481251339,
+      "acRate": 63.260497000856894,
       "isPaidOnly": false,
       "topicTags": []
     },
@@ -431,7 +416,7 @@
       "title": "Count Dominant Indices",
       "titleSlug": "count-dominant-indices",
       "difficulty": "Easy",
-      "acRate": 65.93646545044727,
+      "acRate": 65.93689103843354,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -443,7 +428,7 @@
       "title": "Merge Adjacent Equal Elements",
       "titleSlug": "merge-adjacent-equal-elements",
       "difficulty": "Medium",
-      "acRate": 42.24342533399686,
+      "acRate": 42.241808298882255,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -469,7 +454,7 @@
       "title": "Maximum Score Using Exactly K Pairs",
       "titleSlug": "maximum-score-using-exactly-k-pairs",
       "difficulty": "Hard",
-      "acRate": 41.501230047485556,
+      "acRate": 41.502903401127035,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -494,7 +479,7 @@
       "title": "Weighted Word Mapping",
       "titleSlug": "weighted-word-mapping",
       "difficulty": "Easy",
-      "acRate": 85.58204367561385,
+      "acRate": 85.58384704726168,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -507,7 +492,7 @@
       "title": "Number of Prefix Connected Groups",
       "titleSlug": "number-of-prefix-connected-groups",
       "difficulty": "Medium",
-      "acRate": 60.59832293045836,
+      "acRate": 60.5973207249803,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -521,7 +506,7 @@
       "title": "House Robber V",
       "titleSlug": "house-robber-v",
       "difficulty": "Medium",
-      "acRate": 53.89470714764273,
+      "acRate": 53.89863375936535,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -548,7 +533,7 @@
       "title": "Toggle Light Bulbs",
       "titleSlug": "toggle-light-bulbs",
       "difficulty": "Easy",
-      "acRate": 71.88578984744227,
+      "acRate": 71.8862865608051,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -562,7 +547,7 @@
       "title": "First Element with Unique Frequency",
       "titleSlug": "first-element-with-unique-frequency",
       "difficulty": "Medium",
-      "acRate": 69.98766954377312,
+      "acRate": 69.98839570641138,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -575,7 +560,7 @@
       "title": "Longest Almost-Palindromic Substring",
       "titleSlug": "longest-almost-palindromic-substring",
       "difficulty": "Medium",
-      "acRate": 22.359021831366196,
+      "acRate": 22.362088115512773,
       "isPaidOnly": false,
       "topicTags": [
         "two-pointers",
@@ -617,7 +602,7 @@
       "title": "Find the Score Difference in a Game",
       "titleSlug": "find-the-score-difference-in-a-game",
       "difficulty": "Medium",
-      "acRate": 72.2442184199113,
+      "acRate": 72.24499503350634,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -629,7 +614,7 @@
       "title": "Check Digitorial Permutation",
       "titleSlug": "check-digitorial-permutation",
       "difficulty": "Medium",
-      "acRate": 46.64648112353776,
+      "acRate": 46.646034902688086,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -641,7 +626,7 @@
       "title": "Maximum Bitwise XOR After Rearrangement",
       "titleSlug": "maximum-bitwise-xor-after-rearrangement",
       "difficulty": "Medium",
-      "acRate": 71.16838034976712,
+      "acRate": 71.16901377507305,
       "isPaidOnly": false,
       "topicTags": [
         "string",
@@ -684,7 +669,7 @@
       "title": "Smallest Pair With Different Frequencies",
       "titleSlug": "smallest-pair-with-different-frequencies",
       "difficulty": "Easy",
-      "acRate": 69.35994159162814,
+      "acRate": 69.35979034069636,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -697,7 +682,7 @@
       "title": "Merge Close Characters",
       "titleSlug": "merge-close-characters",
       "difficulty": "Medium",
-      "acRate": 54.49078564500485,
+      "acRate": 54.49166844484103,
       "isPaidOnly": false,
       "topicTags": [
         "hash-table",
@@ -721,7 +706,7 @@
       "title": "Sum of K-Digit Numbers in a Range",
       "titleSlug": "sum-of-k-digit-numbers-in-a-range",
       "difficulty": "Hard",
-      "acRate": 50.509041179152106,
+      "acRate": 50.50520398085543,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -735,7 +720,7 @@
       "title": "Trim Trailing Vowels",
       "titleSlug": "trim-trailing-vowels",
       "difficulty": "Easy",
-      "acRate": 77.29544078938108,
+      "acRate": 77.2983167257783,
       "isPaidOnly": false,
       "topicTags": [
         "string"
@@ -746,7 +731,7 @@
       "title": "Minimum Cost to Split into Ones",
       "titleSlug": "minimum-cost-to-split-into-ones",
       "difficulty": "Medium",
-      "acRate": 83.24579739675735,
+      "acRate": 83.24260729086184,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -758,7 +743,7 @@
       "title": "Minimum Bitwise OR From Grid",
       "titleSlug": "minimum-bitwise-or-from-grid",
       "difficulty": "Medium",
-      "acRate": 26.63064453878811,
+      "acRate": 26.63347612982903,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -772,7 +757,7 @@
       "title": "Count Subarrays With K Distinct Integers",
       "titleSlug": "count-subarrays-with-k-distinct-integers",
       "difficulty": "Hard",
-      "acRate": 19.756639689957826,
+      "acRate": 19.75551376303642,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -799,7 +784,7 @@
       "title": "Minimum Capacity Box",
       "titleSlug": "minimum-capacity-box",
       "difficulty": "Easy",
-      "acRate": 72.48859229620291,
+      "acRate": 72.4912309547298,
       "isPaidOnly": false,
       "topicTags": [
         "array"
@@ -810,7 +795,7 @@
       "title": "Find the Smallest Balanced Index",
       "titleSlug": "find-the-smallest-balanced-index",
       "difficulty": "Medium",
-      "acRate": 19.217649239896183,
+      "acRate": 19.216529573466243,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -858,7 +843,7 @@
       "title": "First Unique Even Element",
       "titleSlug": "first-unique-even-element",
       "difficulty": "Easy",
-      "acRate": 66.26959625318133,
+      "acRate": 66.2721358872425,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -871,7 +856,7 @@
       "title": "Sum of GCD of Formed Pairs",
       "titleSlug": "sum-of-gcd-of-formed-pairs",
       "difficulty": "Medium",
-      "acRate": 65.63790010590243,
+      "acRate": 65.63580567081605,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -886,7 +871,7 @@
       "title": "Minimum Cost to Equalize Arrays Using Swaps",
       "titleSlug": "minimum-cost-to-equalize-arrays-using-swaps",
       "difficulty": "Medium",
-      "acRate": 48.3401745506715,
+      "acRate": 48.342233203156134,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -900,7 +885,7 @@
       "title": "Count Fancy Numbers in a Range",
       "titleSlug": "count-fancy-numbers-in-a-range",
       "difficulty": "Hard",
-      "acRate": 25.878768092284254,
+      "acRate": 25.88945707757589,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -912,7 +897,7 @@
       "title": "Count Commas in Range",
       "titleSlug": "count-commas-in-range",
       "difficulty": "Easy",
-      "acRate": 68.72923947001223,
+      "acRate": 68.72854779366374,
       "isPaidOnly": false,
       "topicTags": [
         "math"
@@ -923,7 +908,7 @@
       "title": "Count Commas in Range II",
       "titleSlug": "count-commas-in-range-ii",
       "difficulty": "Medium",
-      "acRate": 40.9357779781585,
+      "acRate": 40.93545575668934,
       "isPaidOnly": false,
       "topicTags": [
         "math"
@@ -934,7 +919,7 @@
       "title": "Longest Arithmetic Sequence After Changing At Most One Element",
       "titleSlug": "longest-arithmetic-sequence-after-changing-at-most-one-element",
       "difficulty": "Medium",
-      "acRate": 20.85632354395333,
+      "acRate": 20.860933699800288,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -946,7 +931,7 @@
       "title": "Maximum Points Activated with One Addition",
       "titleSlug": "maximum-points-activated-with-one-addition",
       "difficulty": "Hard",
-      "acRate": 43.70409233997901,
+      "acRate": 43.707373943456716,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -971,7 +956,7 @@
       "title": "Construct Uniform Parity Array I",
       "titleSlug": "construct-uniform-parity-array-i",
       "difficulty": "Easy",
-      "acRate": 76.09813015094674,
+      "acRate": 76.09385844445428,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -983,7 +968,7 @@
       "title": "Construct Uniform Parity Array II",
       "titleSlug": "construct-uniform-parity-array-ii",
       "difficulty": "Medium",
-      "acRate": 49.78587599901803,
+      "acRate": 49.78588767967706,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -995,7 +980,7 @@
       "title": "Minimum Removals to Achieve Target XOR",
       "titleSlug": "minimum-removals-to-achieve-target-xor",
       "difficulty": "Medium",
-      "acRate": 41.57775750604847,
+      "acRate": 41.57958398604033,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1036,7 +1021,7 @@
       "title": "Minimum Absolute Difference Between Two Values",
       "titleSlug": "minimum-absolute-difference-between-two-values",
       "difficulty": "Easy",
-      "acRate": 66.18670548966693,
+      "acRate": 66.19333309666655,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1048,7 +1033,7 @@
       "title": "Direction Assignments with Exactly K Visible People",
       "titleSlug": "direction-assignments-with-exactly-k-visible-people",
       "difficulty": "Medium",
-      "acRate": 36.0650945234847,
+      "acRate": 36.064894886848066,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -1060,7 +1045,7 @@
       "title": "Minimum XOR Path in a Grid",
       "titleSlug": "minimum-xor-path-in-a-grid",
       "difficulty": "Medium",
-      "acRate": 39.37461268332989,
+      "acRate": 39.378291851698854,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1074,7 +1059,7 @@
       "title": "Count Non Decreasing Arrays With Given Digit Sums",
       "titleSlug": "count-non-decreasing-arrays-with-given-digit-sums",
       "difficulty": "Hard",
-      "acRate": 41.765214883184306,
+      "acRate": 41.76339124792733,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1087,7 +1072,7 @@
       "title": "First Matching Character From Both Ends",
       "titleSlug": "first-matching-character-from-both-ends",
       "difficulty": "Easy",
-      "acRate": 81.6172998322776,
+      "acRate": 81.60913928623737,
       "isPaidOnly": false,
       "topicTags": [
         "two-pointers",
@@ -1099,7 +1084,7 @@
       "title": "Design Event Manager",
       "titleSlug": "design-event-manager",
       "difficulty": "Medium",
-      "acRate": 50.81828234426834,
+      "acRate": 50.81142815038591,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1114,7 +1099,7 @@
       "title": "Sum of Sortable Integers",
       "titleSlug": "sum-of-sortable-integers",
       "difficulty": "Hard",
-      "acRate": 30.895465237131447,
+      "acRate": 30.8918416447944,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1128,7 +1113,7 @@
       "title": "Incremental Even-Weighted Cycle Queries",
       "titleSlug": "incremental-even-weighted-cycle-queries",
       "difficulty": "Hard",
-      "acRate": 51.503006012024045,
+      "acRate": 51.49867658630804,
       "isPaidOnly": false,
       "topicTags": [
         "union-find",
@@ -1154,7 +1139,7 @@
       "title": "Mirror Frequency Distance",
       "titleSlug": "mirror-frequency-distance",
       "difficulty": "Medium",
-      "acRate": 60.65250611246944,
+      "acRate": 60.660894528685084,
       "isPaidOnly": false,
       "topicTags": [
         "hash-table",
@@ -1167,7 +1152,7 @@
       "title": "Integers With Multiple Sum of Two Cubes",
       "titleSlug": "integers-with-multiple-sum-of-two-cubes",
       "difficulty": "Medium",
-      "acRate": 55.792859680948546,
+      "acRate": 55.78605068400987,
       "isPaidOnly": false,
       "topicTags": [
         "hash-table",
@@ -1181,7 +1166,7 @@
       "title": "Minimum Increase to Maximize Special Indices",
       "titleSlug": "minimum-increase-to-maximize-special-indices",
       "difficulty": "Medium",
-      "acRate": 18.971868223271844,
+      "acRate": 18.979455610769115,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1195,7 +1180,7 @@
       "title": "Minimum Operations to Achieve At Least K Peaks",
       "titleSlug": "minimum-operations-to-achieve-at-least-k-peaks",
       "difficulty": "Hard",
-      "acRate": 29.94034655809109,
+      "acRate": 29.93997825984215,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1216,7 +1201,7 @@
       "title": "Traffic Signal Color",
       "titleSlug": "traffic-signal-color",
       "difficulty": "Easy",
-      "acRate": 82.05402583844447,
+      "acRate": 82.11098176173846,
       "isPaidOnly": false,
       "topicTags": []
     },
@@ -1225,7 +1210,7 @@
       "title": "Count Digit Appearances",
       "titleSlug": "count-digit-appearances",
       "difficulty": "Medium",
-      "acRate": 85.82767711897684,
+      "acRate": 85.90171225261285,
       "isPaidOnly": false,
       "topicTags": []
     },
@@ -1234,7 +1219,7 @@
       "title": "Minimum Operations to Transform Array into Alternating Prime",
       "titleSlug": "minimum-operations-to-transform-array-into-alternating-prime",
       "difficulty": "Medium",
-      "acRate": 52.402544111612634,
+      "acRate": 52.41781849134611,
       "isPaidOnly": false,
       "topicTags": []
     },
@@ -1243,7 +1228,7 @@
       "title": "Maximum Value of Concatenated Binary Segments",
       "titleSlug": "maximum-value-of-concatenated-binary-segments",
       "difficulty": "Hard",
-      "acRate": 23.251327854556987,
+      "acRate": 23.453338906886824,
       "isPaidOnly": false,
       "topicTags": []
     },
@@ -1252,7 +1237,7 @@
       "title": "Find the Degree of Each Vertex",
       "titleSlug": "find-the-degree-of-each-vertex",
       "difficulty": "Easy",
-      "acRate": 92.22275999758,
+      "acRate": 92.27243344890404,
       "isPaidOnly": false,
       "topicTags": []
     },
@@ -1261,7 +1246,7 @@
       "title": "Angles of a Triangle",
       "titleSlug": "angles-of-a-triangle",
       "difficulty": "Medium",
-      "acRate": 60.5212185243881,
+      "acRate": 60.6337509211496,
       "isPaidOnly": false,
       "topicTags": []
     },
@@ -1270,7 +1255,16 @@
       "title": "Longest Balanced Substring After One Swap",
       "titleSlug": "longest-balanced-substring-after-one-swap",
       "difficulty": "Medium",
-      "acRate": 8.758812653650013,
+      "acRate": 9.049943672549755,
+      "isPaidOnly": false,
+      "topicTags": []
+    },
+    {
+      "frontendId": "3901",
+      "title": "Good Subsequence Queries",
+      "titleSlug": "good-subsequence-queries",
+      "difficulty": "Hard",
+      "acRate": 12.903225806451612,
       "isPaidOnly": false,
       "topicTags": []
     }

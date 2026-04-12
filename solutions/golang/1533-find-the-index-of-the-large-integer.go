@@ -1,0 +1,6 @@
+package main
+
+// LeetCode 1533 — Find the Index of the Large Integer
+// https://leetcode.com/problems/find-the-index-of-the-large-integer/
+
+// No official Go starter returned; open the problem on LeetCode and paste the signature.

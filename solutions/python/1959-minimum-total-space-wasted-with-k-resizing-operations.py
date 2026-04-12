@@ -1,0 +1,9 @@
+# LeetCode 1959 — Minimum Total Space Wasted With K Resizing Operations
+# https://leetcode.com/problems/minimum-total-space-wasted-with-k-resizing-operations/
+
+from typing import List
+
+class Solution:
+    def minSpaceWastedKResizing(self, nums: List[int], k: int) -> int:
+        pass
+        

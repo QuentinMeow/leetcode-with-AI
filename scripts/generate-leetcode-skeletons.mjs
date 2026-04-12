@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 /**
  * Creates solution skeleton files from LeetCode official starter code (GraphQL).
- * Reads slugs from data/leetcode/python/{first-100,first-300,last-100}.json (same catalog as golang).
+ * Reads slugs from data/leetcode/python/all.json when present; otherwise merges
+ * first-100, first-300, and last-100 (same catalog as golang).
  *
  * Usage:
  *   node scripts/generate-leetcode-skeletons.mjs              # skip existing files
  *   node scripts/generate-leetcode-skeletons.mjs --force      # overwrite all
  *   node scripts/generate-leetcode-skeletons.mjs --golang-only # only Go (still fetches each problem once)
+ *
+ * Optional: LEETCODE_SKELETON_DELAY_MS (e.g. 30) sleeps between problem fetches to reduce rate limits.
  */
 import { readFile, writeFile, mkdir, access } from "node:fs/promises";
 import { constants as fsConstants } from "node:fs";
@@ -38,6 +41,24 @@ function filenameBase(frontendId, titleSlug) {
 }
 
 async function loadProblemSlugs() {
+  const allPath = join(DATA_DIR, "all.json");
+  try {
+    const raw = await readFile(allPath, "utf8");
+    const data = JSON.parse(raw);
+    const list = data.problems ?? [];
+    if (list.length > 0) {
+      return list
+        .map((p) => ({
+          frontendId: p.frontendId,
+          title: p.title,
+          titleSlug: p.titleSlug,
+        }))
+        .sort((a, b) => Number(a.frontendId) - Number(b.frontendId));
+    }
+  } catch (e) {
+    if (e.code !== "ENOENT") throw e;
+  }
+
   const seen = new Map();
   for (const name of ["first-100.json", "first-300.json", "last-100.json"]) {
     const raw = await readFile(join(DATA_DIR, name), "utf8");
@@ -241,6 +262,11 @@ async function main() {
     goSkip = 0,
     err = 0;
 
+  const delayMs = Math.max(
+    0,
+    Number.parseInt(process.env.LEETCODE_SKELETON_DELAY_MS ?? "0", 10) || 0
+  );
+
   for (const meta of problems) {
     const base = filenameBase(meta.frontendId, meta.titleSlug);
     const pyPath = join(PY_OUT, `${base}.py`);
@@ -253,6 +279,9 @@ async function main() {
       console.error(`fetch failed ${meta.titleSlug}:`, e.message);
       err++;
       continue;
+    }
+    if (delayMs > 0) {
+      await new Promise((r) => setTimeout(r, delayMs));
     }
 
     const pySnip = question?.codeSnippets?.find((s) => s.langSlug === "python3");

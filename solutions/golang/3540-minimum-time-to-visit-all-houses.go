@@ -1,0 +1,6 @@
+package main
+
+// LeetCode 3540 — Minimum Time to Visit All Houses
+// https://leetcode.com/problems/minimum-time-to-visit-all-houses/
+
+// No official Go starter returned; open the problem on LeetCode and paste the signature.

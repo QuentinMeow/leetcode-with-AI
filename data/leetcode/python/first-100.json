@@ -6,7 +6,7 @@
     "skip": 0,
     "limit": 100,
     "totalInCategory": 3901,
-    "fetchedAt": "2026-04-12T12:33:14.610Z",
+    "fetchedAt": "2026-04-12T14:58:26.117Z",
     "submissionLanguages": [
       "python3",
       "golang"
@@ -19,7 +19,7 @@
       "title": "Two Sum",
       "titleSlug": "two-sum",
       "difficulty": "Easy",
-      "acRate": 57.32663191916283,
+      "acRate": 57.327130017772,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -31,7 +31,7 @@
       "title": "Add Two Numbers",
       "titleSlug": "add-two-numbers",
       "difficulty": "Medium",
-      "acRate": 48.26374771224211,
+      "acRate": 48.26440169540069,
       "isPaidOnly": false,
       "topicTags": [
         "linked-list",
@@ -44,7 +44,7 @@
       "title": "Longest Substring Without Repeating Characters",
       "titleSlug": "longest-substring-without-repeating-characters",
       "difficulty": "Medium",
-      "acRate": 38.83462311897047,
+      "acRate": 38.83536423813428,
       "isPaidOnly": false,
       "topicTags": [
         "hash-table",
@@ -57,7 +57,7 @@
       "title": "Median of Two Sorted Arrays",
       "titleSlug": "median-of-two-sorted-arrays",
       "difficulty": "Hard",
-      "acRate": 46.29500842594199,
+      "acRate": 46.295988785650124,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -70,7 +70,7 @@
       "title": "Longest Palindromic Substring",
       "titleSlug": "longest-palindromic-substring",
       "difficulty": "Medium",
-      "acRate": 37.627977243905285,
+      "acRate": 37.628680421428456,
       "isPaidOnly": false,
       "topicTags": [
         "two-pointers",
@@ -83,7 +83,7 @@
       "title": "Zigzag Conversion",
       "titleSlug": "zigzag-conversion",
       "difficulty": "Medium",
-      "acRate": 53.88925453617725,
+      "acRate": 53.89024732532235,
       "isPaidOnly": false,
       "topicTags": [
         "string"
@@ -94,7 +94,7 @@
       "title": "Reverse Integer",
       "titleSlug": "reverse-integer",
       "difficulty": "Medium",
-      "acRate": 31.741752915109387,
+      "acRate": 31.742053152717233,
       "isPaidOnly": false,
       "topicTags": [
         "math"
@@ -105,7 +105,7 @@
       "title": "String to Integer (atoi)",
       "titleSlug": "string-to-integer-atoi",
       "difficulty": "Medium",
-      "acRate": 20.830025330917703,
+      "acRate": 20.8306426424723,
       "isPaidOnly": false,
       "topicTags": [
         "string"
@@ -116,7 +116,7 @@
       "title": "Palindrome Number",
       "titleSlug": "palindrome-number",
       "difficulty": "Easy",
-      "acRate": 60.4455597982605,
+      "acRate": 60.446076855379005,
       "isPaidOnly": false,
       "topicTags": [
         "math"
@@ -127,7 +127,7 @@
       "title": "Regular Expression Matching",
       "titleSlug": "regular-expression-matching",
       "difficulty": "Hard",
-      "acRate": 30.729475714520504,
+      "acRate": 30.73004888099445,
       "isPaidOnly": false,
       "topicTags": [
         "string",
@@ -140,7 +140,7 @@
       "title": "Container With Most Water",
       "titleSlug": "container-with-most-water",
       "difficulty": "Medium",
-      "acRate": 59.827412368712054,
+      "acRate": 59.82822502564827,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -153,7 +153,7 @@
       "title": "Integer to Roman",
       "titleSlug": "integer-to-roman",
       "difficulty": "Medium",
-      "acRate": 70.7594021675565,
+      "acRate": 70.75985431986895,
       "isPaidOnly": false,
       "topicTags": [
         "hash-table",
@@ -166,7 +166,7 @@
       "title": "Roman to Integer",
       "titleSlug": "roman-to-integer",
       "difficulty": "Easy",
-      "acRate": 66.49141894757676,
+      "acRate": 66.49213742222348,
       "isPaidOnly": false,
       "topicTags": [
         "hash-table",
@@ -179,7 +179,7 @@
       "title": "Longest Common Prefix",
       "titleSlug": "longest-common-prefix",
       "difficulty": "Easy",
-      "acRate": 47.3801244052334,
+      "acRate": 47.38072739131124,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -192,7 +192,7 @@
       "title": "3Sum",
       "titleSlug": "3sum",
       "difficulty": "Medium",
-      "acRate": 38.880620899662546,
+      "acRate": 38.88122453601167,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -205,7 +205,7 @@
       "title": "3Sum Closest",
       "titleSlug": "3sum-closest",
       "difficulty": "Medium",
-      "acRate": 48.35032038371252,
+      "acRate": 48.35114613513441,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -218,7 +218,7 @@
       "title": "Letter Combinations of a Phone Number",
       "titleSlug": "letter-combinations-of-a-phone-number",
       "difficulty": "Medium",
-      "acRate": 65.84138968383208,
+      "acRate": 65.84226015666206,
       "isPaidOnly": false,
       "topicTags": [
         "hash-table",
@@ -231,7 +231,7 @@
       "title": "4Sum",
       "titleSlug": "4sum",
       "difficulty": "Medium",
-      "acRate": 40.37484849567476,
+      "acRate": 40.37619189728564,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -244,7 +244,7 @@
       "title": "Remove Nth Node From End of List",
       "titleSlug": "remove-nth-node-from-end-of-list",
       "difficulty": "Medium",
-      "acRate": 51.33681667040187,
+      "acRate": 51.337701804814294,
       "isPaidOnly": false,
       "topicTags": [
         "linked-list",
@@ -256,7 +256,7 @@
       "title": "Valid Parentheses",
       "titleSlug": "valid-parentheses",
       "difficulty": "Easy",
-      "acRate": 43.99292531795111,
+      "acRate": 43.993461683060296,
       "isPaidOnly": false,
       "topicTags": [
         "string",
@@ -268,7 +268,7 @@
       "title": "Merge Two Sorted Lists",
       "titleSlug": "merge-two-sorted-lists",
       "difficulty": "Easy",
-      "acRate": 68.14335590579546,
+      "acRate": 68.14381849889838,
       "isPaidOnly": false,
       "topicTags": [
         "linked-list",
@@ -280,7 +280,7 @@
       "title": "Generate Parentheses",
       "titleSlug": "generate-parentheses",
       "difficulty": "Medium",
-      "acRate": 78.521159850059,
+      "acRate": 78.52138643067846,
       "isPaidOnly": false,
       "topicTags": [
         "string",
@@ -293,7 +293,7 @@
       "title": "Merge k Sorted Lists",
       "titleSlug": "merge-k-sorted-lists",
       "difficulty": "Hard",
-      "acRate": 59.296816927433646,
+      "acRate": 59.297903291525955,
       "isPaidOnly": false,
       "topicTags": [
         "linked-list",
@@ -307,7 +307,7 @@
       "title": "Swap Nodes in Pairs",
       "titleSlug": "swap-nodes-in-pairs",
       "difficulty": "Medium",
-      "acRate": 69.29604330361124,
+      "acRate": 69.29646840081041,
       "isPaidOnly": false,
       "topicTags": [
         "linked-list",
@@ -319,7 +319,7 @@
       "title": "Reverse Nodes in k-Group",
       "titleSlug": "reverse-nodes-in-k-group",
       "difficulty": "Hard",
-      "acRate": 65.7955595367475,
+      "acRate": 65.7960675775472,
       "isPaidOnly": false,
       "topicTags": [
         "linked-list",
@@ -331,7 +331,7 @@
       "title": "Remove Duplicates from Sorted Array",
       "titleSlug": "remove-duplicates-from-sorted-array",
       "difficulty": "Easy",
-      "acRate": 62.5915318667098,
+      "acRate": 62.59212153621244,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -343,7 +343,7 @@
       "title": "Remove Element",
       "titleSlug": "remove-element",
       "difficulty": "Easy",
-      "acRate": 61.63393372726864,
+      "acRate": 61.634621385426755,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -355,7 +355,7 @@
       "title": "Find the Index of the First Occurrence in a String",
       "titleSlug": "find-the-index-of-the-first-occurrence-in-a-string",
       "difficulty": "Easy",
-      "acRate": 46.49456487773579,
+      "acRate": 46.49521240116442,
       "isPaidOnly": false,
       "topicTags": [
         "two-pointers",
@@ -368,7 +368,7 @@
       "title": "Divide Two Integers",
       "titleSlug": "divide-two-integers",
       "difficulty": "Medium",
-      "acRate": 19.617867442914587,
+      "acRate": 19.618180613470766,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -380,7 +380,7 @@
       "title": "Substring with Concatenation of All Words",
       "titleSlug": "substring-with-concatenation-of-all-words",
       "difficulty": "Hard",
-      "acRate": 34.22283612449756,
+      "acRate": 34.2236655620599,
       "isPaidOnly": false,
       "topicTags": [
         "hash-table",
@@ -393,7 +393,7 @@
       "title": "Next Permutation",
       "titleSlug": "next-permutation",
       "difficulty": "Medium",
-      "acRate": 45.039906990017364,
+      "acRate": 45.040636761326795,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -405,7 +405,7 @@
       "title": "Longest Valid Parentheses",
       "titleSlug": "longest-valid-parentheses",
       "difficulty": "Hard",
-      "acRate": 38.51669340047719,
+      "acRate": 38.51765238036601,
       "isPaidOnly": false,
       "topicTags": [
         "string",
@@ -418,7 +418,7 @@
       "title": "Search in Rotated Sorted Array",
       "titleSlug": "search-in-rotated-sorted-array",
       "difficulty": "Medium",
-      "acRate": 44.36457720071215,
+      "acRate": 44.36549560058301,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -430,7 +430,7 @@
       "title": "Find First and Last Position of Element in Sorted Array",
       "titleSlug": "find-first-and-last-position-of-element-in-sorted-array",
       "difficulty": "Medium",
-      "acRate": 48.6640227238896,
+      "acRate": 48.66429192252416,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -442,7 +442,7 @@
       "title": "Search Insert Position",
       "titleSlug": "search-insert-position",
       "difficulty": "Easy",
-      "acRate": 51.03895172073278,
+      "acRate": 51.03940720135041,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -454,7 +454,7 @@
       "title": "Valid Sudoku",
       "titleSlug": "valid-sudoku",
       "difficulty": "Medium",
-      "acRate": 64.3697677277664,
+      "acRate": 64.37036677425434,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -467,7 +467,7 @@
       "title": "Sudoku Solver",
       "titleSlug": "sudoku-solver",
       "difficulty": "Hard",
-      "acRate": 65.42468353539914,
+      "acRate": 65.42462645431188,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -481,7 +481,7 @@
       "title": "Count and Say",
       "titleSlug": "count-and-say",
       "difficulty": "Medium",
-      "acRate": 62.64554644292731,
+      "acRate": 62.646541186009195,
       "isPaidOnly": false,
       "topicTags": [
         "string"
@@ -492,7 +492,7 @@
       "title": "Combination Sum",
       "titleSlug": "combination-sum",
       "difficulty": "Medium",
-      "acRate": 76.3648903803176,
+      "acRate": 76.36508458259006,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -504,7 +504,7 @@
       "title": "Combination Sum II",
       "titleSlug": "combination-sum-ii",
       "difficulty": "Medium",
-      "acRate": 59.261241499403425,
+      "acRate": 59.26173630546059,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -516,7 +516,7 @@
       "title": "First Missing Positive",
       "titleSlug": "first-missing-positive",
       "difficulty": "Hard",
-      "acRate": 42.715800222626335,
+      "acRate": 42.716711701065705,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -528,7 +528,7 @@
       "title": "Trapping Rain Water",
       "titleSlug": "trapping-rain-water",
       "difficulty": "Hard",
-      "acRate": 67.1368535792926,
+      "acRate": 67.13764507217701,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -543,7 +543,7 @@
       "title": "Multiply Strings",
       "titleSlug": "multiply-strings",
       "difficulty": "Medium",
-      "acRate": 43.94127628339261,
+      "acRate": 43.94185654852785,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -556,7 +556,7 @@
       "title": "Wildcard Matching",
       "titleSlug": "wildcard-matching",
       "difficulty": "Hard",
-      "acRate": 31.723807994555997,
+      "acRate": 31.72517912708773,
       "isPaidOnly": false,
       "topicTags": [
         "string",
@@ -570,7 +570,7 @@
       "title": "Jump Game II",
       "titleSlug": "jump-game-ii",
       "difficulty": "Medium",
-      "acRate": 42.686890683728066,
+      "acRate": 42.68704694864817,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -583,7 +583,7 @@
       "title": "Permutations",
       "titleSlug": "permutations",
       "difficulty": "Medium",
-      "acRate": 81.81006243892674,
+      "acRate": 81.8101187938465,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -595,7 +595,7 @@
       "title": "Permutations II",
       "titleSlug": "permutations-ii",
       "difficulty": "Medium",
-      "acRate": 63.24668919427487,
+      "acRate": 63.24753187102448,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -608,7 +608,7 @@
       "title": "Rotate Image",
       "titleSlug": "rotate-image",
       "difficulty": "Medium",
-      "acRate": 79.57409549304172,
+      "acRate": 79.57453321264161,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -621,7 +621,7 @@
       "title": "Group Anagrams",
       "titleSlug": "group-anagrams",
       "difficulty": "Medium",
-      "acRate": 72.41998670877106,
+      "acRate": 72.42057234856907,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -635,7 +635,7 @@
       "title": "Pow(x, n)",
       "titleSlug": "powx-n",
       "difficulty": "Medium",
-      "acRate": 38.510232442856605,
+      "acRate": 38.51082544570658,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -647,7 +647,7 @@
       "title": "N-Queens",
       "titleSlug": "n-queens",
       "difficulty": "Hard",
-      "acRate": 75.29409507685261,
+      "acRate": 75.29504506529747,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -659,7 +659,7 @@
       "title": "N-Queens II",
       "titleSlug": "n-queens-ii",
       "difficulty": "Hard",
-      "acRate": 78.46107552085395,
+      "acRate": 78.46279113654269,
       "isPaidOnly": false,
       "topicTags": [
         "backtracking"
@@ -670,7 +670,7 @@
       "title": "Maximum Subarray",
       "titleSlug": "maximum-subarray",
       "difficulty": "Medium",
-      "acRate": 53.17200502440594,
+      "acRate": 53.17248221009132,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -683,7 +683,7 @@
       "title": "Spiral Matrix",
       "titleSlug": "spiral-matrix",
       "difficulty": "Medium",
-      "acRate": 56.5312821484974,
+      "acRate": 56.532257813590135,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -696,7 +696,7 @@
       "title": "Jump Game",
       "titleSlug": "jump-game",
       "difficulty": "Medium",
-      "acRate": 40.70526306412221,
+      "acRate": 40.70554881721068,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -709,7 +709,7 @@
       "title": "Merge Intervals",
       "titleSlug": "merge-intervals",
       "difficulty": "Medium",
-      "acRate": 51.56090633254045,
+      "acRate": 51.561209490550766,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -721,7 +721,7 @@
       "title": "Insert Interval",
       "titleSlug": "insert-interval",
       "difficulty": "Medium",
-      "acRate": 45.0179576874636,
+      "acRate": 45.01896557963529,
       "isPaidOnly": false,
       "topicTags": [
         "array"
@@ -732,7 +732,7 @@
       "title": "Length of Last Word",
       "titleSlug": "length-of-last-word",
       "difficulty": "Easy",
-      "acRate": 58.61580301574298,
+      "acRate": 58.61659448781968,
       "isPaidOnly": false,
       "topicTags": [
         "string"
@@ -743,7 +743,7 @@
       "title": "Spiral Matrix II",
       "titleSlug": "spiral-matrix-ii",
       "difficulty": "Medium",
-      "acRate": 74.87317243949117,
+      "acRate": 74.87378844888607,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -756,7 +756,7 @@
       "title": "Permutation Sequence",
       "titleSlug": "permutation-sequence",
       "difficulty": "Hard",
-      "acRate": 52.728317483662245,
+      "acRate": 52.72938733355873,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -768,7 +768,7 @@
       "title": "Rotate List",
       "titleSlug": "rotate-list",
       "difficulty": "Medium",
-      "acRate": 41.52974794011976,
+      "acRate": 41.53035263225047,
       "isPaidOnly": false,
       "topicTags": [
         "linked-list",
@@ -780,7 +780,7 @@
       "title": "Unique Paths",
       "titleSlug": "unique-paths",
       "difficulty": "Medium",
-      "acRate": 66.72079750595638,
+      "acRate": 66.72088183646252,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -793,7 +793,7 @@
       "title": "Unique Paths II",
       "titleSlug": "unique-paths-ii",
       "difficulty": "Medium",
-      "acRate": 44.34167885774298,
+      "acRate": 44.342373310461234,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -806,7 +806,7 @@
       "title": "Minimum Path Sum",
       "titleSlug": "minimum-path-sum",
       "difficulty": "Medium",
-      "acRate": 68.05678928581526,
+      "acRate": 68.0572691304702,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -819,7 +819,7 @@
       "title": "Valid Number",
       "titleSlug": "valid-number",
       "difficulty": "Hard",
-      "acRate": 22.81783702228432,
+      "acRate": 22.81863170689356,
       "isPaidOnly": false,
       "topicTags": [
         "string"
@@ -830,7 +830,7 @@
       "title": "Plus One",
       "titleSlug": "plus-one",
       "difficulty": "Easy",
-      "acRate": 49.80223408332275,
+      "acRate": 49.802661208330974,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -842,7 +842,7 @@
       "title": "Add Binary",
       "titleSlug": "add-binary",
       "difficulty": "Easy",
-      "acRate": 57.895064013762656,
+      "acRate": 57.89574195609899,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -856,7 +856,7 @@
       "title": "Text Justification",
       "titleSlug": "text-justification",
       "difficulty": "Hard",
-      "acRate": 50.80528667133728,
+      "acRate": 50.806287013432204,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -869,7 +869,7 @@
       "title": "Sqrt(x)",
       "titleSlug": "sqrtx",
       "difficulty": "Easy",
-      "acRate": 41.655761149125176,
+      "acRate": 41.65631173113446,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -881,7 +881,7 @@
       "title": "Climbing Stairs",
       "titleSlug": "climbing-stairs",
       "difficulty": "Easy",
-      "acRate": 54.003002952679324,
+      "acRate": 54.00316459918189,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -894,7 +894,7 @@
       "title": "Simplify Path",
       "titleSlug": "simplify-path",
       "difficulty": "Medium",
-      "acRate": 50.35305025914126,
+      "acRate": 50.35357218723951,
       "isPaidOnly": false,
       "topicTags": [
         "string",
@@ -906,7 +906,7 @@
       "title": "Edit Distance",
       "titleSlug": "edit-distance",
       "difficulty": "Medium",
-      "acRate": 60.39159744489611,
+      "acRate": 60.39241889545244,
       "isPaidOnly": false,
       "topicTags": [
         "string",
@@ -918,7 +918,7 @@
       "title": "Set Matrix Zeroes",
       "titleSlug": "set-matrix-zeroes",
       "difficulty": "Medium",
-      "acRate": 62.71026595612498,
+      "acRate": 62.71083274675566,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -931,7 +931,7 @@
       "title": "Search a 2D Matrix",
       "titleSlug": "search-a-2d-matrix",
       "difficulty": "Medium",
-      "acRate": 53.779685784261176,
+      "acRate": 53.780280435747805,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -944,7 +944,7 @@
       "title": "Sort Colors",
       "titleSlug": "sort-colors",
       "difficulty": "Medium",
-      "acRate": 69.43476247441185,
+      "acRate": 69.43540954811279,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -957,7 +957,7 @@
       "title": "Minimum Window Substring",
       "titleSlug": "minimum-window-substring",
       "difficulty": "Hard",
-      "acRate": 47.28825997504147,
+      "acRate": 47.2889384056581,
       "isPaidOnly": false,
       "topicTags": [
         "hash-table",
@@ -970,7 +970,7 @@
       "title": "Combinations",
       "titleSlug": "combinations",
       "difficulty": "Medium",
-      "acRate": 74.43382515658178,
+      "acRate": 74.43448697577362,
       "isPaidOnly": false,
       "topicTags": [
         "backtracking"
@@ -981,7 +981,7 @@
       "title": "Subsets",
       "titleSlug": "subsets",
       "difficulty": "Medium",
-      "acRate": 82.22058596519508,
+      "acRate": 82.22097156236255,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -994,7 +994,7 @@
       "title": "Word Search",
       "titleSlug": "word-search",
       "difficulty": "Medium",
-      "acRate": 47.15359484346505,
+      "acRate": 47.154675997209374,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1009,7 +1009,7 @@
       "title": "Remove Duplicates from Sorted Array II",
       "titleSlug": "remove-duplicates-from-sorted-array-ii",
       "difficulty": "Medium",
-      "acRate": 64.5265068590956,
+      "acRate": 64.52748843354445,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1021,7 +1021,7 @@
       "title": "Search in Rotated Sorted Array II",
       "titleSlug": "search-in-rotated-sorted-array-ii",
       "difficulty": "Medium",
-      "acRate": 39.90572199773265,
+      "acRate": 39.90606083850004,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1033,7 +1033,7 @@
       "title": "Remove Duplicates from Sorted List II",
       "titleSlug": "remove-duplicates-from-sorted-list-ii",
       "difficulty": "Medium",
-      "acRate": 51.58673407535933,
+      "acRate": 51.58738126130563,
       "isPaidOnly": false,
       "topicTags": [
         "linked-list",
@@ -1045,7 +1045,7 @@
       "title": "Remove Duplicates from Sorted List",
       "titleSlug": "remove-duplicates-from-sorted-list",
       "difficulty": "Easy",
-      "acRate": 56.54807651780177,
+      "acRate": 56.54885419556707,
       "isPaidOnly": false,
       "topicTags": [
         "linked-list"
@@ -1056,7 +1056,7 @@
       "title": "Largest Rectangle in Histogram",
       "titleSlug": "largest-rectangle-in-histogram",
       "difficulty": "Hard",
-      "acRate": 49.65281973702832,
+      "acRate": 49.653199584382286,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1069,7 +1069,7 @@
       "title": "Maximal Rectangle",
       "titleSlug": "maximal-rectangle",
       "difficulty": "Hard",
-      "acRate": 58.482278842434475,
+      "acRate": 58.48318218782753,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1084,7 +1084,7 @@
       "title": "Partition List",
       "titleSlug": "partition-list",
       "difficulty": "Medium",
-      "acRate": 60.94333006601429,
+      "acRate": 60.94380887721319,
       "isPaidOnly": false,
       "topicTags": [
         "linked-list",
@@ -1096,7 +1096,7 @@
       "title": "Scramble String",
       "titleSlug": "scramble-string",
       "difficulty": "Hard",
-      "acRate": 44.28856892393492,
+      "acRate": 44.28977248588835,
       "isPaidOnly": false,
       "topicTags": [
         "string",
@@ -1108,7 +1108,7 @@
       "title": "Merge Sorted Array",
       "titleSlug": "merge-sorted-array",
       "difficulty": "Easy",
-      "acRate": 54.65868735077022,
+      "acRate": 54.65944829363939,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1121,7 +1121,7 @@
       "title": "Gray Code",
       "titleSlug": "gray-code",
       "difficulty": "Medium",
-      "acRate": 64.5967952960734,
+      "acRate": 64.59832106609532,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -1134,7 +1134,7 @@
       "title": "Subsets II",
       "titleSlug": "subsets-ii",
       "difficulty": "Medium",
-      "acRate": 61.12359076793846,
+      "acRate": 61.124527110146964,
       "isPaidOnly": false,
       "topicTags": [
         "array",
@@ -1147,7 +1147,7 @@
       "title": "Decode Ways",
       "titleSlug": "decode-ways",
       "difficulty": "Medium",
-      "acRate": 37.82582390050207,
+      "acRate": 37.826407194289935,
       "isPaidOnly": false,
       "topicTags": [
         "string",
@@ -1159,7 +1159,7 @@
       "title": "Reverse Linked List II",
       "titleSlug": "reverse-linked-list-ii",
       "difficulty": "Medium",
-      "acRate": 51.31615680163527,
+      "acRate": 51.31717260930766,
       "isPaidOnly": false,
       "topicTags": [
         "linked-list"
@@ -1170,7 +1170,7 @@
       "title": "Restore IP Addresses",
       "titleSlug": "restore-ip-addresses",
       "difficulty": "Medium",
-      "acRate": 55.72071138435697,
+      "acRate": 55.72179299565649,
       "isPaidOnly": false,
       "topicTags": [
         "string",
@@ -1182,7 +1182,7 @@
       "title": "Binary Tree Inorder Traversal",
       "titleSlug": "binary-tree-inorder-traversal",
       "difficulty": "Easy",
-      "acRate": 79.92796455409763,
+      "acRate": 79.92821200296008,
       "isPaidOnly": false,
       "topicTags": [
         "stack",
@@ -1196,7 +1196,7 @@
       "title": "Unique Binary Search Trees II",
       "titleSlug": "unique-binary-search-trees-ii",
       "difficulty": "Medium",
-      "acRate": 62.243105549265834,
+      "acRate": 62.24494535681454,
       "isPaidOnly": false,
       "topicTags": [
         "dynamic-programming",
@@ -1211,7 +1211,7 @@
       "title": "Unique Binary Search Trees",
       "titleSlug": "unique-binary-search-trees",
       "difficulty": "Medium",
-      "acRate": 63.53057711356664,
+      "acRate": 63.531637919492134,
       "isPaidOnly": false,
       "topicTags": [
         "math",
@@ -1226,7 +1226,7 @@
       "title": "Interleaving String",
       "titleSlug": "interleaving-string",
       "difficulty": "Medium",
-      "acRate": 43.79590801487995,
+      "acRate": 43.79633955881499,
       "isPaidOnly": false,
       "topicTags": [
         "string",
@@ -1238,7 +1238,7 @@
       "title": "Validate Binary Search Tree",
       "titleSlug": "validate-binary-search-tree",
       "difficulty": "Medium",
-      "acRate": 35.58828033686815,
+      "acRate": 35.5885985954617,
       "isPaidOnly": false,
       "topicTags": [
         "tree",
@@ -1252,7 +1252,7 @@
       "title": "Recover Binary Search Tree",
       "titleSlug": "recover-binary-search-tree",
       "difficulty": "Medium",
-      "acRate": 59.30658856081752,
+      "acRate": 59.30842183046173,
       "isPaidOnly": false,
       "topicTags": [
         "tree",
@@ -1266,7 +1266,7 @@
       "title": "Same Tree",
       "titleSlug": "same-tree",
       "difficulty": "Easy",
-      "acRate": 66.92336159892999,
+      "acRate": 66.92407567860647,
       "isPaidOnly": false,
       "topicTags": [
         "tree",

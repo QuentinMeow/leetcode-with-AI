@@ -1,0 +1,9 @@
+# LeetCode 2970 — Count the Number of Incremovable Subarrays I
+# https://leetcode.com/problems/count-the-number-of-incremovable-subarrays-i/
+
+from typing import List
+
+class Solution:
+    def incremovableSubarrayCount(self, nums: List[int]) -> int:
+        pass
+        

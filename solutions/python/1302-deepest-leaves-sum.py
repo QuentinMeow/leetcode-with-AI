@@ -1,0 +1,15 @@
+# LeetCode 1302 — Deepest Leaves Sum
+# https://leetcode.com/problems/deepest-leaves-sum/
+
+from typing import Optional
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
+        pass
+        

@@ -1,0 +1,6 @@
+# LeetCode 531 — Lonely Pixel I
+# https://leetcode.com/problems/lonely-pixel-i/
+
+class Solution:
+    pass
+
