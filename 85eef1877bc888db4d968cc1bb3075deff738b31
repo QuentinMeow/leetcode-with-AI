@@ -1,0 +1,51 @@
+solutions/python/0146-lru-cache.py
+  6afeed4cd4bc4c9a 16-18
+progress.md
+  6afeed4cd4bc4c9a 7,11-12,17-42,44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8",
+  "base_commit_sha": "85eef1877bc888db4d968cc1bb3075deff738b31",
+  "prompts": {
+    "15cc9dd46cb97c4b": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "3c6b1653-04d2-4bbd-8580-4abb3d749c0e",
+        "model": "composer-2"
+      },
+      "human_author": "Quentin",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 11,
+      "overriden_lines": 0
+    },
+    "6afeed4cd4bc4c9a": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "f703807c-c612-4a5a-9eb6-e2c7f2ec2ab0",
+        "model": "composer-2"
+      },
+      "human_author": "Quentin",
+      "messages": [],
+      "total_additions": 33,
+      "total_deletions": 6,
+      "accepted_lines": 33,
+      "overriden_lines": 0
+    },
+    "8d15ede54fb32f31": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "d686902c-dfca-49ff-b815-c13f78b74f31",
+        "model": "composer-2"
+      },
+      "human_author": "Quentin",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 335,
+      "overriden_lines": 0
+    }
+  }
+}
