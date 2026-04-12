@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "leetcode:fetch-lists": "node scripts/fetch-leetcode-problem-lists.mjs",
+    "leetcode:generate-skeletons": "node scripts/generate-leetcode-skeletons.mjs"
+  },
   "dependencies": {
     "@jinzcdev/leetcode-mcp-server": "^1.2.0"
   }

@@ -7,6 +7,9 @@
 # Skill runtime artifacts
 .cursor/skills/*/logs/
 
+# Optional local notes under language-coach issues (folder placeholder stays tracked)
+.cursor/skills/language-coach/issues/*.md
+
 # Worklog
 .agents/worklog/
 
