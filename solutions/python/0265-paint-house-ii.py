@@ -1,0 +1,6 @@
+# LeetCode 265 — Paint House II
+# https://leetcode.com/problems/paint-house-ii/
+
+class Solution:
+    pass
+

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Creates solution skeleton files from LeetCode official starter code (GraphQL).
- * Reads slugs from data/leetcode/python/{first-100,last-100}.json (same catalog as golang).
+ * Reads slugs from data/leetcode/python/{first-100,first-300,last-100}.json (same catalog as golang).
  *
  * Usage:
  *   node scripts/generate-leetcode-skeletons.mjs              # skip existing files
@@ -39,7 +39,7 @@ function filenameBase(frontendId, titleSlug) {
 
 async function loadProblemSlugs() {
   const seen = new Map();
-  for (const name of ["first-100.json", "last-100.json"]) {
+  for (const name of ["first-100.json", "first-300.json", "last-100.json"]) {
     const raw = await readFile(join(DATA_DIR, name), "utf8");
     const data = JSON.parse(raw);
     for (const p of data.problems ?? []) {
