@@ -1,0 +1,9 @@
+# LeetCode 1883 — Minimum Skips to Arrive at Meeting On Time
+# https://leetcode.com/problems/minimum-skips-to-arrive-at-meeting-on-time/
+
+from typing import List
+
+class Solution:
+    def minSkips(self, dist: List[int], speed: int, hoursBefore: int) -> int:
+        pass
+        

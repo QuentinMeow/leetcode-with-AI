@@ -1,0 +1,9 @@
+# LeetCode 2006 — Count Number of Pairs With Absolute Difference K
+# https://leetcode.com/problems/count-number-of-pairs-with-absolute-difference-k/
+
+from typing import List
+
+class Solution:
+    def countKDifference(self, nums: List[int], k: int) -> int:
+        pass
+        

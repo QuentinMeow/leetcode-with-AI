@@ -1,0 +1,9 @@
+# LeetCode 3148 — Maximum Difference Score in a Grid
+# https://leetcode.com/problems/maximum-difference-score-in-a-grid/
+
+from typing import List
+
+class Solution:
+    def maxScore(self, grid: List[List[int]]) -> int:
+        pass
+        

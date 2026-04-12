@@ -1,0 +1,6 @@
+package main
+
+// LeetCode 1150 — Check If a Number Is Majority Element in a Sorted Array
+// https://leetcode.com/problems/check-if-a-number-is-majority-element-in-a-sorted-array/
+
+// No official Go starter returned; open the problem on LeetCode and paste the signature.

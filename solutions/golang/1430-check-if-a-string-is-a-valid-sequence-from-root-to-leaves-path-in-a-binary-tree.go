@@ -1,0 +1,6 @@
+package main
+
+// LeetCode 1430 — Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree
+// https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/
+
+// No official Go starter returned; open the problem on LeetCode and paste the signature.

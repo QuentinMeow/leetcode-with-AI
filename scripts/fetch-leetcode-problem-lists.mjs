@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
- * Fetches LeetCode catalog slices (global, algorithms essentials): first 100, first 300,
- * and last 100. Catalog is shared across languages; output is duplicated under python/
- * and golang/ for separate tracks. Requires network access to leetcode.com.
+ * Fetches LeetCode catalog for category `all-code-essentials`: full list (`all.json`)
+ * plus slices first 100, first 300, and last 100. Catalog is shared across languages;
+ * output is duplicated under python/ and golang/ for separate tracks.
+ * Requires network access to leetcode.com.
  *
  * Next step: turn those JSON lists into solution stubs (official LeetCode signatures):
  *   npm run leetcode:generate-skeletons
@@ -43,52 +44,62 @@ async function writeTrack(track, slice, payload) {
   console.log("wrote", file);
 }
 
-/** First N problems in category order (paginates; API returns at most ~100 per call). */
-async function fetchFirstNProblems(lc, n) {
-  let totalInCategory = 0;
-  const out = [];
-  for (let offset = 0; offset < n; offset += PAGE_SIZE) {
-    const limit = Math.min(PAGE_SIZE, n - offset);
+/** All problems in category order (paginates; API returns at most ~100 per call). */
+async function fetchAllProblemsInCategory(lc) {
+  const firstPage = await lc.problems({
+    category: CATEGORY,
+    offset: 0,
+    limit: PAGE_SIZE,
+    filters: {},
+  });
+  const totalInCategory = firstPage?.total ?? 0;
+  const out = [...normalizeQuestions(firstPage?.questions)];
+  for (let offset = PAGE_SIZE; offset < totalInCategory; offset += PAGE_SIZE) {
+    const limit = Math.min(PAGE_SIZE, totalInCategory - offset);
     const page = await lc.problems({
       category: CATEGORY,
       offset,
       limit,
       filters: {},
     });
-    totalInCategory = page?.total ?? totalInCategory;
     const batch = normalizeQuestions(page?.questions);
     if (!batch.length) break;
     out.push(...batch);
-    if (out.length >= n) break;
   }
-  return {
-    totalInCategory,
-    questions: out.slice(0, n),
-  };
+  return { totalInCategory, questions: out };
 }
 
 async function main() {
   const lc = new LeetCode();
   await lc.initialized;
 
-  const { totalInCategory: total, questions: first300Questions } =
-    await fetchFirstNProblems(lc, LIMIT_FIRST_EXTENDED);
-  const first100Questions = first300Questions.slice(0, 100);
-
+  const { totalInCategory: total, questions: allQuestions } =
+    await fetchAllProblemsInCategory(lc);
   const lastOffset = Math.max(0, total - LIMIT_LAST);
-  const lastPage = await lc.problems({
-    category: CATEGORY,
-    offset: lastOffset,
-    limit: LIMIT_LAST,
-    filters: {},
-  });
-  const lastQuestions = normalizeQuestions(lastPage?.questions);
+  const first300Questions = allQuestions.slice(0, LIMIT_FIRST_EXTENDED);
+  const first100Questions = allQuestions.slice(0, 100);
+  const lastQuestions = allQuestions.slice(lastOffset);
 
   const fetchedAt = new Date().toISOString();
   const commonNote =
     "LeetCode problem catalog is the same for all supported languages; Python 3 and Go are standard judge languages.";
 
   for (const track of ["python", "golang"]) {
+    await writeTrack(track, "all", {
+      meta: {
+        track,
+        slice: "all",
+        categorySlug: CATEGORY,
+        skip: 0,
+        limit: allQuestions.length,
+        totalInCategory: total,
+        fetchedAt,
+        submissionLanguages: ["python3", "golang"],
+        note: commonNote,
+      },
+      problems: allQuestions,
+    });
+
     await writeTrack(track, "first-100", {
       meta: {
         track,
