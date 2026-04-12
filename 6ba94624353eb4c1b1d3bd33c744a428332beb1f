@@ -1,0 +1,51 @@
+scripts/fetch-leetcode-problem-lists.mjs
+  8d272ada224613a9 3-6,47-58,69,76-77,79-81,88-102
+scripts/generate-leetcode-skeletons.mjs
+  8d272ada224613a9 4-5,11-12,44-61,265-269,283-284
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8",
+  "base_commit_sha": "6ba94624353eb4c1b1d3bd33c744a428332beb1f",
+  "prompts": {
+    "15cc9dd46cb97c4b": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "3c6b1653-04d2-4bbd-8580-4abb3d749c0e",
+        "model": "composer-2"
+      },
+      "human_author": "Quentin",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "8d15ede54fb32f31": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "d686902c-dfca-49ff-b815-c13f78b74f31",
+        "model": "composer-2"
+      },
+      "human_author": "Quentin",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "8d272ada224613a9": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "e1f618e5-eea0-41ad-9e00-4fa404c631b2",
+        "model": "composer-2"
+      },
+      "human_author": "Quentin",
+      "messages": [],
+      "total_additions": 69,
+      "total_deletions": 29,
+      "accepted_lines": 68,
+      "overriden_lines": 0
+    }
+  }
+}
