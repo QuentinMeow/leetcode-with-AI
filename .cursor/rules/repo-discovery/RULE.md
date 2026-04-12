@@ -11,7 +11,7 @@ alwaysApply: true
 | `.cursor/mcp-example.json` | Template MCP config (committed); copy to `mcp.json` locally |
 | `.cursor/mcp.json` | Real MCP config (gitignored — local paths and optional session cookie) |
 | `.cursor/rules/<name>/RULE.md` | Cursor project rules (always-on or glob-scoped) |
-| `.cursor/skills/<name>/SKILL.md` | Cursor skills with optional `references/` |
+| `.cursor/skills/<name>/SKILL.md` | Cursor skills with optional `references/` and (for **language-coach**) `learning/<lang>/` trackers + concept files |
 | `.cursor/MEMORY.md` | Cross-session memory for progress and mistakes (gitignored) |
 | `progress.md` | Problem-solving progress tracker |
 | `README.md` | Human-facing docs |
@@ -35,6 +35,6 @@ Use these supporting rules as the task demands:
 
 ## Solution File Convention
 
-- Filename: `<4-digit-number>-<leetcode-slug>.<ext>` (e.g. `0001-two-sum.py`)
+- Filename: `<problem-id>-<leetcode-slug>.<ext>` — pad `questionFrontendId` to at least four digits (e.g. `0001-two-sum.py`); if the id is already ≥4 digits, use it as-is (e.g. `3701-…`, `10000-…`). See `solutions/README.md` for bulk stubs via `npm run leetcode:generate-skeletons`.
 - Language folder: lowercase language name under `solutions/`
 - One solution per file
