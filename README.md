@@ -10,7 +10,7 @@ A self-evolving LeetCode practice environment in Cursor: **your** machine runs a
 |-------|------------|-------------|
 | **LeetCode MCP** | A Node process Cursor starts from **`.cursor/mcp.json`** (you create this file locally; it is **not** committed). | Copy `.cursor/mcp-example.json` → `.cursor/mcp.json`, fill in paths, reload Cursor. |
 | **Cursor rules** | Always-on guidance in `.cursor/rules/` (problem-solving steps, memory, banned tools). | Nothing special — they steer the agent automatically. |
-| **Skills** | `leetcode-coach` and `interview-simulator` under `.cursor/skills/`. | Ask for hints, reviews, or “interview me” in natural language. |
+| **Skills** | `leetcode-coach`, `interview-simulator`, and `language-coach` under `.cursor/skills/`. | Hints/reviews, interview follow-ups, or language/syntax deep-dives with tracked progress in `language-coach/learning/`. |
 | **`.cursor/MEMORY.md`** | Gitignored file the agent updates with durable preferences, weak areas, and progress patterns. | Optional: skim it; let the agent maintain it after substantive sessions. |
 | **`progress.md`** | Committed tracker table for problems and languages. | Update with the agent or by hand as you solve problems. |
 
@@ -105,11 +105,12 @@ Reload Cursor after changing `mcp.json`.
 2. **Verify MCP** — `leetcode` server shows as connected.
 3. **Pick a problem** — e.g. ask the agent: *“Fetch the problem `two-sum` via LeetCode MCP”* or *“Search easy array problems”*.
 4. **Understand and plan** — project rules push a structured flow: clarify constraints, name the pattern, sketch approach, then code. Expect the agent to ask about edge cases before diving into implementation.
-5. **Implement** — create or edit a file under `solutions/<language>/` using the naming rule **`NNNN-slug.ext`** (see [solutions/README.md](solutions/README.md)).
+5. **Implement** — create or edit a file under `solutions/<language>/` using the naming rule **`NNNN-slug.ext`** (see [solutions/README.md](solutions/README.md)). To materialize many stubs at once from `data/leetcode/` (official signatures via the API), run **`npm run leetcode:generate-skeletons`** as documented there.
 6. **Get coaching** — *“Give me a hint”*, *“Review my solution”*, *“What pattern is this?”* The **leetcode-coach** skill uses progressive hints (category → approach → detail → pseudocode) before a full solution unless you ask otherwise.
-7. **Interview practice** — after you have a solution, *“Interview me on this”* or *“Ask follow-ups”* triggers **interview-simulator** (complexity, edge cases, optimizations, extensions).
-8. **Submit / run on LeetCode** — if your MCP tool list includes run/submit and you configured `LEETCODE_SESSION`, ask the agent to use those tools; otherwise paste your code into the LeetCode site (still a valid end-to-end loop).
-9. **Track progress** — update **`progress.md`** and let the agent refresh **`.cursor/MEMORY.md`** after substantive sessions (weak areas, recurring mistakes, preferences).
+7. **Language study** — *“Explain this syntax”*, *“What’s sugar vs necessary here?”*, or *“What have I already covered in Python?”* uses **language-coach**: a per-language **tracker** (`learning/<lang>/TRACKER.md`) plus **one file per concept** under `learning/<lang>/concepts/`, so depth can grow without re-teaching everything each time.
+8. **Interview practice** — after you have a solution, *“Interview me on this”* or *“Ask follow-ups”* triggers **interview-simulator** (complexity, edge cases, optimizations, extensions).
+9. **Submit / run on LeetCode** — if your MCP tool list includes run/submit and you configured `LEETCODE_SESSION`, ask the agent to use those tools; otherwise paste your code into the LeetCode site (still a valid end-to-end loop).
+10. **Track progress** — update **`progress.md`** and let the agent refresh **`.cursor/MEMORY.md`** after substantive sessions (weak areas, recurring mistakes, preferences).
 
 ---
 
@@ -133,6 +134,7 @@ Reload Cursor after changing `mcp.json`.
 | Skill | When to use | Expected behavior |
 |-------|-------------|-------------------|
 | **leetcode-coach** | Hints, reviews, patterns, complexity | Hints escalate in levels; reads `MEMORY.md` and skill `LESSONS.md` when relevant. |
+| **language-coach** | Syntax, semantics, sugar, interview language questions | Reads `learning/<lang>/TRACKER.md` first; one markdown file per concept; `glance` / `standard` / `deep` avoids repeating full deep dives. |
 | **interview-simulator** | Post-solve debrief, “real interview” feel | Follow-up questions (complexity, edge cases, variants); structured feedback; may write patterns to `MEMORY.md`. |
 
 ---
@@ -147,7 +149,7 @@ solutions/                 # One folder per language; files: NNNN-slug.ext
   mcp-example.json         # Committed template — copy to mcp.json locally
   mcp.json                 # Local only (gitignored) — real MCP config
   rules/                   # Workflow + memory + safety rules
-  skills/                  # leetcode-coach, interview-simulator
+  skills/                  # leetcode-coach, interview-simulator, language-coach (+ learning/)
   MEMORY.md                # Local only (gitignored) — learning memory
 progress.md                # Committed progress table
 package.json               # Pins @jinzcdev/leetcode-mcp-server (run npm install)
