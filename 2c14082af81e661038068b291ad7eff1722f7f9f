@@ -1,0 +1,83 @@
+scripts/generate-leetcode-skeletons.mjs
+  15cc9dd46cb97c4b 1-10,13-311
+scripts/fetch-leetcode-problem-lists.mjs
+  15cc9dd46cb97c4b 1-108
+.gitignore
+  dfaf8991cccdeb26 10-12
+solutions/README.md
+  15cc9dd46cb97c4b 5,18,20-22,24,26-62,66,68,72-73,77-78
+package.json
+  15cc9dd46cb97c4b 2-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8",
+  "base_commit_sha": "2c14082af81e661038068b291ad7eff1722f7f9f",
+  "prompts": {
+    "15cc9dd46cb97c4b": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "3c6b1653-04d2-4bbd-8580-4abb3d749c0e",
+        "model": "composer-2"
+      },
+      "human_author": "Quentin",
+      "messages": [],
+      "total_additions": 541,
+      "total_deletions": 72,
+      "accepted_lines": 482,
+      "overriden_lines": 2
+    },
+    "216414fa88284e44": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "4b8bdf59-8439-4b0f-a1c7-644e08af4eab",
+        "model": "composer-2"
+      },
+      "human_author": "Quentin",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "8d15ede54fb32f31": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "d686902c-dfca-49ff-b815-c13f78b74f31",
+        "model": "composer-2"
+      },
+      "human_author": "Quentin",
+      "messages": [],
+      "total_additions": 341,
+      "total_deletions": 13,
+      "accepted_lines": 335,
+      "overriden_lines": 0
+    },
+    "a80c31d71ba8104c": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "14fcbbb1-d1c3-4a1c-a730-e6c12677a1b5",
+        "model": "composer-2"
+      },
+      "human_author": "Quentin",
+      "messages": [],
+      "total_additions": 144,
+      "total_deletions": 35,
+      "accepted_lines": 144,
+      "overriden_lines": 0
+    },
+    "dfaf8991cccdeb26": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "30536c23-a71e-4072-8dc0-e7a35a3dd6c2",
+        "model": "composer-2"
+      },
+      "human_author": "Quentin",
+      "messages": [],
+      "total_additions": 3,
+      "total_deletions": 0,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    }
+  }
+}
