@@ -1,0 +1,1279 @@
+{
+  "meta": {
+    "track": "python",
+    "slice": "first-100",
+    "categorySlug": "all-code-essentials",
+    "skip": 0,
+    "limit": 100,
+    "totalInCategory": 3897,
+    "fetchedAt": "2026-04-12T00:15:36.394Z",
+    "submissionLanguages": [
+      "python3",
+      "golang"
+    ],
+    "note": "LeetCode problem catalog is the same for all supported languages; Python 3 and Go are standard judge languages."
+  },
+  "problems": [
+    {
+      "frontendId": "1",
+      "title": "Two Sum",
+      "titleSlug": "two-sum",
+      "difficulty": "Easy",
+      "acRate": 57.324807730010086,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "hash-table"
+      ]
+    },
+    {
+      "frontendId": "2",
+      "title": "Add Two Numbers",
+      "titleSlug": "add-two-numbers",
+      "difficulty": "Medium",
+      "acRate": 48.26119915805997,
+      "isPaidOnly": false,
+      "topicTags": [
+        "linked-list",
+        "math",
+        "recursion"
+      ]
+    },
+    {
+      "frontendId": "3",
+      "title": "Longest Substring Without Repeating Characters",
+      "titleSlug": "longest-substring-without-repeating-characters",
+      "difficulty": "Medium",
+      "acRate": 38.831486834425085,
+      "isPaidOnly": false,
+      "topicTags": [
+        "hash-table",
+        "string",
+        "sliding-window"
+      ]
+    },
+    {
+      "frontendId": "4",
+      "title": "Median of Two Sorted Arrays",
+      "titleSlug": "median-of-two-sorted-arrays",
+      "difficulty": "Hard",
+      "acRate": 46.29199255046863,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "binary-search",
+        "divide-and-conquer"
+      ]
+    },
+    {
+      "frontendId": "5",
+      "title": "Longest Palindromic Substring",
+      "titleSlug": "longest-palindromic-substring",
+      "difficulty": "Medium",
+      "acRate": 37.624817394461175,
+      "isPaidOnly": false,
+      "topicTags": [
+        "two-pointers",
+        "string",
+        "dynamic-programming"
+      ]
+    },
+    {
+      "frontendId": "6",
+      "title": "Zigzag Conversion",
+      "titleSlug": "zigzag-conversion",
+      "difficulty": "Medium",
+      "acRate": 53.88704350273763,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string"
+      ]
+    },
+    {
+      "frontendId": "7",
+      "title": "Reverse Integer",
+      "titleSlug": "reverse-integer",
+      "difficulty": "Medium",
+      "acRate": 31.74033624206266,
+      "isPaidOnly": false,
+      "topicTags": [
+        "math"
+      ]
+    },
+    {
+      "frontendId": "8",
+      "title": "String to Integer (atoi)",
+      "titleSlug": "string-to-integer-atoi",
+      "difficulty": "Medium",
+      "acRate": 20.828075065918608,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string"
+      ]
+    },
+    {
+      "frontendId": "9",
+      "title": "Palindrome Number",
+      "titleSlug": "palindrome-number",
+      "difficulty": "Easy",
+      "acRate": 60.44501634183187,
+      "isPaidOnly": false,
+      "topicTags": [
+        "math"
+      ]
+    },
+    {
+      "frontendId": "10",
+      "title": "Regular Expression Matching",
+      "titleSlug": "regular-expression-matching",
+      "difficulty": "Hard",
+      "acRate": 30.726564746413125,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string",
+        "dynamic-programming",
+        "recursion"
+      ]
+    },
+    {
+      "frontendId": "11",
+      "title": "Container With Most Water",
+      "titleSlug": "container-with-most-water",
+      "difficulty": "Medium",
+      "acRate": 59.8250980560678,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "two-pointers",
+        "greedy"
+      ]
+    },
+    {
+      "frontendId": "12",
+      "title": "Integer to Roman",
+      "titleSlug": "integer-to-roman",
+      "difficulty": "Medium",
+      "acRate": 70.75663326153543,
+      "isPaidOnly": false,
+      "topicTags": [
+        "hash-table",
+        "math",
+        "string"
+      ]
+    },
+    {
+      "frontendId": "13",
+      "title": "Roman to Integer",
+      "titleSlug": "roman-to-integer",
+      "difficulty": "Easy",
+      "acRate": 66.48908689132485,
+      "isPaidOnly": false,
+      "topicTags": [
+        "hash-table",
+        "math",
+        "string"
+      ]
+    },
+    {
+      "frontendId": "14",
+      "title": "Longest Common Prefix",
+      "titleSlug": "longest-common-prefix",
+      "difficulty": "Easy",
+      "acRate": 47.37829919656284,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "string",
+        "trie"
+      ]
+    },
+    {
+      "frontendId": "15",
+      "title": "3Sum",
+      "titleSlug": "3sum",
+      "difficulty": "Medium",
+      "acRate": 38.87803804533455,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "two-pointers",
+        "sorting"
+      ]
+    },
+    {
+      "frontendId": "16",
+      "title": "3Sum Closest",
+      "titleSlug": "3sum-closest",
+      "difficulty": "Medium",
+      "acRate": 48.34711428302725,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "two-pointers",
+        "sorting"
+      ]
+    },
+    {
+      "frontendId": "17",
+      "title": "Letter Combinations of a Phone Number",
+      "titleSlug": "letter-combinations-of-a-phone-number",
+      "difficulty": "Medium",
+      "acRate": 65.83786628305175,
+      "isPaidOnly": false,
+      "topicTags": [
+        "hash-table",
+        "string",
+        "backtracking"
+      ]
+    },
+    {
+      "frontendId": "18",
+      "title": "4Sum",
+      "titleSlug": "4sum",
+      "difficulty": "Medium",
+      "acRate": 40.371246506406436,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "two-pointers",
+        "sorting"
+      ]
+    },
+    {
+      "frontendId": "19",
+      "title": "Remove Nth Node From End of List",
+      "titleSlug": "remove-nth-node-from-end-of-list",
+      "difficulty": "Medium",
+      "acRate": 51.33365254218963,
+      "isPaidOnly": false,
+      "topicTags": [
+        "linked-list",
+        "two-pointers"
+      ]
+    },
+    {
+      "frontendId": "20",
+      "title": "Valid Parentheses",
+      "titleSlug": "valid-parentheses",
+      "difficulty": "Easy",
+      "acRate": 43.9907367266495,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string",
+        "stack"
+      ]
+    },
+    {
+      "frontendId": "21",
+      "title": "Merge Two Sorted Lists",
+      "titleSlug": "merge-two-sorted-lists",
+      "difficulty": "Easy",
+      "acRate": 68.1411090090593,
+      "isPaidOnly": false,
+      "topicTags": [
+        "linked-list",
+        "recursion"
+      ]
+    },
+    {
+      "frontendId": "22",
+      "title": "Generate Parentheses",
+      "titleSlug": "generate-parentheses",
+      "difficulty": "Medium",
+      "acRate": 78.51872658815743,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string",
+        "dynamic-programming",
+        "backtracking"
+      ]
+    },
+    {
+      "frontendId": "23",
+      "title": "Merge k Sorted Lists",
+      "titleSlug": "merge-k-sorted-lists",
+      "difficulty": "Hard",
+      "acRate": 59.29188907503602,
+      "isPaidOnly": false,
+      "topicTags": [
+        "linked-list",
+        "divide-and-conquer",
+        "heap-priority-queue",
+        "merge-sort"
+      ]
+    },
+    {
+      "frontendId": "24",
+      "title": "Swap Nodes in Pairs",
+      "titleSlug": "swap-nodes-in-pairs",
+      "difficulty": "Medium",
+      "acRate": 69.29325071177357,
+      "isPaidOnly": false,
+      "topicTags": [
+        "linked-list",
+        "recursion"
+      ]
+    },
+    {
+      "frontendId": "25",
+      "title": "Reverse Nodes in k-Group",
+      "titleSlug": "reverse-nodes-in-k-group",
+      "difficulty": "Hard",
+      "acRate": 65.7899730770264,
+      "isPaidOnly": false,
+      "topicTags": [
+        "linked-list",
+        "recursion"
+      ]
+    },
+    {
+      "frontendId": "26",
+      "title": "Remove Duplicates from Sorted Array",
+      "titleSlug": "remove-duplicates-from-sorted-array",
+      "difficulty": "Easy",
+      "acRate": 62.58902069709973,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "two-pointers"
+      ]
+    },
+    {
+      "frontendId": "27",
+      "title": "Remove Element",
+      "titleSlug": "remove-element",
+      "difficulty": "Easy",
+      "acRate": 61.63251626677463,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "two-pointers"
+      ]
+    },
+    {
+      "frontendId": "28",
+      "title": "Find the Index of the First Occurrence in a String",
+      "titleSlug": "find-the-index-of-the-first-occurrence-in-a-string",
+      "difficulty": "Easy",
+      "acRate": 46.49254856912409,
+      "isPaidOnly": false,
+      "topicTags": [
+        "two-pointers",
+        "string",
+        "string-matching"
+      ]
+    },
+    {
+      "frontendId": "29",
+      "title": "Divide Two Integers",
+      "titleSlug": "divide-two-integers",
+      "difficulty": "Medium",
+      "acRate": 19.616464597007237,
+      "isPaidOnly": false,
+      "topicTags": [
+        "math",
+        "bit-manipulation"
+      ]
+    },
+    {
+      "frontendId": "30",
+      "title": "Substring with Concatenation of All Words",
+      "titleSlug": "substring-with-concatenation-of-all-words",
+      "difficulty": "Hard",
+      "acRate": 34.22088758025488,
+      "isPaidOnly": false,
+      "topicTags": [
+        "hash-table",
+        "string",
+        "sliding-window"
+      ]
+    },
+    {
+      "frontendId": "31",
+      "title": "Next Permutation",
+      "titleSlug": "next-permutation",
+      "difficulty": "Medium",
+      "acRate": 45.03780823925136,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "two-pointers"
+      ]
+    },
+    {
+      "frontendId": "32",
+      "title": "Longest Valid Parentheses",
+      "titleSlug": "longest-valid-parentheses",
+      "difficulty": "Hard",
+      "acRate": 38.50921067305887,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string",
+        "dynamic-programming",
+        "stack"
+      ]
+    },
+    {
+      "frontendId": "33",
+      "title": "Search in Rotated Sorted Array",
+      "titleSlug": "search-in-rotated-sorted-array",
+      "difficulty": "Medium",
+      "acRate": 44.362919471579694,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "binary-search"
+      ]
+    },
+    {
+      "frontendId": "34",
+      "title": "Find First and Last Position of Element in Sorted Array",
+      "titleSlug": "find-first-and-last-position-of-element-in-sorted-array",
+      "difficulty": "Medium",
+      "acRate": 48.66219104145149,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "binary-search"
+      ]
+    },
+    {
+      "frontendId": "35",
+      "title": "Search Insert Position",
+      "titleSlug": "search-insert-position",
+      "difficulty": "Easy",
+      "acRate": 51.03648611287579,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "binary-search"
+      ]
+    },
+    {
+      "frontendId": "36",
+      "title": "Valid Sudoku",
+      "titleSlug": "valid-sudoku",
+      "difficulty": "Medium",
+      "acRate": 64.36797392753111,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "hash-table",
+        "matrix"
+      ]
+    },
+    {
+      "frontendId": "37",
+      "title": "Sudoku Solver",
+      "titleSlug": "sudoku-solver",
+      "difficulty": "Hard",
+      "acRate": 65.42435091539336,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "hash-table",
+        "backtracking",
+        "matrix"
+      ]
+    },
+    {
+      "frontendId": "38",
+      "title": "Count and Say",
+      "titleSlug": "count-and-say",
+      "difficulty": "Medium",
+      "acRate": 62.64221614040164,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string"
+      ]
+    },
+    {
+      "frontendId": "39",
+      "title": "Combination Sum",
+      "titleSlug": "combination-sum",
+      "difficulty": "Medium",
+      "acRate": 76.36243622441125,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "backtracking"
+      ]
+    },
+    {
+      "frontendId": "40",
+      "title": "Combination Sum II",
+      "titleSlug": "combination-sum-ii",
+      "difficulty": "Medium",
+      "acRate": 59.25867568353683,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "backtracking"
+      ]
+    },
+    {
+      "frontendId": "41",
+      "title": "First Missing Positive",
+      "titleSlug": "first-missing-positive",
+      "difficulty": "Hard",
+      "acRate": 42.71337118377833,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "hash-table"
+      ]
+    },
+    {
+      "frontendId": "42",
+      "title": "Trapping Rain Water",
+      "titleSlug": "trapping-rain-water",
+      "difficulty": "Hard",
+      "acRate": 67.13311086264267,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "two-pointers",
+        "dynamic-programming",
+        "stack",
+        "monotonic-stack"
+      ]
+    },
+    {
+      "frontendId": "43",
+      "title": "Multiply Strings",
+      "titleSlug": "multiply-strings",
+      "difficulty": "Medium",
+      "acRate": 43.93907217180001,
+      "isPaidOnly": false,
+      "topicTags": [
+        "math",
+        "string",
+        "simulation"
+      ]
+    },
+    {
+      "frontendId": "44",
+      "title": "Wildcard Matching",
+      "titleSlug": "wildcard-matching",
+      "difficulty": "Hard",
+      "acRate": 31.720271846044557,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string",
+        "dynamic-programming",
+        "greedy",
+        "recursion"
+      ]
+    },
+    {
+      "frontendId": "45",
+      "title": "Jump Game II",
+      "titleSlug": "jump-game-ii",
+      "difficulty": "Medium",
+      "acRate": 42.68538974602239,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "dynamic-programming",
+        "greedy"
+      ]
+    },
+    {
+      "frontendId": "46",
+      "title": "Permutations",
+      "titleSlug": "permutations",
+      "difficulty": "Medium",
+      "acRate": 81.80847153671921,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "backtracking"
+      ]
+    },
+    {
+      "frontendId": "47",
+      "title": "Permutations II",
+      "titleSlug": "permutations-ii",
+      "difficulty": "Medium",
+      "acRate": 63.24422840247529,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "backtracking",
+        "sorting"
+      ]
+    },
+    {
+      "frontendId": "48",
+      "title": "Rotate Image",
+      "titleSlug": "rotate-image",
+      "difficulty": "Medium",
+      "acRate": 79.5722012943659,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "math",
+        "matrix"
+      ]
+    },
+    {
+      "frontendId": "49",
+      "title": "Group Anagrams",
+      "titleSlug": "group-anagrams",
+      "difficulty": "Medium",
+      "acRate": 72.41796120525076,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "hash-table",
+        "string",
+        "sorting"
+      ]
+    },
+    {
+      "frontendId": "50",
+      "title": "Pow(x, n)",
+      "titleSlug": "powx-n",
+      "difficulty": "Medium",
+      "acRate": 38.50853389046505,
+      "isPaidOnly": false,
+      "topicTags": [
+        "math",
+        "recursion"
+      ]
+    },
+    {
+      "frontendId": "51",
+      "title": "N-Queens",
+      "titleSlug": "n-queens",
+      "difficulty": "Hard",
+      "acRate": 75.29078204719197,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "backtracking"
+      ]
+    },
+    {
+      "frontendId": "52",
+      "title": "N-Queens II",
+      "titleSlug": "n-queens-ii",
+      "difficulty": "Hard",
+      "acRate": 78.45563821430693,
+      "isPaidOnly": false,
+      "topicTags": [
+        "backtracking"
+      ]
+    },
+    {
+      "frontendId": "53",
+      "title": "Maximum Subarray",
+      "titleSlug": "maximum-subarray",
+      "difficulty": "Medium",
+      "acRate": 53.17068948920413,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "divide-and-conquer",
+        "dynamic-programming"
+      ]
+    },
+    {
+      "frontendId": "54",
+      "title": "Spiral Matrix",
+      "titleSlug": "spiral-matrix",
+      "difficulty": "Medium",
+      "acRate": 56.527469117995246,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "matrix",
+        "simulation"
+      ]
+    },
+    {
+      "frontendId": "55",
+      "title": "Jump Game",
+      "titleSlug": "jump-game",
+      "difficulty": "Medium",
+      "acRate": 40.70326465093799,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "dynamic-programming",
+        "greedy"
+      ]
+    },
+    {
+      "frontendId": "56",
+      "title": "Merge Intervals",
+      "titleSlug": "merge-intervals",
+      "difficulty": "Medium",
+      "acRate": 51.558626474646,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "sorting"
+      ]
+    },
+    {
+      "frontendId": "57",
+      "title": "Insert Interval",
+      "titleSlug": "insert-interval",
+      "difficulty": "Medium",
+      "acRate": 45.01626067186816,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array"
+      ]
+    },
+    {
+      "frontendId": "58",
+      "title": "Length of Last Word",
+      "titleSlug": "length-of-last-word",
+      "difficulty": "Easy",
+      "acRate": 58.61291946171718,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string"
+      ]
+    },
+    {
+      "frontendId": "59",
+      "title": "Spiral Matrix II",
+      "titleSlug": "spiral-matrix-ii",
+      "difficulty": "Medium",
+      "acRate": 74.87289058451556,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "matrix",
+        "simulation"
+      ]
+    },
+    {
+      "frontendId": "60",
+      "title": "Permutation Sequence",
+      "titleSlug": "permutation-sequence",
+      "difficulty": "Hard",
+      "acRate": 52.724635270855856,
+      "isPaidOnly": false,
+      "topicTags": [
+        "math",
+        "recursion"
+      ]
+    },
+    {
+      "frontendId": "61",
+      "title": "Rotate List",
+      "titleSlug": "rotate-list",
+      "difficulty": "Medium",
+      "acRate": 41.527471403203094,
+      "isPaidOnly": false,
+      "topicTags": [
+        "linked-list",
+        "two-pointers"
+      ]
+    },
+    {
+      "frontendId": "62",
+      "title": "Unique Paths",
+      "titleSlug": "unique-paths",
+      "difficulty": "Medium",
+      "acRate": 66.71967023537736,
+      "isPaidOnly": false,
+      "topicTags": [
+        "math",
+        "dynamic-programming",
+        "combinatorics"
+      ]
+    },
+    {
+      "frontendId": "63",
+      "title": "Unique Paths II",
+      "titleSlug": "unique-paths-ii",
+      "difficulty": "Medium",
+      "acRate": 44.33987522202997,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "dynamic-programming",
+        "matrix"
+      ]
+    },
+    {
+      "frontendId": "64",
+      "title": "Minimum Path Sum",
+      "titleSlug": "minimum-path-sum",
+      "difficulty": "Medium",
+      "acRate": 68.05477578516212,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "dynamic-programming",
+        "matrix"
+      ]
+    },
+    {
+      "frontendId": "65",
+      "title": "Valid Number",
+      "titleSlug": "valid-number",
+      "difficulty": "Hard",
+      "acRate": 22.816254385654037,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string"
+      ]
+    },
+    {
+      "frontendId": "66",
+      "title": "Plus One",
+      "titleSlug": "plus-one",
+      "difficulty": "Easy",
+      "acRate": 49.80019582562349,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "math"
+      ]
+    },
+    {
+      "frontendId": "67",
+      "title": "Add Binary",
+      "titleSlug": "add-binary",
+      "difficulty": "Easy",
+      "acRate": 57.892439795532894,
+      "isPaidOnly": false,
+      "topicTags": [
+        "math",
+        "string",
+        "bit-manipulation",
+        "simulation"
+      ]
+    },
+    {
+      "frontendId": "68",
+      "title": "Text Justification",
+      "titleSlug": "text-justification",
+      "difficulty": "Hard",
+      "acRate": 50.80349077885165,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "string",
+        "simulation"
+      ]
+    },
+    {
+      "frontendId": "69",
+      "title": "Sqrt(x)",
+      "titleSlug": "sqrtx",
+      "difficulty": "Easy",
+      "acRate": 41.654017198866036,
+      "isPaidOnly": false,
+      "topicTags": [
+        "math",
+        "binary-search"
+      ]
+    },
+    {
+      "frontendId": "70",
+      "title": "Climbing Stairs",
+      "titleSlug": "climbing-stairs",
+      "difficulty": "Easy",
+      "acRate": 54.001952401043326,
+      "isPaidOnly": false,
+      "topicTags": [
+        "math",
+        "dynamic-programming",
+        "memoization"
+      ]
+    },
+    {
+      "frontendId": "71",
+      "title": "Simplify Path",
+      "titleSlug": "simplify-path",
+      "difficulty": "Medium",
+      "acRate": 50.34962326286154,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string",
+        "stack"
+      ]
+    },
+    {
+      "frontendId": "72",
+      "title": "Edit Distance",
+      "titleSlug": "edit-distance",
+      "difficulty": "Medium",
+      "acRate": 60.389354009083526,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string",
+        "dynamic-programming"
+      ]
+    },
+    {
+      "frontendId": "73",
+      "title": "Set Matrix Zeroes",
+      "titleSlug": "set-matrix-zeroes",
+      "difficulty": "Medium",
+      "acRate": 62.70805925545313,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "hash-table",
+        "matrix"
+      ]
+    },
+    {
+      "frontendId": "74",
+      "title": "Search a 2D Matrix",
+      "titleSlug": "search-a-2d-matrix",
+      "difficulty": "Medium",
+      "acRate": 53.77786620753534,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "binary-search",
+        "matrix"
+      ]
+    },
+    {
+      "frontendId": "75",
+      "title": "Sort Colors",
+      "titleSlug": "sort-colors",
+      "difficulty": "Medium",
+      "acRate": 69.43252712831075,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "two-pointers",
+        "sorting"
+      ]
+    },
+    {
+      "frontendId": "76",
+      "title": "Minimum Window Substring",
+      "titleSlug": "minimum-window-substring",
+      "difficulty": "Hard",
+      "acRate": 47.28489774696399,
+      "isPaidOnly": false,
+      "topicTags": [
+        "hash-table",
+        "string",
+        "sliding-window"
+      ]
+    },
+    {
+      "frontendId": "77",
+      "title": "Combinations",
+      "titleSlug": "combinations",
+      "difficulty": "Medium",
+      "acRate": 74.4316261843937,
+      "isPaidOnly": false,
+      "topicTags": [
+        "backtracking"
+      ]
+    },
+    {
+      "frontendId": "78",
+      "title": "Subsets",
+      "titleSlug": "subsets",
+      "difficulty": "Medium",
+      "acRate": 82.21861569752778,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "backtracking",
+        "bit-manipulation"
+      ]
+    },
+    {
+      "frontendId": "79",
+      "title": "Word Search",
+      "titleSlug": "word-search",
+      "difficulty": "Medium",
+      "acRate": 47.15114082225025,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "string",
+        "backtracking",
+        "depth-first-search",
+        "matrix"
+      ]
+    },
+    {
+      "frontendId": "80",
+      "title": "Remove Duplicates from Sorted Array II",
+      "titleSlug": "remove-duplicates-from-sorted-array-ii",
+      "difficulty": "Medium",
+      "acRate": 64.52357155880904,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "two-pointers"
+      ]
+    },
+    {
+      "frontendId": "81",
+      "title": "Search in Rotated Sorted Array II",
+      "titleSlug": "search-in-rotated-sorted-array-ii",
+      "difficulty": "Medium",
+      "acRate": 39.90393672661996,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "binary-search"
+      ]
+    },
+    {
+      "frontendId": "82",
+      "title": "Remove Duplicates from Sorted List II",
+      "titleSlug": "remove-duplicates-from-sorted-list-ii",
+      "difficulty": "Medium",
+      "acRate": 51.58499625602624,
+      "isPaidOnly": false,
+      "topicTags": [
+        "linked-list",
+        "two-pointers"
+      ]
+    },
+    {
+      "frontendId": "83",
+      "title": "Remove Duplicates from Sorted List",
+      "titleSlug": "remove-duplicates-from-sorted-list",
+      "difficulty": "Easy",
+      "acRate": 56.54590000961136,
+      "isPaidOnly": false,
+      "topicTags": [
+        "linked-list"
+      ]
+    },
+    {
+      "frontendId": "84",
+      "title": "Largest Rectangle in Histogram",
+      "titleSlug": "largest-rectangle-in-histogram",
+      "difficulty": "Hard",
+      "acRate": 49.650017419947424,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "stack",
+        "monotonic-stack"
+      ]
+    },
+    {
+      "frontendId": "85",
+      "title": "Maximal Rectangle",
+      "titleSlug": "maximal-rectangle",
+      "difficulty": "Hard",
+      "acRate": 58.48000052855248,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "dynamic-programming",
+        "stack",
+        "matrix",
+        "monotonic-stack"
+      ]
+    },
+    {
+      "frontendId": "86",
+      "title": "Partition List",
+      "titleSlug": "partition-list",
+      "difficulty": "Medium",
+      "acRate": 60.94075704410099,
+      "isPaidOnly": false,
+      "topicTags": [
+        "linked-list",
+        "two-pointers"
+      ]
+    },
+    {
+      "frontendId": "87",
+      "title": "Scramble String",
+      "titleSlug": "scramble-string",
+      "difficulty": "Hard",
+      "acRate": 44.284409192309056,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string",
+        "dynamic-programming"
+      ]
+    },
+    {
+      "frontendId": "88",
+      "title": "Merge Sorted Array",
+      "titleSlug": "merge-sorted-array",
+      "difficulty": "Easy",
+      "acRate": 54.656138471093804,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "two-pointers",
+        "sorting"
+      ]
+    },
+    {
+      "frontendId": "89",
+      "title": "Gray Code",
+      "titleSlug": "gray-code",
+      "difficulty": "Medium",
+      "acRate": 64.59386565022753,
+      "isPaidOnly": false,
+      "topicTags": [
+        "math",
+        "backtracking",
+        "bit-manipulation"
+      ]
+    },
+    {
+      "frontendId": "90",
+      "title": "Subsets II",
+      "titleSlug": "subsets-ii",
+      "difficulty": "Medium",
+      "acRate": 61.1211701093525,
+      "isPaidOnly": false,
+      "topicTags": [
+        "array",
+        "backtracking",
+        "bit-manipulation"
+      ]
+    },
+    {
+      "frontendId": "91",
+      "title": "Decode Ways",
+      "titleSlug": "decode-ways",
+      "difficulty": "Medium",
+      "acRate": 37.82400448197001,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string",
+        "dynamic-programming"
+      ]
+    },
+    {
+      "frontendId": "92",
+      "title": "Reverse Linked List II",
+      "titleSlug": "reverse-linked-list-ii",
+      "difficulty": "Medium",
+      "acRate": 51.31386429515115,
+      "isPaidOnly": false,
+      "topicTags": [
+        "linked-list"
+      ]
+    },
+    {
+      "frontendId": "93",
+      "title": "Restore IP Addresses",
+      "titleSlug": "restore-ip-addresses",
+      "difficulty": "Medium",
+      "acRate": 55.7164034990111,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string",
+        "backtracking"
+      ]
+    },
+    {
+      "frontendId": "94",
+      "title": "Binary Tree Inorder Traversal",
+      "titleSlug": "binary-tree-inorder-traversal",
+      "difficulty": "Easy",
+      "acRate": 79.92653559054871,
+      "isPaidOnly": false,
+      "topicTags": [
+        "stack",
+        "tree",
+        "depth-first-search",
+        "binary-tree"
+      ]
+    },
+    {
+      "frontendId": "95",
+      "title": "Unique Binary Search Trees II",
+      "titleSlug": "unique-binary-search-trees-ii",
+      "difficulty": "Medium",
+      "acRate": 62.23984303336297,
+      "isPaidOnly": false,
+      "topicTags": [
+        "dynamic-programming",
+        "backtracking",
+        "tree",
+        "binary-search-tree",
+        "binary-tree"
+      ]
+    },
+    {
+      "frontendId": "96",
+      "title": "Unique Binary Search Trees",
+      "titleSlug": "unique-binary-search-trees",
+      "difficulty": "Medium",
+      "acRate": 63.52613879773739,
+      "isPaidOnly": false,
+      "topicTags": [
+        "math",
+        "dynamic-programming",
+        "tree",
+        "binary-search-tree",
+        "binary-tree"
+      ]
+    },
+    {
+      "frontendId": "97",
+      "title": "Interleaving String",
+      "titleSlug": "interleaving-string",
+      "difficulty": "Medium",
+      "acRate": 43.79233192797674,
+      "isPaidOnly": false,
+      "topicTags": [
+        "string",
+        "dynamic-programming"
+      ]
+    },
+    {
+      "frontendId": "98",
+      "title": "Validate Binary Search Tree",
+      "titleSlug": "validate-binary-search-tree",
+      "difficulty": "Medium",
+      "acRate": 35.58464035660464,
+      "isPaidOnly": false,
+      "topicTags": [
+        "tree",
+        "depth-first-search",
+        "binary-search-tree",
+        "binary-tree"
+      ]
+    },
+    {
+      "frontendId": "99",
+      "title": "Recover Binary Search Tree",
+      "titleSlug": "recover-binary-search-tree",
+      "difficulty": "Medium",
+      "acRate": 59.302421888644616,
+      "isPaidOnly": false,
+      "topicTags": [
+        "tree",
+        "depth-first-search",
+        "binary-search-tree",
+        "binary-tree"
+      ]
+    },
+    {
+      "frontendId": "100",
+      "title": "Same Tree",
+      "titleSlug": "same-tree",
+      "difficulty": "Easy",
+      "acRate": 66.92100708650094,
+      "isPaidOnly": false,
+      "topicTags": [
+        "tree",
+        "depth-first-search",
+        "breadth-first-search",
+        "binary-tree"
+      ]
+    }
+  ]
+}
