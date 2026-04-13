@@ -5,5 +5,17 @@ from typing import List
 
 class Solution:
     def minimumCost(self, nums: List[int]) -> int:
-        pass
+        if len(nums) < 3:
+            return -1
+
+        fixed_cost = nums[0]
+        first_min = min(nums[1], nums[2])
+        second_min = max(nums[1], nums[2])
+
+        for i in range(3, len(nums)):
+            if nums[i] < second_min:
+                second_min = max(nums[i], first_min)
+                first_min = min(nums[i], first_min)
+
+        return fixed_cost + first_min + second_min
         
