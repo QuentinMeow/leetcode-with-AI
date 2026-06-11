@@ -378,9 +378,12 @@ def iteration_patterns(nums: list[int], a: list[int], b: list[int]) -> None:
 
 
 def string_patterns(s: str, chars: list[str], nums: list[int]) -> None:
+    # Split / join / trim.
     words = s.split()  # Split on runs of whitespace.
     csv_parts = [part.strip() for part in s.split(",") if part.strip()]
+    lines = s.splitlines()
     joined = " ".join(words)
+    answer_line = ",".join(str(x) for x in nums)
 
     # Efficient build: list append + join.
     pieces: list[str] = []
@@ -388,30 +391,65 @@ def string_patterns(s: str, chars: list[str], nums: list[int]) -> None:
         pieces.append(ch)
     built = "".join(pieces)
 
+    # Slices: end index is exclusive.
+    first_three = s[:3]
+    without_last = s[:-1]
+    reversed_s = s[::-1]
+    every_other = s[::2]
+
+    # Search / replace.
+    contains = "needle" in s
+    first_idx = s.find("needle")  # -1 if absent.
+    count_a = s.count("a")
+    replaced_once = s.replace("old", "new", 1)
+    replaced_all = s.replace("old", "new")
+
+    # Case / whitespace.
     lower = s.lower()
+    upper = s.upper()
     stripped = s.strip()
-    replaced = s.replace("old", "new")
+    left_stripped = s.lstrip()
+    right_stripped = s.rstrip()
     starts = s.startswith("pre")
     ends = s.endswith("suf")
 
+    # Character classes are common in palindrome / parsing problems.
+    normalized = "".join(ch.lower() for ch in s if ch.isalnum())
+    is_clean_palindrome = normalized == normalized[::-1]
+    kind_flags = [(ch.isalpha(), ch.isdigit(), ch.isalnum(), ch.isspace()) for ch in s[:3]]
+
+    # Ord / chr for compact fixed alphabet arrays.
     idx = ord("c") - ord("a")
     ch = chr(ord("a") + idx)
+    digit = ord("7") - ord("0")
     freq26 = [0] * 26
     for ch2 in s:
         if "a" <= ch2 <= "z":
             freq26[ord(ch2) - ord("a")] += 1
+    anagram_key_counts = tuple(freq26)
+    anagram_key_sorted = "".join(sorted(s))
+    char_counts = Counter(s)
+    top_chars = char_counts.most_common(3)
 
+    # Parsing numbers from strings.
     ints_from_spaces = [int(part) for part in s.split()]
     ints_from_text = [int(m) for m in re.findall(r"-?\d+", s)]
-    answer_line = ",".join(str(x) for x in nums)
+    digits_from_string = [ord(ch) - ord("0") for ch in s if ch.isdigit()]
+    zero_padded = f"{len(s):04d}"  # Useful for labels/debug output.
 
 
 def numeric_bit_patterns(a: int, b: int, n: int, mask: int) -> None:
+    sign = (a > 0) - (a < 0)
+    absolute = abs(a)
+    clamped = max(0, min(n, 100))
+
+    quotient, rem = divmod(a, b)  # Same as (a // b, a % b).
     true_division = a / b
     floor_division = a // b  # Floors toward -inf.
-    trunc_toward_zero = int(a / b)
-    ceil_div_positive = -(-a // b)
+    trunc_toward_zero = (abs(a) // abs(b)) * (1 if a * b >= 0 else -1)
+    ceil_div_positive = -(-a // b)  # For positive b.
     remainder = a % b  # If b > 0, result is in [0, b).
+    normalized_mod = (a % b + b) % b
 
     inf = float("inf")
     neg_inf = float("-inf")
@@ -420,7 +458,24 @@ def numeric_bit_patterns(a: int, b: int, n: int, mask: int) -> None:
     gcd = math.gcd(a, b)
     lcm = math.lcm(a, b)
     root_floor = math.isqrt(n)
+    is_square = root_floor * root_floor == n
     choose_two = math.comb(n, 2) if n >= 2 else 0
+    permutations = math.perm(n, 2) if n >= 2 else 0
+
+    mod = 10**9 + 7
+    add_mod = (a + b) % mod
+    mul_mod = (a * b) % mod
+    pow_mod = pow(a, n, mod)
+    # inv_mod = pow(a, -1, mod)  # Modular inverse when gcd(a, mod) == 1.
+
+    # Decimal digits.
+    digits = [int(ch) for ch in str(abs(n))]
+    digit_sum = sum(digits)
+    x = abs(n)
+    reversed_digits = 0
+    while x:
+        reversed_digits = reversed_digits * 10 + x % 10
+        x //= 10
 
     one_bit = 1 << 3
     mask |= 1 << 3  # Set bit.
@@ -845,6 +900,64 @@ def count_palindromes_expand(s: str) -> int:
         return count
 
     return sum(expand(i, i) + expand(i, i + 1) for i in range(len(s)))
+
+
+def normalize_alnum_lower(s: str) -> str:
+    return "".join(ch.lower() for ch in s if ch.isalnum())
+
+
+def is_alnum_palindrome(s: str) -> bool:
+    left, right = 0, len(s) - 1
+    while left < right:
+        while left < right and not s[left].isalnum():
+            left += 1
+        while left < right and not s[right].isalnum():
+            right -= 1
+        if s[left].lower() != s[right].lower():
+            return False
+        left += 1
+        right -= 1
+    return True
+
+
+def add_decimal_strings(a: str, b: str) -> str:
+    i, j, carry = len(a) - 1, len(b) - 1, 0
+    ans: list[str] = []
+    while i >= 0 or j >= 0 or carry:
+        x = ord(a[i]) - ord("0") if i >= 0 else 0
+        y = ord(b[j]) - ord("0") if j >= 0 else 0
+        carry, digit = divmod(x + y + carry, 10)
+        ans.append(chr(ord("0") + digit))
+        i -= 1
+        j -= 1
+    return "".join(reversed(ans))
+
+
+def compare_version_numbers(version1: str, version2: str) -> int:
+    a = [int(part) for part in version1.split(".")]
+    b = [int(part) for part in version2.split(".")]
+    n = max(len(a), len(b))
+    for i in range(n):
+        x = a[i] if i < len(a) else 0
+        y = b[i] if i < len(b) else 0
+        if x != y:
+            return -1 if x < y else 1
+    return 0
+
+
+def run_length_encode(s: str) -> list[tuple[str, int]]:
+    if not s:
+        return []
+    groups: list[tuple[str, int]] = []
+    cur, count = s[0], 1
+    for ch in s[1:]:
+        if ch == cur:
+            count += 1
+        else:
+            groups.append((cur, count))
+            cur, count = ch, 1
+    groups.append((cur, count))
+    return groups
 
 
 def search_rotated(nums: list[int], target: int) -> int:
@@ -1290,6 +1403,75 @@ def combination_sum(candidates: list[int], target: int) -> list[list[int]]:
 
     backtrack(0, target)
     return ans
+
+
+def base10_digits(n: int) -> list[int]:
+    n = abs(n)
+    if n == 0:
+        return [0]
+    digits: list[int] = []
+    while n:
+        n, digit = divmod(n, 10)
+        digits.append(digit)
+    return digits[::-1]
+
+
+def int_from_base10_digits(digits: Iterable[int]) -> int:
+    ans = 0
+    for digit in digits:
+        ans = ans * 10 + digit
+    return ans
+
+
+def reduce_fraction(numerator: int, denominator: int) -> tuple[int, int]:
+    g = math.gcd(numerator, denominator)
+    numerator //= g
+    denominator //= g
+    if denominator < 0:
+        numerator, denominator = -numerator, -denominator
+    return numerator, denominator
+
+
+def is_prime_trial(n: int) -> bool:
+    if n < 2:
+        return False
+    if n % 2 == 0:
+        return n == 2
+    factor = 3
+    while factor * factor <= n:
+        if n % factor == 0:
+            return False
+        factor += 2
+    return True
+
+
+def sieve_is_prime(n: int) -> list[bool]:
+    is_prime = [True] * (n + 1)
+    if n >= 0:
+        is_prime[0] = False
+    if n >= 1:
+        is_prime[1] = False
+    p = 2
+    while p * p <= n:
+        if is_prime[p]:
+            for multiple in range(p * p, n + 1, p):
+                is_prime[multiple] = False
+        p += 1
+    return is_prime
+
+
+def prime_factor_counts(n: int) -> dict[int, int]:
+    n = abs(n)
+    factors: dict[int, int] = {}
+    d = 2
+    while d * d <= n:
+        while n % d == 0:
+            factors[d] = factors.get(d, 0) + 1
+            n //= d
+        d += 1 if d == 2 else 2
+    if n > 1:
+        factors[n] = factors.get(n, 0) + 1
+    return factors
 
 
 def single_number_xor(nums: list[int]) -> int:
