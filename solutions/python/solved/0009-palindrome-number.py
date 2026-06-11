@@ -23,5 +23,25 @@ class Solution:
             reversed_rightside = reversed_rightside * 10 + leftside % 10
             leftside //= 10
         
-        return False 
-        
+        return False
+
+
+def run_assertion_tests():
+    solution = Solution()
+
+    assert solution.isPalindrome(121)
+    assert not solution.isPalindrome(-121)
+    assert not solution.isPalindrome(10)
+    assert solution.isPalindrome(12321)
+    assert solution.isPalindrome(0)
+
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(f"Test case 1 (expected: True): {solution.isPalindrome(121)}")
+    print(f"Test case 2 (expected: False): {solution.isPalindrome(-121)}")
+    print(f"Test case 3 (expected: False): {solution.isPalindrome(10)}")
+    print(f"Test case 4 (expected: True): {solution.isPalindrome(12321)}")
+    print(f"Test case 5 (expected: True): {solution.isPalindrome(0)}")
+
+    run_assertion_tests()

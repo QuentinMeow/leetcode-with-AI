@@ -150,3 +150,27 @@ class SolutionKthByElimination:
         if nums1[i + take1 - 1] < nums2[j + take2 - 1]:
             return SolutionKthByElimination._kth(nums1, i + take1, nums2, j, k - take1)
         return SolutionKthByElimination._kth(nums1, i, nums2, j + take2, k - take2)
+
+
+def run_assertion_tests():
+    cases = [
+        ([1, 3], [2], 2.0),
+        ([1, 2], [3, 4], 2.5),
+        ([], [1], 1.0),
+        ([0, 0], [0, 0], 0.0),
+    ]
+
+    for solution_class in (Solution, SolutionBinarySearchPartition, SolutionKthByElimination):
+        solution = solution_class()
+        for nums1, nums2, expected in cases:
+            assert solution.findMedianSortedArrays(nums1, nums2) == expected
+
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(f"Test case 1 (expected: 2.0): {solution.findMedianSortedArrays([1, 3], [2])}")
+    print(f"Test case 2 (expected: 2.5): {solution.findMedianSortedArrays([1, 2], [3, 4])}")
+    print(f"Test case 3 (expected: 1.0): {solution.findMedianSortedArrays([], [1])}")
+    print(f"Test case 4 (expected: 0.0): {solution.findMedianSortedArrays([0, 0], [0, 0])}")
+
+    run_assertion_tests()

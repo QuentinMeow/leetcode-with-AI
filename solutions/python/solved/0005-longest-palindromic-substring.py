@@ -25,4 +25,22 @@ class Solution:
                         ans = [i, j]
 
         return s[ans[0]: ans[1] + 1]
-        
+
+
+def run_assertion_tests():
+    solution = Solution()
+
+    assert solution.longestPalindrome("babad") in {"bab", "aba"}
+    assert solution.longestPalindrome("cbbd") == "bb"
+    assert solution.longestPalindrome("a") == "a"
+    assert solution.longestPalindrome("ac") in {"a", "c"}
+
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(f"Test case 1 (expected: 'bab' or 'aba'): {solution.longestPalindrome('babad')}")
+    print(f"Test case 2 (expected: 'bb'): {solution.longestPalindrome('cbbd')}")
+    print(f"Test case 3 (expected: 'a'): {solution.longestPalindrome('a')}")
+    print(f"Test case 4 (expected: 'a' or 'c'): {solution.longestPalindrome('ac')}")
+
+    run_assertion_tests()

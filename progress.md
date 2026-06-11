@@ -8,7 +8,7 @@ Track which problems have been solved and in which languages.
 - WA = attempted but not yet accepted
 - (blank) = not attempted
 
-Python rows below list problems whose `solutions/python/*.py` files contain at least one non-`pass` method body (AST check). Difficulty and titles follow `data/leetcode/python/first-300.json` when the problem appears there. Go column is AC when a matching `solutions/golang/<id>-*.go` stub or solution file exists.
+Python rows below list problems whose files live under `solutions/python/solved/`. Difficulty and titles follow `data/leetcode/python/all.json` when available. Go column is AC when a matching `solutions/golang/<id>-*.go` file exists.
 
 ## Problems
 
@@ -23,22 +23,15 @@ Python rows below list problems whose `solutions/python/*.py` files contain at l
 | 7 | Reverse Integer | Medium | AC | AC | math | |
 | 8 | String to Integer (atoi) | Medium | AC | AC | string | |
 | 9 | Palindrome Number | Easy | AC | AC | math | |
-| 31 | Next Permutation | Medium | AC | AC | array, two-pointers | |
-| 37 | Sudoku Solver | Hard | AC | AC | array, hash-table, backtracking, matrix | |
-| 48 | Rotate Image | Medium | AC | AC | array, math, matrix | |
-| 73 | Set Matrix Zeroes | Medium | AC | AC | array, hash-table, matrix | |
-| 75 | Sort Colors | Medium | AC | AC | array, two-pointers, sorting | |
-| 88 | Merge Sorted Array | Easy | AC | AC | array, two-pointers, sorting | |
-| 99 | Recover Binary Search Tree | Medium | AC | AC | tree, depth-first-search, binary-search-tree, binary-tree | |
-| 114 | Flatten Binary Tree to Linked List | Medium | AC | AC | linked-list, stack, tree, depth-first-search, binary-tree | |
-| 130 | Surrounded Regions | Medium | AC | AC | array, depth-first-search, breadth-first-search, union-find, matrix | |
-| 143 | Reorder List | Medium | AC | AC | linked-list, two-pointers, stack, recursion | |
 | 146 | LRU Cache | Medium | AC | AC | hash-table, linked-list, design, doubly-linked-list | |
-| 189 | Rotate Array | Medium | AC | AC | array, math, two-pointers | |
-| 237 | Delete Node in a Linked List | Medium | AC | AC | linked-list | |
-| 283 | Move Zeroes | Easy | AC | AC | array, two-pointers | |
-| 284 | Peeking Iterator | Medium | AC | AC | array, design, iterator | |
-| 289 | Game of Life | Medium | AC | AC | array, matrix, simulation | |
-| 297 | Serialize and Deserialize Binary Tree | Hard | AC | AC | string, tree, depth-first-search, breadth-first-search, design, binary-tree | |
+| 200 | Number of Islands | Medium | AC | AC | array, depth-first-search, breadth-first-search, union-find, matrix | |
+| 253 | Meeting Rooms II | Medium | AC | AC | array, two-pointers, greedy, sorting, heap-priority-queue, prefix-sum | |
+| 279 | Perfect Squares | Medium | AC | AC | math, dynamic-programming, breadth-first-search | |
+| 408 | Valid Word Abbreviation | Easy | AC | AC | two-pointers, string | |
+| 460 | LFU Cache | Hard | AC | AC | hash-table, linked-list, design, doubly-linked-list | |
+| 723 | Candy Crush | Medium | AC | AC | array, two-pointers, matrix, simulation | |
+| 751 | IP to CIDR | Medium | AC | AC | string, bit-manipulation | |
+| 1169 | Invalid Transactions | Medium | AC | AC | array, hash-table, string, sorting | |
+| 3010 | Divide an Array Into Subarrays With Minimum Cost I | Easy | AC | AC | array, sorting, enumeration | |
 
-*Regenerate the Python column with an AST pass over `solutions/python/` when you want to refresh; see agent notes in git history.*
+*Regenerate the Python column from `solutions/python/solved/` when you want to refresh.*

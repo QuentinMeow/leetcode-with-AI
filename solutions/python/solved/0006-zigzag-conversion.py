@@ -22,4 +22,20 @@ class Solution:
                 i += charsInSection
         
         return "".join(ans)
-        
+
+
+def run_assertion_tests():
+    solution = Solution()
+
+    assert solution.convert("PAYPALISHIRING", 3) == "PAHNAPLSIIGYIR"
+    assert solution.convert("PAYPALISHIRING", 4) == "PINALSIGYAHRPI"
+    assert solution.convert("ABC", 1) == "ABC"
+
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(f"Test case 1 (expected: 'PAHNAPLSIIGYIR'): {solution.convert('PAYPALISHIRING', 3)}")
+    print(f"Test case 2 (expected: 'PINALSIGYAHRPI'): {solution.convert('PAYPALISHIRING', 4)}")
+    print(f"Test case 3 (expected: 'ABC'): {solution.convert('ABC', 1)}")
+
+    run_assertion_tests()

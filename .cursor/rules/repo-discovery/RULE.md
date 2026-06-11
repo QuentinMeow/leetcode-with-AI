@@ -7,7 +7,7 @@ alwaysApply: true
 
 | Path | What lives here |
 |------|-----------------|
-| `solutions/<language>/` | LeetCode solutions organized by language |
+| `solutions/<language>/` | LeetCode solutions organized by language; Python uses `solved/` and `unsolved/` subfolders |
 | `.cursor/mcp-example.json` | Template MCP config (committed); copy to `mcp.json` locally |
 | `.cursor/mcp.json` | Real MCP config (gitignored — local paths and optional session cookie) |
 | `.cursor/rules/<name>/RULE.md` | Cursor project rules (always-on or glob-scoped) |
@@ -37,4 +37,5 @@ Use these supporting rules as the task demands:
 
 - Filename: `<problem-id>-<leetcode-slug>.<ext>` — pad `questionFrontendId` to at least four digits (e.g. `0001-two-sum.py`); if the id is already ≥4 digits, use it as-is (e.g. `3701-…`, `10000-…`). See `solutions/README.md` for bulk stubs via `npm run leetcode:generate-skeletons`.
 - Language folder: lowercase language name under `solutions/`
+- Python files are organized as `solutions/python/solved/` for completed solutions and `solutions/python/unsolved/` for generated or in-progress stubs.
 - One solution per file

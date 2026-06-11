@@ -2,6 +2,8 @@
 # https://leetcode.com/problems/invalid-transactions/
 
 from typing import List
+from collections import defaultdict
+
 class Solution:
     def invalidTransactions(self, transactions: List[str]) -> List[str]:
         invalid = []
@@ -53,4 +55,34 @@ class Transaction:
     def __repr__(self):
         return f"Transaction(name='{self.name}', time={self.time}, amount={self.amount}, city='{self.city}')"
 
-        
+
+def run_assertion_tests():
+    solution = Solution()
+
+    assert sorted(solution.invalidTransactions([
+        "alice,20,800,mtv",
+        "alice,50,100,beijing",
+    ])) == sorted([
+        "alice,20,800,mtv",
+        "alice,50,100,beijing",
+    ])
+    assert solution.invalidTransactions([
+        "alice,20,800,mtv",
+        "alice,50,1200,mtv",
+    ]) == ["alice,50,1200,mtv"]
+    assert solution.invalidTransactions([]) == []
+
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(
+        "Test case 1 (expected: both transactions invalid): "
+        f"{solution.invalidTransactions(['alice,20,800,mtv', 'alice,50,100,beijing'])}"
+    )
+    print(
+        "Test case 2 (expected: ['alice,50,1200,mtv']): "
+        f"{solution.invalidTransactions(['alice,20,800,mtv', 'alice,50,1200,mtv'])}"
+    )
+    print(f"Test case 3 (expected: []): {solution.invalidTransactions([])}")
+
+    run_assertion_tests()
