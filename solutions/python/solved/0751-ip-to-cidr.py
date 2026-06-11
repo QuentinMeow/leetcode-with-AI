@@ -1,6 +1,9 @@
 # LeetCode 751 — IP to CIDR
 # https://leetcode.com/problems/ip-to-cidr/
 
+from typing import List
+import math
+
 class Solution:
     def ipToCIDR(self, ip_str: str, n: int) -> List[str]:
         result = []
@@ -34,3 +37,24 @@ class Solution:
             return -1
         return int(blocks[0]) * 2**24 + int(blocks[1]) * 2**16 + int(blocks[2]) * 2**8 + int(blocks[3])
 
+
+def run_assertion_tests():
+    solution = Solution()
+
+    assert solution.ipToCIDR("255.0.0.7", 10) == [
+        "255.0.0.7/32",
+        "255.0.0.8/29",
+        "255.0.0.16/32",
+    ]
+    assert solution.ipToCIDR("0.0.0.0", 1) == ["0.0.0.0/32"]
+
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(
+        "Test case 1 (expected: ['255.0.0.7/32', '255.0.0.8/29', '255.0.0.16/32']): "
+        f"{solution.ipToCIDR('255.0.0.7', 10)}"
+    )
+    print(f"Test case 2 (expected: ['0.0.0.0/32']): {solution.ipToCIDR('0.0.0.0', 1)}")
+
+    run_assertion_tests()

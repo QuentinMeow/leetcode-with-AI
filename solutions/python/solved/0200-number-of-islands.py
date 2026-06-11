@@ -3,6 +3,8 @@
 
 from collections import deque
 
+from typing import List
+
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         if not grid:
@@ -38,7 +40,6 @@ class Solution:
         queue.append((r, c))
         while queue:
             r, c = queue.popleft()
-            print(f"r: {r}, c: {c}")
             if r - 1 >= 0 and grid[r - 1][c] == "1":
                 queue.append((r - 1, c))
                 grid[r - 1][c] = "-1"
@@ -51,6 +52,48 @@ class Solution:
             if c + 1 < len(grid[0]) and grid[r][c + 1] == "1":
                 queue.append((r, c + 1))
                 grid[r][c + 1] = "-1"
-        
 
-        
+
+def run_assertion_tests():
+    solution = Solution()
+
+    grid = [
+        ["1", "1", "1", "1", "0"],
+        ["1", "1", "0", "1", "0"],
+        ["1", "1", "0", "0", "0"],
+        ["0", "0", "0", "0", "0"],
+    ]
+    assert solution.numIslands(grid) == 1
+
+    grid = [
+        ["1", "1", "0", "0", "0"],
+        ["1", "1", "0", "0", "0"],
+        ["0", "0", "1", "0", "0"],
+        ["0", "0", "0", "1", "1"],
+    ]
+    assert solution.numIslands(grid) == 3
+
+    assert solution.numIslands([]) == 0
+
+
+if __name__ == "__main__":
+    solution = Solution()
+
+    grid = [
+        ["1", "1", "1", "1", "0"],
+        ["1", "1", "0", "1", "0"],
+        ["1", "1", "0", "0", "0"],
+        ["0", "0", "0", "0", "0"],
+    ]
+    print(f"Test case 1 (expected: 1): {solution.numIslands(grid)}")
+
+    grid = [
+        ["1", "1", "0", "0", "0"],
+        ["1", "1", "0", "0", "0"],
+        ["0", "0", "1", "0", "0"],
+        ["0", "0", "0", "1", "1"],
+    ]
+    print(f"Test case 2 (expected: 3): {solution.numIslands(grid)}")
+    print(f"Test case 3 (expected: 0): {solution.numIslands([])}")
+
+    run_assertion_tests()

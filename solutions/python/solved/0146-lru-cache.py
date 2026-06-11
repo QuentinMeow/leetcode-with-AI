@@ -60,3 +60,39 @@ class LRUCache:
 # obj = LRUCache(capacity)
 # param_1 = obj.get(key)
 # obj.put(key,value)
+
+
+def run_assertion_tests():
+    cache = LRUCache(2)
+    cache.put(1, 1)
+    cache.put(2, 2)
+    assert cache.get(1) == 1
+    cache.put(3, 3)
+    assert cache.get(2) == -1
+    cache.put(4, 4)
+    assert cache.get(1) == -1
+    assert cache.get(3) == 3
+    assert cache.get(4) == 4
+
+    cache = LRUCache(2)
+    cache.put(1, 1)
+    cache.put(2, 2)
+    cache.put(1, 10)
+    cache.put(3, 3)
+    assert cache.get(1) == 10
+    assert cache.get(2) == -1
+
+
+if __name__ == "__main__":
+    cache = LRUCache(2)
+    cache.put(1, 1)
+    cache.put(2, 2)
+    print(f"Test case 1 (expected: 1): {cache.get(1)}")
+    cache.put(3, 3)
+    print(f"Test case 2 (expected: -1): {cache.get(2)}")
+    cache.put(4, 4)
+    print(f"Test case 3 (expected: -1): {cache.get(1)}")
+    print(f"Test case 4 (expected: 3): {cache.get(3)}")
+    print(f"Test case 5 (expected: 4): {cache.get(4)}")
+
+    run_assertion_tests()

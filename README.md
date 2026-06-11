@@ -1,6 +1,6 @@
 # LeetCode with AI
 
-A self-evolving LeetCode practice environment in Cursor: **your** machine runs a **local** LeetCode MCP server (not a shared public service), project rules keep problem-solving disciplined, and skills provide coaching plus interview-style follow-ups. Solutions live under `solutions/<language>/`.
+A self-evolving LeetCode practice environment in Cursor: **your** machine runs a **local** LeetCode MCP server (not a shared public service), project rules keep problem-solving disciplined, and skills provide coaching plus interview-style follow-ups. Solutions live under `solutions/<language>/`; Python is split into `solutions/python/solved/` and `solutions/python/unsolved/`.
 
 ---
 
@@ -105,7 +105,7 @@ Reload Cursor after changing `mcp.json`.
 2. **Verify MCP** — `leetcode` server shows as connected.
 3. **Pick a problem** — e.g. ask the agent: *“Fetch the problem `two-sum` via LeetCode MCP”* or *“Search easy array problems”*.
 4. **Understand and plan** — project rules push a structured flow: clarify constraints, name the pattern, sketch approach, then code. Expect the agent to ask about edge cases before diving into implementation.
-5. **Implement** — create or edit a file under `solutions/<language>/` using the naming rule **`NNNN-slug.ext`** (see [solutions/README.md](solutions/README.md)). To materialize many stubs at once from `data/leetcode/` (official signatures via the API), run **`npm run leetcode:generate-skeletons`** as documented there.
+5. **Implement** — create or edit a file under `solutions/<language>/` using the naming rule **`NNNN-slug.ext`** (Python solved work belongs in `solutions/python/solved/`; stubs live in `solutions/python/unsolved/`; see [solutions/README.md](solutions/README.md)). To materialize many stubs at once from `data/leetcode/` (official signatures via the API), run **`npm run leetcode:generate-skeletons`** as documented there.
 6. **Get coaching** — *“Give me a hint”*, *“Review my solution”*, *“What pattern is this?”* The **leetcode-coach** skill uses progressive hints (category → approach → detail → pseudocode) before a full solution unless you ask otherwise.
 7. **Language study** — *“Explain this syntax”*, *“What’s sugar vs necessary here?”*, or *“What have I already covered in Python?”* uses **language-coach**: a per-language **tracker** (`learning/<lang>/TRACKER.md`) plus **one file per concept** under `learning/<lang>/concepts/`, so depth can grow without re-teaching everything each time.
 8. **Interview practice** — after you have a solution, *“Interview me on this”* or *“Ask follow-ups”* triggers **interview-simulator** (complexity, edge cases, optimizations, extensions).
@@ -144,6 +144,8 @@ Reload Cursor after changing `mcp.json`.
 ```
 solutions/                 # One folder per language; files: NNNN-slug.ext
   python/
+    solved/
+    unsolved/
   golang/
 .cursor/
   mcp-example.json         # Committed template — copy to mcp.json locally

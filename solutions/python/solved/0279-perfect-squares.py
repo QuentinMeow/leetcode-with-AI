@@ -32,4 +32,19 @@ class Solution:
         dp[n] = minimum
         return minimum
 
-        
+
+def run_assertion_tests():
+    solution = Solution()
+
+    assert solution.numSquares(12) == 3
+    assert solution.numSquares(13) == 2
+    assert solution.numSquares(1) == 1
+
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(f"Test case 1 (expected: 3): {solution.numSquares(12)}")
+    print(f"Test case 2 (expected: 2): {solution.numSquares(13)}")
+    print(f"Test case 3 (expected: 1): {solution.numSquares(1)}")
+
+    run_assertion_tests()

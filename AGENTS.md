@@ -7,13 +7,13 @@ alwaysApply: true
 
 ## Summary
 
-This repo is a LeetCode practice environment with AI coaching. Solutions live under `solutions/<language>/`. Cursor rules enforce workflow discipline. Cursor skills provide coaching and interview simulation. A **local** LeetCode MCP server (see below) handles problem fetch/search and related tools; submit/run on LeetCode depends on MCP package version and `LEETCODE_SESSION` configuration.
+This repo is a LeetCode practice environment with AI coaching. Solutions live under `solutions/<language>/`; Python is split into `solutions/python/solved/` and `solutions/python/unsolved/`. Cursor rules enforce workflow discipline. Cursor skills provide coaching and interview simulation. A **local** LeetCode MCP server (see below) handles problem fetch/search and related tools; submit/run on LeetCode depends on MCP package version and `LEETCODE_SESSION` configuration.
 
 ## Folder Structure
 
 | Path | Purpose |
 |------|---------|
-| `solutions/<language>/` | Solution files, one per problem, named `<NNNN>-<slug>.<ext>` |
+| `solutions/<language>/` | Solution files, one per problem, named `<NNNN>-<slug>.<ext>`; Python uses `solved/` and `unsolved/` subfolders |
 | `.cursor/mcp-example.json` | **Committed** template for LeetCode MCP — copy to `.cursor/mcp.json` and edit (see README). |
 | `.cursor/mcp.json` | **Gitignored** — your real MCP config (paths, optional `LEETCODE_SESSION`). Cursor reads this file name only after you create it. |
 | `.cursor/rules/<name>/RULE.md` | Cursor project rules |
@@ -25,7 +25,7 @@ This repo is a LeetCode practice environment with AI coaching. Solutions live un
 | `AGENTS.md` | This file (agent-facing contract) |
 | `data/leetcode/` | Fetched problem-list JSON (from `scripts/fetch-leetcode-problem-lists.mjs`) used by `scripts/generate-leetcode-skeletons.mjs` |
 | `scripts/fetch-leetcode-problem-lists.mjs` | Downloads first/last N problems per track into `data/leetcode/{python,golang}/` |
-| `scripts/generate-leetcode-skeletons.mjs` | Writes `solutions/{python,golang}/NNNN-slug.*` stubs from LeetCode starter code + those JSON lists |
+| `scripts/generate-leetcode-skeletons.mjs` | Writes Python stubs to `solutions/python/unsolved/` and Go stubs to `solutions/golang/` from LeetCode starter code + those JSON lists |
 
 ## Handy Commands
 
@@ -37,7 +37,7 @@ ls .cursor/rules/
 ls .cursor/skills/
 
 # List solved problems by language
-ls solutions/python/
+ls solutions/python/solved/
 ls solutions/golang/
 
 # Fetch catalog JSON → data/leetcode/… then generate solution stubs
@@ -59,8 +59,9 @@ npm run leetcode:generate-skeletons
 ### Solution File Convention
 
 - Filename: `<4-digit-number>-<leetcode-slug>.<ext>` (e.g. `0001-two-sum.py`). Use at least four digits; if `questionFrontendId` exceeds 9999, the unpadded id is used (e.g. `10000-problem-slug.py`).
+- Python placement: completed files live in `solutions/python/solved/`; generated or not-yet-solved stubs live in `solutions/python/unsolved/`.
 - One solution per file. If the user wants multiple approaches, use comments to separate them within the file.
-- To (re)generate empty stubs for problems listed under `data/leetcode/`, run `npm run leetcode:generate-skeletons` (see `solutions/README.md`). Use `--force` to overwrite existing files.
+- To (re)generate empty stubs for problems listed under `data/leetcode/`, run `npm run leetcode:generate-skeletons` (see `solutions/README.md`). Use `--force` to overwrite unsolved stubs.
 
 ### Banned Tools
 

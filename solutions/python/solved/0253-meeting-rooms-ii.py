@@ -1,6 +1,8 @@
 # LeetCode 253 — Meeting Rooms II
 # https://leetcode.com/problems/meeting-rooms-ii/
 
+from typing import List
+
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
         # 0           10
@@ -28,3 +30,21 @@ class Solution:
         
         return max_rooms
 
+
+def run_assertion_tests():
+    solution = Solution()
+
+    assert solution.minMeetingRooms([[0, 30], [5, 10], [15, 20]]) == 2
+    assert solution.minMeetingRooms([[7, 10], [2, 4]]) == 1
+    assert solution.minMeetingRooms([[1, 5], [5, 10], [10, 15]]) == 1
+    assert solution.minMeetingRooms([]) == 0
+
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(f"Test case 1 (expected: 2): {solution.minMeetingRooms([[0, 30], [5, 10], [15, 20]])}")
+    print(f"Test case 2 (expected: 1): {solution.minMeetingRooms([[7, 10], [2, 4]])}")
+    print(f"Test case 3 (expected: 1): {solution.minMeetingRooms([[1, 5], [5, 10], [10, 15]])}")
+    print(f"Test case 4 (expected: 0): {solution.minMeetingRooms([])}")
+
+    run_assertion_tests()

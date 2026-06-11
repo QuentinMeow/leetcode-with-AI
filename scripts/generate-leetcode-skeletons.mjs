@@ -6,7 +6,7 @@
  *
  * Usage:
  *   node scripts/generate-leetcode-skeletons.mjs              # skip existing files
- *   node scripts/generate-leetcode-skeletons.mjs --force      # overwrite all
+ *   node scripts/generate-leetcode-skeletons.mjs --force      # overwrite unsolved stubs
  *   node scripts/generate-leetcode-skeletons.mjs --golang-only # only Go (still fetches each problem once)
  *
  * Optional: LEETCODE_SKELETON_DELAY_MS (e.g. 30) sleeps between problem fetches to reduce rate limits.
@@ -20,7 +20,8 @@ import { LeetCode } from "leetcode-query";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const DATA_DIR = join(ROOT, "data", "leetcode", "python");
-const PY_OUT = join(ROOT, "solutions", "python");
+const PY_SOLVED_OUT = join(ROOT, "solutions", "python", "solved");
+const PY_OUT = join(ROOT, "solutions", "python", "unsolved");
 const GO_OUT = join(ROOT, "solutions", "golang");
 
 const force = process.argv.includes("--force");
@@ -253,6 +254,7 @@ async function main() {
   const lc = new LeetCode();
   await lc.initialized;
 
+  await mkdir(PY_SOLVED_OUT, { recursive: true });
   await mkdir(PY_OUT, { recursive: true });
   await mkdir(GO_OUT, { recursive: true });
 
@@ -269,6 +271,7 @@ async function main() {
 
   for (const meta of problems) {
     const base = filenameBase(meta.frontendId, meta.titleSlug);
+    const pySolvedPath = join(PY_SOLVED_OUT, `${base}.py`);
     const pyPath = join(PY_OUT, `${base}.py`);
     const goPath = join(GO_OUT, `${base}.go`);
 
@@ -289,7 +292,9 @@ async function main() {
 
     if (!golangOnly) {
       const pyContent = buildPythonFile(meta, pySnip?.code);
-      if (!force && (await fileExists(pyPath))) {
+      if (await fileExists(pySolvedPath)) {
+        pySkip++;
+      } else if (!force && (await fileExists(pyPath))) {
         pySkip++;
       } else {
         await writeFile(pyPath, pyContent, "utf8");

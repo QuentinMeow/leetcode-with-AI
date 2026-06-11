@@ -7,8 +7,10 @@ LeetCode solutions organized by language.
 ```
 solutions/
   python/
-    0001-two-sum.py
-    0015-3sum.py
+    solved/
+      0001-two-sum.py
+    unsolved/
+      0015-3sum.py
   golang/
     0001-two-sum.go
   <language>/
@@ -43,10 +45,10 @@ npm run leetcode:generate-skeletons
 
 This reads those JSON files, calls LeetCode’s API for each slug, and writes **Python 3** and **Go** files using the **official** starter signatures (plus minimal fixes so files parse locally):
 
-- **Python**: inserts `pass` in empty method bodies and adds common `typing` imports when hints use them.
+- **Python**: writes new stubs under `solutions/python/unsolved/`, skips matching files already under `solutions/python/solved/`, inserts `pass` in empty method bodies, and adds common `typing` imports when hints use them.
 - **Go**: unwraps doc-block helper types (e.g. `ListNode`), adds `panic("TODO")` in empty functions, and appends `func main() {}` so **`go build path/to/one-file.go`** succeeds. Each file is its own `package main`; do not `go build *.go` in the whole directory (duplicate `main`). On LeetCode, submit only the solution function(s) if their editor wraps your code; you can delete `main` locally if you prefer.
 
-**Overwrite existing files** (including ones you already edited):
+**Overwrite existing unsolved Python stubs and Go files**:
 
 ```bash
 node scripts/generate-leetcode-skeletons.mjs --force
