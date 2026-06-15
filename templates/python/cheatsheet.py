@@ -1,41 +1,31 @@
 """
 Python interview cheatsheet.
 
-Use this as the fast scan before an interview. The deeper explanations live in:
+Use this as the fast scan before an interview. The deeper explanations
+live in:
 
-- language-specific-pattern/*.py: Python syntax, containers, libraries, OOP.
+- language-specific-pattern/*.py: Python syntax, containers,
+  libraries, OOP.
 - algorithms/*.py: reusable algorithm templates by pattern.
 
-This file is intentionally compact: adjacent lines often show equivalent ways
-to do the same thing, plus the small caveats that cause interview bugs.
+This file is intentionally compact: adjacent lines often show
+equivalent ways
+to do the same thing, plus the small caveats that cause interview
+bugs.
 """
 
-# ruff: noqa: E501, F401, F841, B006
+# ruff: noqa: E501, F401, F841, B006, F811, E402
 # pyright: reportUnusedImport=false, reportUnusedVariable=false
 
-from __future__ import annotations
 
-import heapq
-import math
-import re
-import sys
-from bisect import bisect_left, bisect_right, insort
-from collections import Counter, OrderedDict, defaultdict, deque
-from dataclasses import dataclass, field
-from functools import cache, cmp_to_key, lru_cache
-from heapq import heapify, heappop, heappush, nlargest, nsmallest
-from itertools import accumulate, combinations, pairwise, permutations, product
-from operator import attrgetter, itemgetter
-from typing import Iterable
-
-
-# =============================================================================
+# ====================================================================
 # 0. Version / Syntax Quick Map
-# =============================================================================
+# ====================================================================
 
 """
 Python 3.8+:  walrus `:=`, `int.bit_count()`
-Python 3.9+:  `list[int]`, `dict[str, int]`, `dict_a | dict_b`, `@cache`
+Python 3.9+:  `list[int]`, `dict[str, int]`, `dict_a | dict_b`,
+`@cache`
 Python 3.10+: `int | None`, `match/case`, `itertools.pairwise`
 
 Older equivalents:
@@ -43,12 +33,18 @@ Older equivalents:
     dict[str, int]   -> typing.Dict[str, int]
     int | None       -> typing.Optional[int]
     @cache           -> @lru_cache(maxsize=None)
+
+`from __future__ import annotations` must be the first import in a
+real file, so
+this cheatsheet avoids depending on it. Snippets with forward
+references quote
+those type names instead.
 """
 
 
-# =============================================================================
+# ====================================================================
 # 1. Common Imports
-# =============================================================================
+# ====================================================================
 
 """
 collections: Counter, OrderedDict, defaultdict, deque
@@ -63,12 +59,17 @@ re:          findall, sub
 """
 
 
-# =============================================================================
+# ====================================================================
 # 2. Containers: Init, Copy, Mutate
-# =============================================================================
+# ====================================================================
 
 
-def list_array_matrix_patterns(n: int, rows: int, cols: int, nums: list[int]) -> None:
+from collections import deque
+
+
+def list_array_matrix_patterns(
+    n: int, rows: int, cols: int, nums: list[int]
+) -> None:
     # Empty list / dynamic array / stack.
     a: list[int] = []
     b = list()
@@ -87,7 +88,9 @@ def list_array_matrix_patterns(n: int, rows: int, cols: int, nums: list[int]) ->
     # Matrix: make fresh inner lists.
     grid = [[0] * cols for _ in range(rows)]
     visited = [[False for _ in range(cols)] for _ in range(rows)]
-    bad_grid = [[0] * cols] * rows  # AVOID: every row aliases the same list.
+    bad_grid = [
+        [0] * cols
+    ] * rows  # AVOID: every row aliases the same list.
 
     # Stack: use end of list.
     stack: list[int] = []
@@ -110,7 +113,12 @@ def list_array_matrix_patterns(n: int, rows: int, cols: int, nums: list[int]) ->
     reversed_iter = reversed(nums)
 
 
-def dict_defaultdict_counter_patterns(words: list[str], nums: list[int]) -> None:
+from collections import Counter, defaultdict
+
+
+def dict_defaultdict_counter_patterns(
+    words: list[str], nums: list[int]
+) -> None:
     # Empty dict / hash map.
     d: dict[str, int] = {}
     e = dict()
@@ -127,7 +135,8 @@ def dict_defaultdict_counter_patterns(words: list[str], nums: list[int]) -> None
     for w in words:
         groups1.setdefault("".join(sorted(w)), []).append(w)
 
-    # defaultdict(<factory>): when groups2[key] is missing, Python creates
+    # defaultdict(<factory>): when groups2[key] is missing,
+    # Python creates
     # groups2[key] = list(), then returns that list so append can run.
     groups2: defaultdict[str, list[str]] = defaultdict(list)
     for w in words:
@@ -137,7 +146,8 @@ def dict_defaultdict_counter_patterns(words: list[str], nums: list[int]) -> None
     for x in nums:
         counts1[x] = counts1.get(x, 0) + 1
 
-    # defaultdict(int): int() returns 0, so missing counts start from 0.
+    # defaultdict(int): int() returns 0, so missing counts start
+    # from 0.
     counts2: defaultdict[int, int] = defaultdict(int)
     for x in nums:
         counts2[x] += 1
@@ -161,7 +171,9 @@ def dict_defaultdict_counter_patterns(words: list[str], nums: list[int]) -> None
     merged_old.update({"a": 9, "b": 2})
 
 
-def set_tuple_key_patterns(nums: list[int], grid: list[list[int]]) -> None:
+def set_tuple_key_patterns(
+    nums: list[int], grid: list[list[int]]
+) -> None:
     seen: set[int] = set()
     unique = set(nums)
 
@@ -181,9 +193,9 @@ def set_tuple_key_patterns(nums: list[int], grid: list[list[int]]) -> None:
                 visited.add((r, c))
 
 
-# =============================================================================
+# ====================================================================
 # 3. Copying / Binding / Mutability
-# =============================================================================
+# ====================================================================
 
 
 def copy_and_aliasing(grid: list[list[int]], nums: list[int]) -> None:
@@ -198,17 +210,25 @@ def copy_and_aliasing(grid: list[list[int]], nums: list[int]) -> None:
     path: list[int] = []
     result: list[list[int]] = []
     result.append(path.copy())  # Save a snapshot in backtracking.
-    # result.append(path)       # AVOID: later path mutations affect saved row.
+    # result.append(path)
+    # AVOID: later path mutations affect saved row.
 
-    # Mutable default args: avoid `def f(bucket=[]): ...`; use None sentinel.
+    # Mutable default args: avoid `def f(bucket=[]): ...`; use
+    # None sentinel.
 
 
-# =============================================================================
+# ====================================================================
 # 4. Sorting / Comparison / Heap
-# =============================================================================
+# ====================================================================
 
 
-def sorting_patterns(items: list[tuple[str, int]], intervals: list[list[int]]) -> None:
+from functools import cmp_to_key
+from operator import itemgetter
+
+
+def sorting_patterns(
+    items: list[tuple[str, int]], intervals: list[list[int]]
+) -> None:
     nums = [3, 1, 2]
 
     new_sorted = sorted(nums)
@@ -216,46 +236,71 @@ def sorting_patterns(items: list[tuple[str, int]], intervals: list[list[int]]) -
 
     desc_all = sorted(nums, reverse=True)
 
-    # sorted(<list>, key=lambda <argument>: <representation sorting key>)
+    # sorted(<list>, key=lambda <argument>: <representation
+    # sorting key>)
     # <argument>: each element extracted from the list/iterable.
-    # <representation sorting key>: value Python compares for that element.
+    # <representation sorting key>: value Python compares for
+    # that element.
     by_start_end = sorted(intervals, key=lambda x: (x[0], x[1]))
-    # x is one interval like [start, end]; (x[0], x[1]) sorts by start, then end.
+    # x is one interval like [start, end]; (x[0], x[1]) sorts by
+    # start, then end.
 
-    score_desc_name_asc = sorted(items, key=lambda item: (-item[1], item[0]))
-    # item is one tuple like (name, score); (-score, name) means score desc, name asc.
+    score_desc_name_asc = sorted(
+        items, key=lambda item: (-item[1], item[0])
+    )
+    # item is one tuple like (name, score); (-score, name) means
+    # score desc, name asc.
 
     # Stable two-pass sort: sort secondary first, primary second.
     records = [("a", 90, 20), ("b", 90, 18)]
-    records = sorted(records, key=lambda r: r[2])  # r is each record; r[2] is age.
-    records = sorted(records, key=lambda r: r[1], reverse=True)  # r[1] is score.
-    records = sorted(records, key=itemgetter(2))  # same as lambda r: r[2]
-    records = sorted(records, key=itemgetter(1), reverse=True)  # same as lambda r: r[1]
+    records = sorted(
+        records, key=lambda r: r[2]
+    )  # r is each record; r[2] is age.
+    records = sorted(
+        records, key=lambda r: r[1], reverse=True
+    )  # r[1] is score.
+    records = sorted(
+        records, key=itemgetter(2)
+    )  # same as lambda r: r[2]
+    records = sorted(
+        records, key=itemgetter(1), reverse=True
+    )  # same as lambda r: r[1]
 
     best = max(items, key=lambda item: (item[1], item[0]))
     worst = min(items, key=lambda item: item[1])
 
     # Comparator fallback: this is the -1/0/+1 style from Java/C/C++.
-    # Python 3 sorting does not accept compare= directly; wrap it with cmp_to_key.
+    # Python 3 sorting does not accept compare= directly; wrap
+    # it with cmp_to_key.
     def compare(a: int, b: int) -> int:
         return (a % 2) - (b % 2) or a - b
 
     sorted_with_cmp = sorted(nums, key=cmp_to_key(compare))
 
 
-def custom_sorting_patterns(words: list[str], transactions: list[TransactionRecord]) -> None:
+from functools import cmp_to_key
+from operator import attrgetter, itemgetter
+
+
+def custom_sorting_patterns(
+    words: list[str], transactions: list["TransactionRecord"]
+) -> None:
     # 1) Lambda key: most common.
-    # w is each string in words; (len(w), w) is the value used for ordering.
+    # w is each string in words; (len(w), w) is the value used
+    # for ordering.
     by_len_then_word = sorted(words, key=lambda w: (len(w), w))
 
-    # 2) Named key function: easier to debug/explain when the key is not tiny.
+    # 2) Named key function: easier to debug/explain when the
+    # key is not tiny.
     def word_key(word: str) -> tuple[int, str]:
         return len(word), word
 
     by_named_key = sorted(words, key=word_key)
 
-    # 3) Comparator function: use only when "a before b?" logic is naturally pairwise.
-    # This function receives TWO items and returns negative / zero / positive.
+    # 3) Comparator function: use only when "a before b?" logic
+    # is naturally pairwise.
+    # This function receives TWO items and returns negative /
+    # zero / positive.
     def compare_words(a: str, b: str) -> int:
         if len(a) != len(b):
             return len(a) - len(b)
@@ -265,7 +310,9 @@ def custom_sorting_patterns(words: list[str], transactions: list[TransactionReco
 
     # 4) Custom object ordering: sorted(objs) calls obj.__lt__(other).
     by_time = sorted(transactions)
-    by_time_key = sorted(transactions, key=attrgetter("time"))  # same as lambda t: t.time
+    by_time_key = sorted(
+        transactions, key=attrgetter("time")
+    )  # same as lambda t: t.time
 
     # 5) Common accessors: itemgetter(0) is like lambda item: item[0].
     pairs = [("b", 2), ("a", 3)]
@@ -282,25 +329,41 @@ class TransactionRecord:
         self.city = city
         self.raw = raw
 
-    def __lt__(self, other: TransactionRecord) -> bool:
-        return (self.time, self.amount, self.city) < (other.time, other.amount, other.city)
+    def __lt__(self, other: "TransactionRecord") -> bool:
+        return (self.time, self.amount, self.city) < (
+            other.time,
+            other.amount,
+            other.city,
+        )
 
     def __repr__(self) -> str:
         return f"TransactionRecord({self.raw!r})"
 
 
+from bisect import bisect_left, bisect_right, insort
+
+
 def bisect_patterns(sorted_nums: list[int], x: int) -> None:
     left = bisect_left(sorted_nums, x)  # First index with value >= x.
-    right = bisect_right(sorted_nums, x)  # First index with value > x.
+    right = bisect_right(
+        sorted_nums, x
+    )  # First index with value > x.
     count_x = right - left
     exists = left < len(sorted_nums) and sorted_nums[left] == x
 
     insert_at_left = bisect_left(sorted_nums, x)
     insert_at_right = bisect_right(sorted_nums, x)
-    insort(sorted_nums, x)  # Finds position O(log n), inserts into list O(n).
+    insort(
+        sorted_nums, x
+    )  # Finds position O(log n), inserts into list O(n).
 
 
-def heap_patterns(nums: list[int], k: int, tasks: list[tuple[int, str]]) -> None:
+from heapq import heapify, heappop, heappush, nlargest, nsmallest
+
+
+def heap_patterns(
+    nums: list[int], k: int, tasks: list[tuple[int, str]]
+) -> None:
     # Min-heap over a normal list.
     heap = nums[:]
     heapify(heap)
@@ -329,12 +392,17 @@ def heap_patterns(nums: list[int], k: int, tasks: list[tuple[int, str]]) -> None
         heappush(pq, (priority, order, name))
 
 
-# =============================================================================
+# ====================================================================
 # 5. Iteration / Comprehensions / Ranges
-# =============================================================================
+# ====================================================================
 
 
-def iteration_patterns(nums: list[int], a: list[int], b: list[int]) -> None:
+from itertools import pairwise
+
+
+def iteration_patterns(
+    nums: list[int], a: list[int], b: list[int]
+) -> None:
     for i, x in enumerate(nums):
         pass
 
@@ -345,12 +413,15 @@ def iteration_patterns(nums: list[int], a: list[int], b: list[int]) -> None:
         pass
 
     pairs1 = list(pairwise(nums))  # Python 3.10+
-    pairs2 = list(zip(nums, nums[1:]))  # Older equivalent; slice copies.
+    pairs2 = list(
+        zip(nums, nums[1:])
+    )  # Older equivalent; slice copies.
 
     zipped = list(zip(a, b))  # Stops at shortest input.
     dot = sum(x * y for x, y in zip(a, b))
 
-    # [<output_expr> for <element> in <iterable> if <filter_condition>]
+    # [<output_expr> for <element> in <iterable> if
+    # <filter_condition>]
     # x is each number from nums; x * x is what gets stored.
     squares = [x * x for x in nums if x >= 0]
 
@@ -361,7 +432,8 @@ def iteration_patterns(nums: list[int], a: list[int], b: list[int]) -> None:
     # enumerate(nums) yields (index, value), unpacked as i, x.
     index_by_value = {x: i for i, x in enumerate(nums)}
 
-    # Generator expression: no list is built; sum/any/all pull values lazily.
+    # Generator expression: no list is built; sum/any/all pull
+    # values lazily.
     total_pos = sum(x for x in nums if x > 0)
     has_even = any(x % 2 == 0 for x in nums)
     all_positive = all(x > 0 for x in nums)
@@ -372,15 +444,23 @@ def iteration_patterns(nums: list[int], a: list[int], b: list[int]) -> None:
     a0, b0 = b0, a0
 
 
-# =============================================================================
+# ====================================================================
 # 6. Strings / Numbers / Bits
-# =============================================================================
+# ====================================================================
 
 
-def string_patterns(s: str, chars: list[str], nums: list[int]) -> None:
+import re
+from collections import Counter
+
+
+def string_patterns(
+    s: str, chars: list[str], nums: list[int]
+) -> None:
     # Split / join / trim.
     words = s.split()  # Split on runs of whitespace.
-    csv_parts = [part.strip() for part in s.split(",") if part.strip()]
+    csv_parts = [
+        part.strip() for part in s.split(",") if part.strip()
+    ]
     lines = s.splitlines()
     joined = " ".join(words)
     answer_line = ",".join(str(x) for x in nums)
@@ -416,7 +496,10 @@ def string_patterns(s: str, chars: list[str], nums: list[int]) -> None:
     # Character classes are common in palindrome / parsing problems.
     normalized = "".join(ch.lower() for ch in s if ch.isalnum())
     is_clean_palindrome = normalized == normalized[::-1]
-    kind_flags = [(ch.isalpha(), ch.isdigit(), ch.isalnum(), ch.isspace()) for ch in s[:3]]
+    kind_flags = [
+        (ch.isalpha(), ch.isdigit(), ch.isalnum(), ch.isspace())
+        for ch in s[:3]
+    ]
 
     # Ord / chr for compact fixed alphabet arrays.
     idx = ord("c") - ord("a")
@@ -434,8 +517,13 @@ def string_patterns(s: str, chars: list[str], nums: list[int]) -> None:
     # Parsing numbers from strings.
     ints_from_spaces = [int(part) for part in s.split()]
     ints_from_text = [int(m) for m in re.findall(r"-?\d+", s)]
-    digits_from_string = [ord(ch) - ord("0") for ch in s if ch.isdigit()]
+    digits_from_string = [
+        ord(ch) - ord("0") for ch in s if ch.isdigit()
+    ]
     zero_padded = f"{len(s):04d}"  # Useful for labels/debug output.
+
+
+import math
 
 
 def numeric_bit_patterns(a: int, b: int, n: int, mask: int) -> None:
@@ -466,7 +554,8 @@ def numeric_bit_patterns(a: int, b: int, n: int, mask: int) -> None:
     add_mod = (a + b) % mod
     mul_mod = (a * b) % mod
     pow_mod = pow(a, n, mod)
-    # inv_mod = pow(a, -1, mod)  # Modular inverse when gcd(a, mod) == 1.
+    # Modular inverse when gcd(a, mod) == 1.
+    # inv_mod = pow(a, -1, mod)
 
     # Decimal digits.
     digits = [int(ch) for ch in str(abs(n))]
@@ -485,12 +574,14 @@ def numeric_bit_patterns(a: int, b: int, n: int, mask: int) -> None:
     bits = mask.bit_count()
 
 
-# =============================================================================
+# ====================================================================
 # 7. Functions / Scope / Decorators
-# =============================================================================
+# ====================================================================
 
 
-def function_call_syntax(required: int, *args: int, **kwargs: int) -> None:
+def function_call_syntax(
+    required: int, *args: int, **kwargs: int
+) -> None:
     collected_args = args  # tuple
     collected_kwargs = kwargs  # dict
 
@@ -500,12 +591,28 @@ def function_call_syntax(required: int, *args: int, **kwargs: int) -> None:
     # function_call_syntax(**options)
 
 
-def nested_helper_and_nonlocal(root: TreeNode | None) -> int:
+class ScopeTreeNode:
+    # Local copy so this section does not depend on the Classes
+    # section.
+    def __init__(
+        self,
+        val: int = 0,
+        left: "ScopeTreeNode | None" = None,
+        right: "ScopeTreeNode | None" = None,
+    ) -> None:
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+def nested_helper_and_nonlocal(root: ScopeTreeNode | None) -> int:
     count = 0
 
-    def dfs(node: TreeNode | None) -> None:
-        # nonlocal means "when assigning count, use the count in the outer
-        # function scope." Without it, count += 1 would create/read a local name.
+    def dfs(node: ScopeTreeNode | None) -> None:
+        # nonlocal means "when assigning count, use the
+        # count in the outer
+        # function scope." Without it, count += 1 would
+        # create/read a local name.
         nonlocal count
         if node is None:
             return
@@ -517,29 +624,45 @@ def nested_helper_and_nonlocal(root: TreeNode | None) -> int:
     return count
 
 
+from functools import cache
+
+
 @cache
 def cached_dp(i: int, remaining: int) -> int:
     # @cache is decorator syntax: cached_dp = cache(cached_dp).
-    # It memoizes by the argument tuple (i, remaining), so args must be hashable.
+    # It memoizes by the argument tuple (i, remaining), so args
+    # must be hashable.
     if remaining == 0:
         return 1
     if i == 0 or remaining < 0:
         return 0
-    return cached_dp(i - 1, remaining) + cached_dp(i - 1, remaining - 1)
+    return cached_dp(i - 1, remaining) + cached_dp(
+        i - 1, remaining - 1
+    )
+
+
+from functools import lru_cache
 
 
 @lru_cache(maxsize=None)
 def cached_dp_old_spelling(i: int) -> int:
-    return i if i <= 1 else cached_dp_old_spelling(i - 1) + cached_dp_old_spelling(i - 2)
+    return (
+        i
+        if i <= 1
+        else cached_dp_old_spelling(i - 1)
+        + cached_dp_old_spelling(i - 2)
+    )
 
 
-# =============================================================================
+# ====================================================================
 # 8. Classes / Nodes / Dataclasses
-# =============================================================================
+# ====================================================================
 
 
 class ListNode:
-    def __init__(self, val: int = 0, next: ListNode | None = None) -> None:
+    def __init__(
+        self, val: int = 0, next: "ListNode | None" = None
+    ) -> None:
         self.val = val
         self.next = next
 
@@ -548,26 +671,37 @@ class TreeNode:
     def __init__(
         self,
         val: int = 0,
-        left: TreeNode | None = None,
-        right: TreeNode | None = None,
+        left: "TreeNode | None" = None,
+        right: "TreeNode | None" = None,
     ) -> None:
         self.val = val
         self.left = left
         self.right = right
 
 
+from dataclasses import dataclass
+
+
 @dataclass
 class Interval:
-    # @dataclass reads annotated fields and generates __init__, __repr__, __eq__.
+    # @dataclass reads annotated fields and generates __init__,
+    # __repr__, __eq__.
     start: int
     end: int
 
 
+from dataclasses import dataclass
+
+
 @dataclass(frozen=True)
 class Point:
-    # frozen=True makes value objects immutable/hashable if fields are hashable.
+    # frozen=True makes value objects immutable/hashable if
+    # fields are hashable.
     row: int
     col: int
+
+
+from dataclasses import dataclass, field
 
 
 @dataclass(order=True)
@@ -578,9 +712,12 @@ class Task:
     tags: list[str] = field(default_factory=list)
 
 
+from dataclasses import dataclass, field
+
+
 @dataclass
 class TrieNode:
-    children: dict[str, TrieNode] = field(default_factory=dict)
+    children: dict[str, "TrieNode"] = field(default_factory=dict)
     is_word: bool = False
 
 
@@ -605,16 +742,20 @@ class Trie:
 
 # Object notes:
 #   `is` checks identity; `==` checks value equality.
-#   Mutable class variables are shared by every instance; use `self.x` in __init__.
-#   `field(default_factory=list)` gives every dataclass instance a fresh list.
+#   Mutable class variables are shared by every instance; use
+#   `self.x` in __init__.
+#   `field(default_factory=list)` gives every dataclass instance a
+#   fresh list.
 
 
-# =============================================================================
+# ====================================================================
 # 9. Algorithm Skeletons
-# =============================================================================
+# ====================================================================
 
 
-def two_sum_hash(nums: list[int], target: int) -> tuple[int, int] | None:
+def two_sum_hash(
+    nums: list[int], target: int
+) -> tuple[int, int] | None:
     seen: dict[int, int] = {}
     for i, x in enumerate(nums):
         if target - x in seen:
@@ -623,7 +764,9 @@ def two_sum_hash(nums: list[int], target: int) -> tuple[int, int] | None:
     return None
 
 
-def two_pointers_sorted(nums: list[int], target: int) -> tuple[int, int] | None:
+def two_pointers_sorted(
+    nums: list[int], target: int
+) -> tuple[int, int] | None:
     left, right = 0, len(nums) - 1
     while left < right:
         total = nums[left] + nums[right]
@@ -634,6 +777,9 @@ def two_pointers_sorted(nums: list[int], target: int) -> tuple[int, int] | None:
         else:
             right -= 1
     return None
+
+
+from collections import defaultdict
 
 
 def sliding_window_at_most_k_distinct(nums: list[int], k: int) -> int:
@@ -674,6 +820,9 @@ def first_feasible(low: int, high: int, can) -> int:
     return low
 
 
+from collections import defaultdict
+
+
 def prefix_sum_subarray_count(nums: list[int], k: int) -> int:
     seen: defaultdict[int, int] = defaultdict(int)
     seen[0] = 1
@@ -685,7 +834,12 @@ def prefix_sum_subarray_count(nums: list[int], k: int) -> int:
     return ans
 
 
-def bfs_graph(graph: dict[int, list[int]], start: int, target: int) -> int:
+from collections import deque
+
+
+def bfs_graph(
+    graph: dict[int, list[int]], start: int, target: int
+) -> int:
     q = deque([(start, 0)])
     seen = {start}
     while q:
@@ -699,7 +853,12 @@ def bfs_graph(graph: dict[int, list[int]], start: int, target: int) -> int:
     return -1
 
 
-def grid_neighbors(r: int, c: int, rows: int, cols: int) -> Iterable[tuple[int, int]]:
+from collections.abc import Iterable
+
+
+def grid_neighbors(
+    r: int, c: int, rows: int, cols: int
+) -> Iterable[tuple[int, int]]:
     for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
         nr, nc = r + dr, c + dc
         if 0 <= nr < rows and 0 <= nc < cols:
@@ -761,9 +920,21 @@ def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:
     return merged
 
 
+from collections import Counter
+from heapq import nlargest
+
+
 def top_k_frequent(nums: list[int], k: int) -> list[int]:
     counts = Counter(nums)
-    return [num for _, num in nlargest(k, ((freq, num) for num, freq in counts.items()))]
+    return [
+        num
+        for _, num in nlargest(
+            k, ((freq, num) for num, freq in counts.items())
+        )
+    ]
+
+
+from functools import cache
 
 
 def coin_change_top_down(coins: tuple[int, ...], amount: int) -> int:
@@ -804,9 +975,9 @@ class DSU:
         return True
 
 
-# =============================================================================
+# ====================================================================
 # 10. High-Frequency Add-ons From Solutions / Hot Patterns
-# =============================================================================
+# ====================================================================
 
 
 def set_based_unique_window(s: str) -> int:
@@ -819,6 +990,9 @@ def set_based_unique_window(s: str) -> int:
         seen.add(ch)
         best = max(best, right - left + 1)
     return best
+
+
+import math
 
 
 def min_subarray_len_at_least(nums: list[int], target: int) -> int:
@@ -842,8 +1016,31 @@ def fixed_window_max_sum(nums: list[int], k: int) -> int:
     return best
 
 
+from collections import defaultdict
+
+
+def _at_most_k_distinct_local(nums: list[int], k: int) -> int:
+    # Local helper so this pattern does not depend on Section 9.
+    if k < 0:
+        return 0
+    count: defaultdict[int, int] = defaultdict(int)
+    left = total = 0
+    for right, x in enumerate(nums):
+        count[x] += 1
+        while len(count) > k:
+            y = nums[left]
+            count[y] -= 1
+            if count[y] == 0:
+                del count[y]
+            left += 1
+        total += right - left + 1
+    return total
+
+
 def exactly_k_distinct(nums: list[int], k: int) -> int:
-    return sliding_window_at_most_k_distinct(nums, k) - sliding_window_at_most_k_distinct(nums, k - 1)
+    return _at_most_k_distinct_local(
+        nums, k
+    ) - _at_most_k_distinct_local(nums, k - 1)
 
 
 def three_sum(nums: list[int]) -> list[list[int]]:
@@ -882,7 +1079,9 @@ def max_area_container(height: list[int]) -> int:
     left, right = 0, len(height) - 1
     best = 0
     while left < right:
-        best = max(best, (right - left) * min(height[left], height[right]))
+        best = max(
+            best, (right - left) * min(height[left], height[right])
+        )
         if height[left] < height[right]:
             left += 1
         else:
@@ -979,6 +1178,9 @@ def search_rotated(nums: list[int], target: int) -> int:
     return -1
 
 
+import math
+
+
 def median_two_sorted_partition(a: list[int], b: list[int]) -> float:
     if len(a) > len(b):
         a, b = b, a
@@ -1003,8 +1205,13 @@ def median_two_sorted_partition(a: list[int], b: list[int]) -> float:
     raise ValueError("inputs must be sorted")
 
 
+from collections import defaultdict
+
+
 def group_anagrams_count_key(words: list[str]) -> list[list[str]]:
-    groups: defaultdict[tuple[int, ...], list[str]] = defaultdict(list)
+    groups: defaultdict[tuple[int, ...], list[str]] = defaultdict(
+        list
+    )
     for word in words:
         count = [0] * 26
         for ch in word:
@@ -1074,7 +1281,9 @@ def meeting_rooms_two_pointer(intervals: list[list[int]]) -> int:
     return best
 
 
-def insert_interval(intervals: list[list[int]], new_interval: list[int]) -> list[list[int]]:
+def insert_interval(
+    intervals: list[list[int]], new_interval: list[int]
+) -> list[list[int]]:
     ans: list[list[int]] = []
     i = 0
     while i < len(intervals) and intervals[i][1] < new_interval[0]:
@@ -1085,6 +1294,9 @@ def insert_interval(intervals: list[list[int]], new_interval: list[int]) -> list
         new_interval[1] = max(new_interval[1], intervals[i][1])
         i += 1
     return ans + [new_interval] + intervals[i:]
+
+
+import math
 
 
 def erase_overlap_intervals(intervals: list[list[int]]) -> int:
@@ -1099,7 +1311,19 @@ def erase_overlap_intervals(intervals: list[list[int]]) -> int:
     return removed
 
 
-def merge_two_lists(a: ListNode | None, b: ListNode | None) -> ListNode | None:
+class ListNode:
+    # Local copy so linked-list hot patterns do not depend on
+    # Section 8.
+    def __init__(
+        self, val: int = 0, next: "ListNode | None" = None
+    ) -> None:
+        self.val = val
+        self.next = next
+
+
+def merge_two_lists(
+    a: ListNode | None, b: ListNode | None
+) -> ListNode | None:
     dummy = tail = ListNode()
     while a and b:
         if a.val <= b.val:
@@ -1132,7 +1356,9 @@ def has_cycle(head: ListNode | None) -> bool:
     return False
 
 
-def remove_nth_from_end(head: ListNode | None, n: int) -> ListNode | None:
+def remove_nth_from_end(
+    head: ListNode | None, n: int
+) -> ListNode | None:
     dummy = ListNode(0, head)
     fast = slow = dummy
     for _ in range(n):
@@ -1195,6 +1421,9 @@ class LRUCacheDLL:
             del self.nodes[victim.key]
 
 
+from collections import OrderedDict
+
+
 class LRUCacheOrderedDict:
     def __init__(self, capacity: int) -> None:
         self.capacity = capacity
@@ -1212,6 +1441,22 @@ class LRUCacheOrderedDict:
         self.data[key] = value
         if len(self.data) > self.capacity:
             self.data.popitem(last=False)
+
+
+class TreeNode:
+    # Local copy so tree hot patterns do not depend on Section 8.
+    def __init__(
+        self,
+        val: int = 0,
+        left: "TreeNode | None" = None,
+        right: "TreeNode | None" = None,
+    ) -> None:
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+from collections import deque
 
 
 def level_order(root: TreeNode | None) -> list[list[int]]:
@@ -1232,21 +1477,42 @@ def level_order(root: TreeNode | None) -> list[list[int]]:
     return ans
 
 
-def grid_bfs_distance(grid: list[list[int]], start: tuple[int, int]) -> list[list[int]]:
+from collections import deque
+from collections.abc import Iterable
+
+
+def _grid_neighbors_local(
+    r: int, c: int, rows: int, cols: int
+) -> Iterable[tuple[int, int]]:
+    # Local helper so this grid BFS does not depend on Section 9.
+    for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+        nr, nc = r + dr, c + dc
+        if 0 <= nr < rows and 0 <= nc < cols:
+            yield nr, nc
+
+
+def grid_bfs_distance(
+    grid: list[list[int]], start: tuple[int, int]
+) -> list[list[int]]:
     rows, cols = len(grid), len(grid[0])
     dist = [[-1] * cols for _ in range(rows)]
     q = deque([start])
     dist[start[0]][start[1]] = 0  # Mark on enqueue, not on pop.
     while q:
         r, c = q.popleft()
-        for nr, nc in grid_neighbors(r, c, rows, cols):
+        for nr, nc in _grid_neighbors_local(r, c, rows, cols):
             if grid[nr][nc] == 0 and dist[nr][nc] == -1:
                 dist[nr][nc] = dist[r][c] + 1
                 q.append((nr, nc))
     return dist
 
 
-def topological_sort_kahn(n: int, edges: list[tuple[int, int]]) -> list[int]:
+from collections import defaultdict, deque
+
+
+def topological_sort_kahn(
+    n: int, edges: list[tuple[int, int]]
+) -> list[int]:
     graph: defaultdict[int, list[int]] = defaultdict(list)
     indeg = [0] * n
     for pre, course in edges:
@@ -1264,7 +1530,13 @@ def topological_sort_kahn(n: int, edges: list[tuple[int, int]]) -> list[int]:
     return order if len(order) == n else []
 
 
-def dijkstra(graph: dict[int, list[tuple[int, int]]], start: int) -> dict[int, int]:
+import math
+from heapq import heappop, heappush
+
+
+def dijkstra(
+    graph: dict[int, list[tuple[int, int]]], start: int
+) -> dict[int, int]:
     dist: dict[int, int] = {start: 0}
     heap = [(0, start)]
     while heap:
@@ -1296,7 +1568,9 @@ class MinStack:
         self.stack: list[tuple[int, int]] = []
 
     def push(self, val: int) -> None:
-        cur_min = val if not self.stack else min(val, self.stack[-1][1])
+        cur_min = (
+            val if not self.stack else min(val, self.stack[-1][1])
+        )
         self.stack.append((val, cur_min))
 
     def pop(self) -> int:
@@ -1307,6 +1581,9 @@ class MinStack:
 
     def get_min(self) -> int:
         return self.stack[-1][1]
+
+
+from heapq import heappop, heappush
 
 
 def merge_k_sorted_arrays(arrays: list[list[int]]) -> list[int]:
@@ -1345,7 +1622,11 @@ def lcs_2d(a: str, b: str) -> int:
     dp = [[0] * (len(b) + 1) for _ in range(len(a) + 1)]
     for i in range(len(a) - 1, -1, -1):
         for j in range(len(b) - 1, -1, -1):
-            dp[i][j] = 1 + dp[i + 1][j + 1] if a[i] == b[j] else max(dp[i + 1][j], dp[i][j + 1])
+            dp[i][j] = (
+                1 + dp[i + 1][j + 1]
+                if a[i] == b[j]
+                else max(dp[i + 1][j], dp[i][j + 1])
+            )
     return dp[0][0]
 
 
@@ -1384,7 +1665,9 @@ def permutations_used(nums: list[int]) -> list[list[int]]:
     return ans
 
 
-def combination_sum(candidates: list[int], target: int) -> list[list[int]]:
+def combination_sum(
+    candidates: list[int], target: int
+) -> list[list[int]]:
     candidates.sort()
     ans: list[list[int]] = []
     path: list[int] = []
@@ -1416,6 +1699,9 @@ def base10_digits(n: int) -> list[int]:
     return digits[::-1]
 
 
+from collections.abc import Iterable
+
+
 def int_from_base10_digits(digits: Iterable[int]) -> int:
     ans = 0
     for digit in digits:
@@ -1423,7 +1709,12 @@ def int_from_base10_digits(digits: Iterable[int]) -> int:
     return ans
 
 
-def reduce_fraction(numerator: int, denominator: int) -> tuple[int, int]:
+import math
+
+
+def reduce_fraction(
+    numerator: int, denominator: int
+) -> tuple[int, int]:
     g = math.gcd(numerator, denominator)
     numerator //= g
     denominator //= g
@@ -1489,7 +1780,9 @@ def reverse_integer_32(x: int) -> int:
     while x:
         digit = x % 10
         x //= 10
-        if ans > limit // 10 or (ans == limit // 10 and digit > limit % 10):
+        if ans > limit // 10 or (
+            ans == limit // 10 and digit > limit % 10
+        ):
             return 0
         ans = ans * 10 + digit
     return sign * ans
@@ -1546,27 +1839,38 @@ def apply_gravity(board: list[list[int]]) -> None:
             board[r][c] = 0
 
 
-def find_three_in_a_row(board: list[list[int]]) -> set[tuple[int, int]]:
+def find_three_in_a_row(
+    board: list[list[int]],
+) -> set[tuple[int, int]]:
     rows, cols = len(board), len(board[0])
     crush: set[tuple[int, int]] = set()
     for r in range(1, rows - 1):
         for c in range(cols):
-            if board[r][c] and board[r - 1][c] == board[r][c] == board[r + 1][c]:
+            if (
+                board[r][c]
+                and board[r - 1][c] == board[r][c] == board[r + 1][c]
+            ):
                 crush.update({(r - 1, c), (r, c), (r + 1, c)})
     for r in range(rows):
         for c in range(1, cols - 1):
-            if board[r][c] and board[r][c - 1] == board[r][c] == board[r][c + 1]:
+            if (
+                board[r][c]
+                and board[r][c - 1] == board[r][c] == board[r][c + 1]
+            ):
                 crush.update({(r, c - 1), (r, c), (r, c + 1)})
     return crush
+
+
+import sys
 
 
 def recursion_limit_for_deep_dfs() -> None:
     sys.setrecursionlimit(10**6)
 
 
-# =============================================================================
+# ====================================================================
 # 11. Main Guard / Local Script Pattern
-# =============================================================================
+# ====================================================================
 
 
 def solve(nums: list[int]) -> int:
@@ -1579,6 +1883,8 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    # LeetCode normally calls `Solution` methods directly, so do not include this
-    # in submissions unless you are building a local script or template.
+    # LeetCode normally calls `Solution` methods directly, so do
+    # not include this
+    # in submissions unless you are building a local script or
+    # template.
     main()
