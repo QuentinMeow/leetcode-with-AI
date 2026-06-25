@@ -12,6 +12,10 @@ This file is intentionally compact: adjacent lines often show
 equivalent ways
 to do the same thing, plus the small caveats that cause interview
 bugs.
+
+After editing this file, run:
+    python3 templates/python/cheatsheet.py
+`main()` checks that the CRUD guide block stays within 70 columns.
 """
 
 # ruff: noqa: E501, F401, F841, B006, F811, E402
@@ -47,143 +51,162 @@ those type names instead.
 # ====================================================================
 
 """
-collections: Counter, OrderedDict, defaultdict, deque
-heapq:       heappush, heappop, heapify, nlargest, nsmallest
-bisect:      bisect_left, bisect_right, insort
-functools:   cache, lru_cache, cmp_to_key
-itertools:   accumulate, pairwise, product, combinations, permutations
-math:        gcd, lcm, isqrt, comb, inf, ceil
-dataclasses: dataclass, field
-operator:    itemgetter, attrgetter
-re:          findall, sub
+collections: collections.Counter, collections.defaultdict
+heapq:       heapq.heappush, heapq.heappop, heapq.heapify
+bisect:      bisect.bisect_left, bisect.bisect_right
+functools:   functools.cache, functools.cmp_to_key
+itertools:   itertools.pairwise, itertools.product
+math:        math.gcd, math.lcm, math.isqrt, math.inf
+dataclasses: dataclasses.dataclass, dataclasses.field
+operator:    operator.itemgetter, operator.attrgetter
+re:          re.findall, re.sub
 """
 
 
 # ====================================================================
-# 2. Containers: Init, Copy, Mutate
+# 2. Python Data Structures - CRUD Cheat Sheet
 # ====================================================================
 
+"""
+Python Data Structures - CRUD Cheat Sheet
 
-from collections import deque
+Big naming logic:
+
+| Concept          | Pattern                       |
+|------------------|-------------------------------|
+| Add one item     | append / add / heapq.heappush |
+| Add many items   | extend / update               |
+| Remove + return  | pop / popleft / heapq.heappop |
+| Remove by value  | remove / discard / del        |
+| Remove all       | clear                         |
+| Contains?        | in                            |
+| Soft read/delete | get / discard / pop(default)  |
+
+Why the names stick:
+
+- `pop*` means "take it out and give it back".
+- `remove` / `discard` delete a known value.
+- `del` / `pop(key)` delete a known dict key.
+- `clear` empties the container.
+- `in` is the universal membership test.
+
+Master memory table:
+
+Core containers:
+
+| Operation       | list   | set            | dict          |
+|-----------------|--------|----------------|---------------|
+| Empty           | []     | set()          | {}            |
+| Add one         | append | add            | d[k] = v      |
+| Add many        | extend | update         | update        |
+| Read            | lst[i] | x in s         | d[k] / get    |
+| Remove + return | pop    | pop            | pop / popitem |
+| Remove by value | remove | discard/remove | del / pop(k)  |
+| Empty all       | clear  | clear          | clear         |
+
+Priority and double-ended containers:
+
+| Operation       | heapq          | collections.deque |
+|-----------------|----------------|-------------------|
+| Empty           | []             | collections.deque |
+| Add one         | heapq.heappush | append/appendleft |
+| Add many        | heapq.heapify  | extend/extendleft |
+| Read            | heap[0]        | q[0] / q[-1]      |
+| Remove + return | heapq.heappop  | pop / popleft     |
+| Remove by value | rebuild        | remove            |
+| Empty all       | clear          | clear             |
+
+Mental model: `pop*` returns what it removes; `remove`, `discard`,
+`del`, `clear`, `sort`, and `reverse` mutate and return None.
+"""
 
 
-def list_array_matrix_patterns(
+import collections
+import heapq
+import queue
+
+
+def list_crud_patterns(
     n: int, rows: int, cols: int, nums: list[int]
 ) -> None:
-    # Empty list / dynamic array / stack.
-    a: list[int] = []
-    b = list()
+    x = 2
 
-    # Fixed-size lists.
+    # CREATE
+    lst: list[int] = []  # Empty dynamic array / stack.
+    from_iterable = list(nums)
     zeros = [0] * n
-    falses = [False] * n
-    none_slots = [None] * n
     one_to_n = list(range(1, n + 1))
 
-    # Copying: all are shallow for a flat list.
+    # Matrix create: make fresh inner lists.
+    grid = [[0] * cols for _ in range(rows)]
+    visited = [[False for _ in range(cols)] for _ in range(rows)]
+    bad_grid = [[0] * cols] * rows  # AVOID: every row aliases.
+
+    # READ
+    first = nums[0]  # IndexError if empty.
+    last = nums[-1]
+    middle = nums[1:3]  # Slice returns a new shallow list.
+    size = len(nums)
+    contains_x = x in nums
+    first_x = nums.index(x) if x in nums else -1
+    count_x = nums.count(x)
+
+    # COPY: all are shallow for a flat list.
     copy1 = nums[:]
     copy2 = nums.copy()
     copy3 = list(nums)
+    matrix_copy = [row[:] for row in grid]
 
-    # Matrix: make fresh inner lists.
-    grid = [[0] * cols for _ in range(rows)]
-    visited = [[False for _ in range(cols)] for _ in range(rows)]
-    bad_grid = [
-        [0] * cols
-    ] * rows  # AVOID: every row aliases the same list.
+    # UPDATE / ADD
+    lst.append(x)  # Add one to the right end.
+    lst.extend([4, 5])  # Add many to the right end.
+    lst.insert(1, x)  # Insert before index 1.
+    nums[0] = 99
+    nums.sort()  # In-place; returns None.
+    nums.reverse()  # In-place; returns None.
+    sorted_nums = sorted(nums)  # New list.
+    reversed_nums = nums[::-1]  # New list.
 
-    # Stack: use end of list.
+    # DELETE
+    removed_last = lst.pop()  # Remove and return last item.
+    removed_at_index = lst.pop(0)  # O(n): shifts everything left.
+    if x in lst:
+        lst.remove(x)  # Remove first matching value; returns None.
+    del lst[:1]  # Delete by index/slice.
+    lst.clear()
+
+    # Stack pattern: right end only, O(1).
     stack: list[int] = []
     stack.append(1)
     top = stack[-1]
     popped = stack.pop()
 
-    # Queue: use deque, not list.pop(0).
-    q = deque([0])
-    q.append(1)
-    left = q.popleft()
 
-    # In-place operations that return None.
-    nums.sort()
-    nums.reverse()
+def set_crud_patterns(nums: list[int], grid: list[list[int]]) -> None:
+    x = 2
 
-    # New-list operations.
-    sorted_nums = sorted(nums)
-    reversed_nums = nums[::-1]
-    reversed_iter = reversed(nums)
+    # CREATE
+    s: set[int] = set()  # Empty set. `{}` is an empty dict.
+    from_iterable = set(nums)
+    with_data = {1, 2, 3}
 
+    # READ
+    exists = x in with_data  # Average O(1); sets have no indexing.
+    size = len(with_data)
 
-from collections import Counter, defaultdict
-
-
-def dict_defaultdict_counter_patterns(
-    words: list[str], nums: list[int]
-) -> None:
-    # Empty dict / hash map.
-    d: dict[str, int] = {}
-    e = dict()
-
-    # Insert/update/read.
-    d["a"] = 1
-    d["a"] = d.get("a", 0) + 1
-    exists = "a" in d
-    value_or_default = d.get("missing", 0)
-    removed = d.pop("a", None)
-
-    # setdefault vs defaultdict: keep the alternatives adjacent.
-    groups1: dict[str, list[str]] = {}
-    for w in words:
-        groups1.setdefault("".join(sorted(w)), []).append(w)
-
-    # defaultdict(<factory>): when groups2[key] is missing,
-    # Python creates
-    # groups2[key] = list(), then returns that list so append can run.
-    groups2: defaultdict[str, list[str]] = defaultdict(list)
-    for w in words:
-        groups2["".join(sorted(w))].append(w)
-
-    counts1: dict[int, int] = {}
-    for x in nums:
-        counts1[x] = counts1.get(x, 0) + 1
-
-    # defaultdict(int): int() returns 0, so missing counts start
-    # from 0.
-    counts2: defaultdict[int, int] = defaultdict(int)
-    for x in nums:
-        counts2[x] += 1
-
-    # Counter(<iterable>): consume items and build a frequency map.
-    # Unlike a normal dict, counts3[missing_key] reads as 0.
-    counts3 = Counter(nums)
-    top_three = counts3.most_common(3)
-    counts3.update([10])
-    counts3.subtract([10])
-    counts3 += Counter()  # Drop zero/negative counts.
-
-    # Iteration views.
-    keys = list(d.keys())
-    values = list(d.values())
-    pairs = list(d.items())
-
-    # Dict merge: right side wins.
-    merged_modern = {"a": 1} | {"a": 9, "b": 2}
-    merged_old = {"a": 1}
-    merged_old.update({"a": 9, "b": 2})
-
-
-def set_tuple_key_patterns(
-    nums: list[int], grid: list[list[int]]
-) -> None:
-    seen: set[int] = set()
-    unique = set(nums)
-
-    seen.add(1)
-    seen.discard(1)  # No error if absent.
-    # seen.remove(1)  # Raises KeyError if absent.
-
+    # UPDATE / ADD
+    s.add(x)  # Add one.
+    s.update([3, 4, 5])  # Add many from any iterable.
     union = {1, 2} | {2, 3}
     intersection = {1, 2} & {2, 3}
     difference = {1, 2} - {2, 3}
+    symmetric_difference = {1, 2} ^ {2, 3}
+
+    # DELETE
+    s.discard(x)  # Soft: no error if absent.
+    # s.remove(x)  # Strict: KeyError if absent.
+    arbitrary = s.pop() if s else None  # Remove and return any item.
+    s.clear()
 
     # Tuple keys are hashable when all parts are hashable.
     visited: set[tuple[int, int]] = set()
@@ -191,6 +214,149 @@ def set_tuple_key_patterns(
         for c, value in enumerate(row):
             if value:
                 visited.add((r, c))
+
+
+def dict_crud_patterns(words: list[str], nums: list[int]) -> None:
+    # CREATE
+    d: dict[str, int] = {}
+    with_data = {"a": 1, "b": 2}
+    from_keywords = dict(a=1, b=2)
+    from_pairs = dict(zip(["a", "b"], [1, 2]))
+
+    # READ
+    strict = with_data["a"]  # KeyError if missing.
+    soft_none = with_data.get("missing")  # None if missing.
+    soft_default = with_data.get("missing", 0)
+    exists = "a" in with_data  # Tests keys, not values.
+    size = len(with_data)
+    keys = list(with_data.keys())
+    values = list(with_data.values())
+    pairs = list(with_data.items())
+
+    # UPDATE / ADD
+    d["c"] = 3  # Set or overwrite one key.
+    d.update({"d": 4, "e": 5})  # Merge many; right side wins.
+    merged_modern = {"a": 1} | {"a": 9, "b": 2}
+    merged_old = {"a": 1}
+    merged_old.update({"a": 9, "b": 2})
+
+    # Grouping: setdefault is a dict method.
+    groups1: dict[str, list[str]] = {}
+    for w in words:
+        groups1.setdefault("".join(sorted(w)), []).append(w)
+
+    # defaultdict(<factory>): missing key creates factory().
+    groups2: collections.defaultdict[str, list[str]]
+    groups2 = collections.defaultdict(list)
+    for w in words:
+        groups2["".join(sorted(w))].append(w)
+
+    counts1: dict[int, int] = {}
+    for x in nums:
+        counts1[x] = counts1.get(x, 0) + 1
+
+    counts2: collections.defaultdict[int, int]
+    counts2 = collections.defaultdict(int)
+    for x in nums:
+        counts2[x] += 1
+
+    # Counter(<iterable>): frequency dict with 0 for missing keys.
+    counts3 = collections.Counter(nums)
+    top_three = counts3.most_common(3)
+    counts3.update([10])
+    counts3.subtract([10])
+    counts3 += collections.Counter()  # Drop zero/negative counts.
+
+    # DELETE
+    removed_value = d.pop("c")  # KeyError if missing.
+    removed_or_default = d.pop("missing", 0)
+    last_pair = d.popitem()  # Remove and return last inserted pair.
+    del with_data["a"]
+    d.clear()
+
+
+def heap_crud_patterns(nums: list[int]) -> None:
+    # CREATE
+    heap: list[int] = nums[:]
+    heapq.heapify(heap)  # Turn a list into a min-heap in-place, O(n).
+    built_by_push: list[int] = []
+    for x in nums:
+        heapq.heappush(built_by_push, x)  # O(log n) each.
+
+    # READ
+    smallest = heap[0] if heap else None  # Peek; do not remove.
+    size = len(heap)
+
+    # UPDATE / ADD
+    heapq.heappush(heap, 42)
+    max_heap = [-x for x in nums]  # Python heapq is min-heap only.
+    heapq.heapify(max_heap)
+    largest = -heapq.heappop(max_heap)
+
+    # DELETE
+    removed_smallest = heapq.heappop(heap) if heap else None
+    # No efficient remove-by-value: rebuild, or use lazy deletion
+    # with a separate "deleted" counter in advanced problems.
+    heap.clear()
+
+
+def deque_crud_patterns(nums: list[int]) -> None:
+    x = 2
+
+    # CREATE
+    q: collections.deque[int] = collections.deque()
+    with_data = collections.deque(nums)
+    bounded = collections.deque(maxlen=3)  # Auto-drops old items.
+
+    # READ
+    left = with_data[0] if with_data else None
+    right = with_data[-1] if with_data else None
+    size = len(with_data)
+    contains_x = x in with_data
+
+    # UPDATE / ADD
+    q.append(1)  # Add right.
+    q.appendleft(0)  # Add left.
+    q.extend([2, 3])  # Add many to right.
+    q.extendleft([-1, -2])  # Adds left one-by-one; order reverses.
+    q.rotate(1)  # Move rightmost item to the left.
+
+    # DELETE
+    removed_right = q.pop()
+    removed_left = q.popleft()
+    if x in q:
+        q.remove(x)  # Remove first matching value.
+    q.clear()
+
+    # Usage patterns:
+    fifo = collections.deque([1])
+    fifo.append(2)
+    next_in_line = fifo.popleft()  # Queue: FIFO.
+
+    stack = collections.deque([1])
+    stack.append(2)
+    top = stack.pop()  # Stack: LIFO.
+
+
+def thread_safe_queue_crud_patterns() -> None:
+    # CREATE: for multi-threading; prefer deque/heapq in algorithms.
+    fifo = queue.Queue()
+    stack = queue.LifoQueue()
+    priority = queue.PriorityQueue()
+
+    # UPDATE / ADD
+    fifo.put(1)
+    stack.put(1)
+    priority.put((0, "task"))
+
+    # READ
+    fifo_empty = fifo.empty()
+    fifo_size = fifo.qsize()  # Approximate under concurrency.
+
+    # DELETE
+    fifo_item = fifo.get()
+    stack_item = stack.get()
+    priority_item = priority.get()
 
 
 # ====================================================================
@@ -222,8 +388,8 @@ def copy_and_aliasing(grid: list[list[int]], nums: list[int]) -> None:
 # ====================================================================
 
 
-from functools import cmp_to_key
-from operator import itemgetter
+import functools
+import operator
 
 
 def sorting_patterns(
@@ -260,10 +426,10 @@ def sorting_patterns(
         records, key=lambda r: r[1], reverse=True
     )  # r[1] is score.
     records = sorted(
-        records, key=itemgetter(2)
+        records, key=operator.itemgetter(2)
     )  # same as lambda r: r[2]
     records = sorted(
-        records, key=itemgetter(1), reverse=True
+        records, key=operator.itemgetter(1), reverse=True
     )  # same as lambda r: r[1]
 
     best = max(items, key=lambda item: (item[1], item[0]))
@@ -275,11 +441,11 @@ def sorting_patterns(
     def compare(a: int, b: int) -> int:
         return (a % 2) - (b % 2) or a - b
 
-    sorted_with_cmp = sorted(nums, key=cmp_to_key(compare))
+    sorted_with_cmp = sorted(nums, key=functools.cmp_to_key(compare))
 
 
-from functools import cmp_to_key
-from operator import attrgetter, itemgetter
+import functools
+import operator
 
 
 def custom_sorting_patterns(
@@ -306,18 +472,20 @@ def custom_sorting_patterns(
             return len(a) - len(b)
         return -1 if a < b else (1 if a > b else 0)
 
-    by_comparator = sorted(words, key=cmp_to_key(compare_words))
+    by_comparator = sorted(
+        words, key=functools.cmp_to_key(compare_words)
+    )
 
     # 4) Custom object ordering: sorted(objs) calls obj.__lt__(other).
     by_time = sorted(transactions)
     by_time_key = sorted(
-        transactions, key=attrgetter("time")
+        transactions, key=operator.attrgetter("time")
     )  # same as lambda t: t.time
 
     # 5) Common accessors: itemgetter(0) is like lambda item: item[0].
     pairs = [("b", 2), ("a", 3)]
-    by_first = sorted(pairs, key=itemgetter(0))
-    by_first_then_second = sorted(pairs, key=itemgetter(0, 1))
+    by_first = sorted(pairs, key=operator.itemgetter(0))
+    by_first_then_second = sorted(pairs, key=operator.itemgetter(0, 1))
 
 
 class TransactionRecord:
@@ -340,56 +508,48 @@ class TransactionRecord:
         return f"TransactionRecord({self.raw!r})"
 
 
-from bisect import bisect_left, bisect_right, insort
+import bisect
 
 
 def bisect_patterns(sorted_nums: list[int], x: int) -> None:
-    left = bisect_left(sorted_nums, x)  # First index with value >= x.
-    right = bisect_right(
+    left = bisect.bisect_left(sorted_nums, x)  # First index >= x.
+    right = bisect.bisect_right(
         sorted_nums, x
     )  # First index with value > x.
     count_x = right - left
     exists = left < len(sorted_nums) and sorted_nums[left] == x
 
-    insert_at_left = bisect_left(sorted_nums, x)
-    insert_at_right = bisect_right(sorted_nums, x)
-    insort(
+    insert_at_left = bisect.bisect_left(sorted_nums, x)
+    insert_at_right = bisect.bisect_right(sorted_nums, x)
+    bisect.insort(
         sorted_nums, x
     )  # Finds position O(log n), inserts into list O(n).
 
 
-from heapq import heapify, heappop, heappush, nlargest, nsmallest
+import heapq
 
 
 def heap_patterns(
     nums: list[int], k: int, tasks: list[tuple[int, str]]
 ) -> None:
-    # Min-heap over a normal list.
-    heap = nums[:]
-    heapify(heap)
-    smallest = heappop(heap)
-    heappush(heap, 42)
-
-    # Max-heap by negating numeric priorities.
-    max_heap = [-x for x in nums]
-    heapify(max_heap)
-    largest = -heappop(max_heap)
+    # Basic heap CRUD lives in `heap_crud_patterns`.
+    # This section keeps the interview variants.
 
     # Top-k one-off helpers.
-    k_largest = nlargest(k, nums)
-    k_smallest = nsmallest(k, nums)
+    k_largest = heapq.nlargest(k, nums)
+    k_smallest = heapq.nsmallest(k, nums)
 
     # Bounded min-heap for streaming kth largest.
     top: list[int] = []
     for x in nums:
-        heappush(top, x)
+        heapq.heappush(top, x)
         if len(top) > k:
-            heappop(top)
+            heapq.heappop(top)
 
     # Tuple heap: priority, tie breaker, payload.
     pq: list[tuple[int, int, str]] = []
     for order, (priority, name) in enumerate(tasks):
-        heappush(pq, (priority, order, name))
+        heapq.heappush(pq, (priority, order, name))
 
 
 # ====================================================================
@@ -397,7 +557,7 @@ def heap_patterns(
 # ====================================================================
 
 
-from itertools import pairwise
+import itertools
 
 
 def iteration_patterns(
@@ -412,7 +572,7 @@ def iteration_patterns(
     for i in range(len(nums) - 1, -1, -1):
         pass
 
-    pairs1 = list(pairwise(nums))  # Python 3.10+
+    pairs1 = list(itertools.pairwise(nums))  # Python 3.10+
     pairs2 = list(
         zip(nums, nums[1:])
     )  # Older equivalent; slice copies.
@@ -450,7 +610,7 @@ def iteration_patterns(
 
 
 import re
-from collections import Counter
+import collections
 
 
 def string_patterns(
@@ -511,7 +671,7 @@ def string_patterns(
             freq26[ord(ch2) - ord("a")] += 1
     anagram_key_counts = tuple(freq26)
     anagram_key_sorted = "".join(sorted(s))
-    char_counts = Counter(s)
+    char_counts = collections.Counter(s)
     top_chars = char_counts.most_common(3)
 
     # Parsing numbers from strings.
@@ -624,12 +784,12 @@ def nested_helper_and_nonlocal(root: ScopeTreeNode | None) -> int:
     return count
 
 
-from functools import cache
+import functools
 
 
-@cache
+@functools.cache
 def cached_dp(i: int, remaining: int) -> int:
-    # @cache is decorator syntax: cached_dp = cache(cached_dp).
+    # @functools.cache means: cached_dp = functools.cache(cached_dp).
     # It memoizes by the argument tuple (i, remaining), so args
     # must be hashable.
     if remaining == 0:
@@ -641,10 +801,10 @@ def cached_dp(i: int, remaining: int) -> int:
     )
 
 
-from functools import lru_cache
+import functools
 
 
-@lru_cache(maxsize=None)
+@functools.lru_cache(maxsize=None)
 def cached_dp_old_spelling(i: int) -> int:
     return (
         i
@@ -679,21 +839,21 @@ class TreeNode:
         self.right = right
 
 
-from dataclasses import dataclass
+import dataclasses
 
 
-@dataclass
+@dataclasses.dataclass
 class Interval:
-    # @dataclass reads annotated fields and generates __init__,
+    # @dataclasses.dataclass reads fields and generates __init__,
     # __repr__, __eq__.
     start: int
     end: int
 
 
-from dataclasses import dataclass
+import dataclasses
 
 
-@dataclass(frozen=True)
+@dataclasses.dataclass(frozen=True)
 class Point:
     # frozen=True makes value objects immutable/hashable if
     # fields are hashable.
@@ -701,23 +861,25 @@ class Point:
     col: int
 
 
-from dataclasses import dataclass, field
+import dataclasses
 
 
-@dataclass(order=True)
+@dataclasses.dataclass(order=True)
 class Task:
     # order=True makes comparisons use fields in definition order.
     priority: int
     name: str
-    tags: list[str] = field(default_factory=list)
+    tags: list[str] = dataclasses.field(default_factory=list)
 
 
-from dataclasses import dataclass, field
+import dataclasses
 
 
-@dataclass
+@dataclasses.dataclass
 class TrieNode:
-    children: dict[str, "TrieNode"] = field(default_factory=dict)
+    children: dict[str, "TrieNode"] = dataclasses.field(
+        default_factory=dict
+    )
     is_word: bool = False
 
 
@@ -744,8 +906,8 @@ class Trie:
 #   `is` checks identity; `==` checks value equality.
 #   Mutable class variables are shared by every instance; use
 #   `self.x` in __init__.
-#   `field(default_factory=list)` gives every dataclass instance a
-#   fresh list.
+#   `dataclasses.field(default_factory=list)` gives every dataclass
+#   instance a fresh list.
 
 
 # ====================================================================
@@ -779,13 +941,15 @@ def two_pointers_sorted(
     return None
 
 
-from collections import defaultdict
+import collections
 
 
 def sliding_window_at_most_k_distinct(nums: list[int], k: int) -> int:
     if k < 0:
         return 0
-    count: defaultdict[int, int] = defaultdict(int)
+    count: collections.defaultdict[int, int] = collections.defaultdict(
+        int
+    )
     left = total = 0
     for right, x in enumerate(nums):
         count[x] += 1
@@ -820,11 +984,13 @@ def first_feasible(low: int, high: int, can) -> int:
     return low
 
 
-from collections import defaultdict
+import collections
 
 
 def prefix_sum_subarray_count(nums: list[int], k: int) -> int:
-    seen: defaultdict[int, int] = defaultdict(int)
+    seen: collections.defaultdict[int, int] = collections.defaultdict(
+        int
+    )
     seen[0] = 1
     prefix = ans = 0
     for x in nums:
@@ -834,13 +1000,13 @@ def prefix_sum_subarray_count(nums: list[int], k: int) -> int:
     return ans
 
 
-from collections import deque
+import collections
 
 
 def bfs_graph(
     graph: dict[int, list[int]], start: int, target: int
 ) -> int:
-    q = deque([(start, 0)])
+    q = collections.deque([(start, 0)])
     seen = {start}
     while q:
         node, dist = q.popleft()
@@ -853,12 +1019,12 @@ def bfs_graph(
     return -1
 
 
-from collections.abc import Iterable
+import collections.abc
 
 
 def grid_neighbors(
     r: int, c: int, rows: int, cols: int
-) -> Iterable[tuple[int, int]]:
+) -> collections.abc.Iterable[tuple[int, int]]:
     for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
         nr, nc = r + dr, c + dc
         if 0 <= nr < rows and 0 <= nc < cols:
@@ -920,27 +1086,27 @@ def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:
     return merged
 
 
-from collections import Counter
-from heapq import nlargest
+import collections
+import heapq
 
 
 def top_k_frequent(nums: list[int], k: int) -> list[int]:
-    counts = Counter(nums)
+    counts = collections.Counter(nums)
     return [
         num
-        for _, num in nlargest(
+        for _, num in heapq.nlargest(
             k, ((freq, num) for num, freq in counts.items())
         )
     ]
 
 
-from functools import cache
+import functools
 
 
 def coin_change_top_down(coins: tuple[int, ...], amount: int) -> int:
     inf = amount + 1
 
-    @cache
+    @functools.cache
     def dp(rem: int) -> int:
         if rem == 0:
             return 0
@@ -1016,14 +1182,16 @@ def fixed_window_max_sum(nums: list[int], k: int) -> int:
     return best
 
 
-from collections import defaultdict
+import collections
 
 
 def _at_most_k_distinct_local(nums: list[int], k: int) -> int:
     # Local helper so this pattern does not depend on Section 9.
     if k < 0:
         return 0
-    count: defaultdict[int, int] = defaultdict(int)
+    count: collections.defaultdict[int, int] = collections.defaultdict(
+        int
+    )
     left = total = 0
     for right, x in enumerate(nums):
         count[x] += 1
@@ -1205,13 +1373,12 @@ def median_two_sorted_partition(a: list[int], b: list[int]) -> float:
     raise ValueError("inputs must be sorted")
 
 
-from collections import defaultdict
+import collections
 
 
 def group_anagrams_count_key(words: list[str]) -> list[list[str]]:
-    groups: defaultdict[tuple[int, ...], list[str]] = defaultdict(
-        list
-    )
+    groups: collections.defaultdict[tuple[int, ...], list[str]]
+    groups = collections.defaultdict(list)
     for word in words:
         count = [0] * 26
         for ch in word:
@@ -1421,13 +1588,14 @@ class LRUCacheDLL:
             del self.nodes[victim.key]
 
 
-from collections import OrderedDict
+import collections
 
 
 class LRUCacheOrderedDict:
     def __init__(self, capacity: int) -> None:
         self.capacity = capacity
-        self.data: OrderedDict[int, int] = OrderedDict()
+        self.data: collections.OrderedDict[int, int]
+        self.data = collections.OrderedDict()
 
     def get(self, key: int) -> int:
         if key not in self.data:
@@ -1456,14 +1624,14 @@ class TreeNode:
         self.right = right
 
 
-from collections import deque
+import collections
 
 
 def level_order(root: TreeNode | None) -> list[list[int]]:
     if root is None:
         return []
     ans: list[list[int]] = []
-    q = deque([root])
+    q = collections.deque([root])
     while q:
         level: list[int] = []
         for _ in range(len(q)):
@@ -1477,13 +1645,13 @@ def level_order(root: TreeNode | None) -> list[list[int]]:
     return ans
 
 
-from collections import deque
-from collections.abc import Iterable
+import collections
+import collections.abc
 
 
 def _grid_neighbors_local(
     r: int, c: int, rows: int, cols: int
-) -> Iterable[tuple[int, int]]:
+) -> collections.abc.Iterable[tuple[int, int]]:
     # Local helper so this grid BFS does not depend on Section 9.
     for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
         nr, nc = r + dr, c + dc
@@ -1496,7 +1664,7 @@ def grid_bfs_distance(
 ) -> list[list[int]]:
     rows, cols = len(grid), len(grid[0])
     dist = [[-1] * cols for _ in range(rows)]
-    q = deque([start])
+    q = collections.deque([start])
     dist[start[0]][start[1]] = 0  # Mark on enqueue, not on pop.
     while q:
         r, c = q.popleft()
@@ -1507,18 +1675,19 @@ def grid_bfs_distance(
     return dist
 
 
-from collections import defaultdict, deque
+import collections
 
 
 def topological_sort_kahn(
     n: int, edges: list[tuple[int, int]]
 ) -> list[int]:
-    graph: defaultdict[int, list[int]] = defaultdict(list)
+    graph: collections.defaultdict[int, list[int]]
+    graph = collections.defaultdict(list)
     indeg = [0] * n
     for pre, course in edges:
         graph[pre].append(course)
         indeg[course] += 1
-    q = deque(i for i, deg in enumerate(indeg) if deg == 0)
+    q = collections.deque(i for i, deg in enumerate(indeg) if deg == 0)
     order: list[int] = []
     while q:
         node = q.popleft()
@@ -1531,7 +1700,7 @@ def topological_sort_kahn(
 
 
 import math
-from heapq import heappop, heappush
+import heapq
 
 
 def dijkstra(
@@ -1540,14 +1709,14 @@ def dijkstra(
     dist: dict[int, int] = {start: 0}
     heap = [(0, start)]
     while heap:
-        d, node = heappop(heap)
+        d, node = heapq.heappop(heap)
         if d != dist[node]:
             continue
         for nei, weight in graph.get(node, []):
             nd = d + weight
             if nd < dist.get(nei, math.inf):
                 dist[nei] = nd
-                heappush(heap, (nd, nei))
+                heapq.heappush(heap, (nd, nei))
     return dist
 
 
@@ -1583,21 +1752,21 @@ class MinStack:
         return self.stack[-1][1]
 
 
-from heapq import heappop, heappush
+import heapq
 
 
 def merge_k_sorted_arrays(arrays: list[list[int]]) -> list[int]:
     heap: list[tuple[int, int, int]] = []
     for arr_i, arr in enumerate(arrays):
         if arr:
-            heappush(heap, (arr[0], arr_i, 0))
+            heapq.heappush(heap, (arr[0], arr_i, 0))
     ans: list[int] = []
     while heap:
-        val, arr_i, elem_i = heappop(heap)
+        val, arr_i, elem_i = heapq.heappop(heap)
         ans.append(val)
         nxt = elem_i + 1
         if nxt < len(arrays[arr_i]):
-            heappush(heap, (arrays[arr_i][nxt], arr_i, nxt))
+            heapq.heappush(heap, (arrays[arr_i][nxt], arr_i, nxt))
     return ans
 
 
@@ -1699,10 +1868,12 @@ def base10_digits(n: int) -> list[int]:
     return digits[::-1]
 
 
-from collections.abc import Iterable
+import collections.abc
 
 
-def int_from_base10_digits(digits: Iterable[int]) -> int:
+def int_from_base10_digits(
+    digits: collections.abc.Iterable[int],
+) -> int:
     ans = 0
     for digit in digits:
         ans = ans * 10 + digit
@@ -1877,9 +2048,30 @@ def solve(nums: list[int]) -> int:
     return sum(nums)
 
 
+def assert_crud_guide_width(max_columns: int = 70) -> None:
+    with open(__file__, encoding="utf-8") as source:
+        lines = source.read().splitlines()
+
+    start = lines.index("Python Data Structures - CRUD Cheat Sheet")
+    end = lines.index('"""', start + 1)
+    too_wide = [
+        (line_no, len(line), line)
+        for line_no, line in enumerate(lines[start:end], start + 1)
+        if len(line) > max_columns
+    ]
+    if not too_wide:
+        return
+
+    line_no, width, line = too_wide[0]
+    raise AssertionError(
+        f"CRUD guide line {line_no} is {width} columns: {line!r}"
+    )
+
+
 def main() -> None:
     sample = [1, 2, 3]
     print(solve(sample))
+    assert_crud_guide_width()
 
 
 if __name__ == "__main__":
