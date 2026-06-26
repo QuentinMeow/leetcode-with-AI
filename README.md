@@ -11,6 +11,7 @@ A self-evolving LeetCode practice environment in Cursor: **your** machine runs a
 | **LeetCode MCP** | A Node process Cursor starts from **`.cursor/mcp.json`** (you create this file locally; it is **not** committed). | Copy `.cursor/mcp-example.json` → `.cursor/mcp.json`, fill in paths, reload Cursor. |
 | **Cursor rules** | Always-on guidance in `.cursor/rules/` (problem-solving steps, memory, banned tools). | Nothing special — they steer the agent automatically. |
 | **Skills** | `leetcode-coach`, `interview-simulator`, and `language-coach` under `.cursor/skills/`. | Hints/reviews, interview follow-ups, or language/syntax deep-dives with tracked progress in `language-coach/learning/`. |
+| **System design guide** | `system-design/` study notes for senior+ system design interviews. | Start with `system-design/cheatsheet.md`, then use `system-design/databases/cheatsheet.md` or `system-design/cache/cheatsheet.md` under time pressure. |
 | **`.cursor/MEMORY.md`** | Gitignored file the agent updates with durable preferences, weak areas, and progress patterns. | Optional: skim it; let the agent maintain it after substantive sessions. |
 | **`progress.md`** | Committed tracker table for problems and languages. | Update with the agent or by hand as you solve problems. |
 
@@ -147,6 +148,7 @@ solutions/                 # One folder per language; files: NNNN-slug.ext
     solved/
     unsolved/
   golang/
+system-design/             # Senior+ system design study guide and database choice cheatsheets
 .cursor/
   mcp-example.json         # Committed template — copy to mcp.json locally
   mcp.json                 # Local only (gitignored) — real MCP config
