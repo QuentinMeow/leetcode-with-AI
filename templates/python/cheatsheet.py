@@ -15,7 +15,7 @@ bugs.
 
 After editing this file, run:
     python3 templates/python/cheatsheet.py
-`main()` checks that the CRUD guide block stays within 70 columns.
+`main()` checks every line in this file stays within 70 columns.
 """
 
 # ruff: noqa: E501, F401, F841, B006, F811, E402
@@ -485,7 +485,9 @@ def custom_sorting_patterns(
     # 5) Common accessors: itemgetter(0) is like lambda item: item[0].
     pairs = [("b", 2), ("a", 3)]
     by_first = sorted(pairs, key=operator.itemgetter(0))
-    by_first_then_second = sorted(pairs, key=operator.itemgetter(0, 1))
+    by_first_then_second = sorted(
+        pairs, key=operator.itemgetter(0, 1)
+    )
 
 
 class TransactionRecord:
@@ -947,9 +949,8 @@ import collections
 def sliding_window_at_most_k_distinct(nums: list[int], k: int) -> int:
     if k < 0:
         return 0
-    count: collections.defaultdict[int, int] = collections.defaultdict(
-        int
-    )
+    count: collections.defaultdict[int, int]
+    count = collections.defaultdict(int)
     left = total = 0
     for right, x in enumerate(nums):
         count[x] += 1
@@ -1189,9 +1190,8 @@ def _at_most_k_distinct_local(nums: list[int], k: int) -> int:
     # Local helper so this pattern does not depend on Section 9.
     if k < 0:
         return 0
-    count: collections.defaultdict[int, int] = collections.defaultdict(
-        int
-    )
+    count: collections.defaultdict[int, int]
+    count = collections.defaultdict(int)
     left = total = 0
     for right, x in enumerate(nums):
         count[x] += 1
@@ -1687,7 +1687,9 @@ def topological_sort_kahn(
     for pre, course in edges:
         graph[pre].append(course)
         indeg[course] += 1
-    q = collections.deque(i for i, deg in enumerate(indeg) if deg == 0)
+    q = collections.deque(
+        i for i, deg in enumerate(indeg) if deg == 0
+    )
     order: list[int] = []
     while q:
         node = q.popleft()
@@ -2048,30 +2050,24 @@ def solve(nums: list[int]) -> int:
     return sum(nums)
 
 
-def assert_crud_guide_width(max_columns: int = 70) -> None:
+def assert_file_width(max_columns: int = 70) -> None:
     with open(__file__, encoding="utf-8") as source:
-        lines = source.read().splitlines()
-
-    start = lines.index("Python Data Structures - CRUD Cheat Sheet")
-    end = lines.index('"""', start + 1)
-    too_wide = [
-        (line_no, len(line), line)
-        for line_no, line in enumerate(lines[start:end], start + 1)
-        if len(line) > max_columns
-    ]
-    if not too_wide:
-        return
-
-    line_no, width, line = too_wide[0]
-    raise AssertionError(
-        f"CRUD guide line {line_no} is {width} columns: {line!r}"
-    )
+        for line_no, line in enumerate(source, 1):
+            text = line.rstrip("\n")
+            width = len(text)
+            if width <= max_columns:
+                continue
+            message = (
+                f"line {line_no} is {width} columns "
+                f"(limit {max_columns}): {text!r}"
+            )
+            raise AssertionError(message)
 
 
 def main() -> None:
     sample = [1, 2, 3]
     print(solve(sample))
-    assert_crud_guide_width()
+    assert_file_width()
 
 
 if __name__ == "__main__":
