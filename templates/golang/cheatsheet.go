@@ -17,6 +17,7 @@
 package main
 
 import (
+	"cmp"
 	"container/heap"
 	"context"
 	"errors"
@@ -107,6 +108,7 @@ Key caveats:
 */
 
 func sliceCRUDPatterns(n, rows, cols int, nums []int) {
+	// The indexed read examples below require len(nums) >= 3.
 	x := 2
 
 	// CREATE
@@ -177,14 +179,13 @@ func sliceCRUDPatterns(n, rows, cols int, nums []int) {
 
 	// Stack: append and trim the right end.
 	stack := []int{1, 2}
-	top := stack[len(stack)-1]
 	popped := stack[len(stack)-1]
 	stack = stack[:len(stack)-1]
 
 	_ = []any{
 		nilSlice, empty, first, last, middle, size, capacity,
 		firstX, containsX, copy1, copy2, copy3, matrixCopy,
-		top, popped, stack,
+		popped, stack,
 	}
 }
 
@@ -242,76 +243,31 @@ func mapCRUDPatterns(words []string, nums []int) {
 	}
 }
 
-type Set[T comparable] map[T]struct{}
-
-func newSet[T comparable](values ...T) Set[T] {
-	set := make(Set[T], len(values))
-	for _, value := range values {
+func setCRUDPatterns(nums []int) {
+	set := make(map[int]struct{}, len(nums))
+	for _, value := range nums {
 		set[value] = struct{}{}
 	}
-	return set
-}
-
-func (s Set[T]) add(value T) {
-	s[value] = struct{}{}
-}
-
-func (s Set[T]) contains(value T) bool {
-	_, ok := s[value]
-	return ok
-}
-
-func (s Set[T]) remove(value T) {
-	delete(s, value)
-}
-
-func setCRUDPatterns(nums []int) {
-	set := newSet(nums...)
-	set.add(42)
-	exists := set.contains(42)
-	set.remove(42)
+	set[42] = struct{}{}
+	_, exists := set[42]
+	delete(set, 42)
 	size := len(set)
 	clear(set)
 	_ = []any{exists, size}
 }
 
-// Queue with a head index gives amortized O(1) dequeue. Periodically
-// compact long-lived queues so consumed elements can be garbage-collected.
-type Queue[T any] struct {
-	data []T
-	head int
-}
-
-func (q *Queue[T]) push(value T) {
-	q.data = append(q.data, value)
-}
-
-func (q *Queue[T]) pop() (T, bool) {
-	var zero T
-	if q.head == len(q.data) {
-		return zero, false
+func queueCRUDPatterns(values []int) []int {
+	// A slice plus a head index gives amortized O(1) dequeue.
+	queue := append([]int(nil), values...)
+	head := 0
+	queue = append(queue, 42)
+	if head < len(queue) {
+		front := queue[head]
+		queue[head] = 0 // Release references here for pointer element types.
+		head++
+		_ = front
 	}
-	value := q.data[q.head]
-	q.data[q.head] = zero
-	q.head++
-
-	if q.head > 1024 && q.head*2 >= len(q.data) {
-		q.data = append([]T(nil), q.data[q.head:]...)
-		q.head = 0
-	}
-	return value, true
-}
-
-func (q *Queue[T]) front() (T, bool) {
-	var zero T
-	if q.head == len(q.data) {
-		return zero, false
-	}
-	return q.data[q.head], true
-}
-
-func (q *Queue[T]) len() int {
-	return len(q.data) - q.head
+	return queue[head:]
 }
 
 // IntHeap is a min-heap. Reverse Less for a max-heap.
@@ -339,8 +295,11 @@ func heapCRUDPatterns(nums []int) {
 	heap.Push(&h, 42) // O(log n).
 	smallest := h[0]  // Peek, O(1); requires non-empty heap.
 	popped := heap.Pop(&h).(int)
-	heap.Fix(&h, 0)    // Restore after changing h[0].
-	heap.Remove(&h, 0) // Remove by index, O(log n).
+	if len(h) > 0 {
+		h[0]++          // Example priority change.
+		heap.Fix(&h, 0) // Restore after changing h[0].
+		heap.Remove(&h, 0)
+	}
 	clear(h)
 	h = h[:0]
 	_ = []any{smallest, popped}
@@ -408,15 +367,15 @@ func sortingPatterns(nums []int, words []string, records []ScoreRecord) {
 	sortedNums := slices.Clone(nums)
 	slices.Sort(sortedNums)
 	slices.SortFunc(sortedNums, func(a, b int) int {
-		return b - a // Descending; avoid subtraction if overflow matters.
+		return cmp.Compare(b, a) // Descending without subtraction overflow.
 	})
 
 	sortedWords := slices.Clone(words)
 	slices.SortFunc(sortedWords, func(a, b string) int {
 		if len(a) != len(b) {
-			return len(a) - len(b)
+			return cmp.Compare(len(a), len(b))
 		}
-		return strings.Compare(a, b)
+		return cmp.Compare(a, b)
 	})
 
 	// score descending, then name ascending.
@@ -581,9 +540,12 @@ func numericBitPatterns(a, b, n int, mask uint) {
 	}
 	clamped := max(0, min(n, 100))
 
-	quotient := a / b  // Integer division truncates toward zero.
-	remainder := a % b // Remainder has the sign of a.
-	normalizedMod := ((a % b) + b) % b
+	quotient, remainder, normalizedMod := 0, 0, 0
+	if b != 0 {
+		quotient = a / b  // Integer division truncates toward zero.
+		remainder = a % b // Remainder has the sign of a.
+		normalizedMod = ((remainder % b) + b) % b
+	}
 
 	positiveInfinity := math.Inf(1)
 	squareRoot := math.Sqrt(float64(n))
@@ -764,6 +726,12 @@ func cloneMap[K comparable, V any](source map[K]V) map[K]V {
 	return result
 }
 
+func typedNilInterfacePattern() bool {
+	var node *ListNode
+	var value any = node
+	return value == nil // false: the interface has dynamic type *ListNode.
+}
+
 /*
 Struct and interface notes:
 
@@ -783,6 +751,10 @@ Struct and interface notes:
 // ===================================================================
 
 func squareWorkerPool(ctx context.Context, nums []int, workers int) []int {
+	if workers <= 0 {
+		return nil
+	}
+
 	type job struct {
 		index int
 		value int
@@ -792,8 +764,8 @@ func squareWorkerPool(ctx context.Context, nums []int, workers int) []int {
 		value int
 	}
 
-	jobs := make(chan job)
-	results := make(chan result)
+	jobs := make(chan job, len(nums))
+	results := make(chan result, len(nums))
 	var wg sync.WaitGroup
 
 	worker := func() {
@@ -806,9 +778,13 @@ func squareWorkerPool(ctx context.Context, nums []int, workers int) []int {
 				if !ok {
 					return
 				}
-				results <- result{
+				select {
+				case <-ctx.Done():
+					return
+				case results <- result{
 					index: current.index,
 					value: current.value * current.value,
+				}:
 				}
 			}
 		}
@@ -840,6 +816,41 @@ func squareWorkerPool(ctx context.Context, nums []int, workers int) []int {
 		squared[result.index] = result.value
 	}
 	return squared
+}
+
+func mutexCounterPattern(workers int) int {
+	if workers <= 0 {
+		return 0
+	}
+	var mu sync.Mutex
+	var wg sync.WaitGroup
+	count := 0
+
+	wg.Add(workers)
+	for i := 0; i < workers; i++ {
+		go func() {
+			defer wg.Done()
+			mu.Lock()
+			count++
+			mu.Unlock()
+		}()
+	}
+	wg.Wait()
+	return count
+}
+
+func bufferedChannelPattern(values []int) []int {
+	channel := make(chan int, len(values))
+	for _, value := range values {
+		channel <- value
+	}
+	close(channel)
+
+	result := make([]int, 0, len(values))
+	for value := range channel {
+		result = append(result, value)
+	}
+	return result
 }
 
 func timeoutPattern(parent context.Context) error {
@@ -959,21 +970,22 @@ func bfsGraph(graph map[int][]int, start, target int) int {
 		distance int
 	}
 
-	queue := Queue[state]{}
-	queue.push(state{node: start})
-	seen := newSet(start)
+	queue := []state{{node: start}}
+	head := 0
+	seen := map[int]struct{}{start: {}}
 
-	for queue.len() > 0 {
-		current, _ := queue.pop()
+	for head < len(queue) {
+		current := queue[head]
+		head++
 		if current.node == target {
 			return current.distance
 		}
 		for _, neighbor := range graph[current.node] {
-			if seen.contains(neighbor) {
+			if _, ok := seen[neighbor]; ok {
 				continue
 			}
-			seen.add(neighbor) // Mark on enqueue.
-			queue.push(state{
+			seen[neighbor] = struct{}{} // Mark on enqueue.
+			queue = append(queue, state{
 				node:     neighbor,
 				distance: current.distance + 1,
 			})
@@ -990,6 +1002,7 @@ var directions4 = [][2]int{
 }
 
 func dfsIslands(grid [][]byte) int {
+	// Interview grids are normally rectangular.
 	if len(grid) == 0 {
 		return 0
 	}
@@ -1152,6 +1165,9 @@ func minSubarrayLenAtLeast(nums []int, target int) int {
 }
 
 func fixedWindowMaxSum(nums []int, k int) int {
+	if k <= 0 || k > len(nums) {
+		return 0
+	}
 	window := 0
 	for _, value := range nums[:k] {
 		window += value
@@ -1335,13 +1351,10 @@ func searchRotated(nums []int, target int) int {
 }
 
 func groupAnagramsCountKey(words []string) [][]string {
-	groups := make(map[[26]int][]string)
+	groups := make(map[string][]string)
 	for _, word := range words {
-		var count [26]int
-		for _, char := range word {
-			count[char-'a']++
-		}
-		groups[count] = append(groups[count], word)
+		key := sortString(word)
+		groups[key] = append(groups[key], word)
 	}
 
 	answer := make([][]string, 0, len(groups))
@@ -1352,14 +1365,20 @@ func groupAnagramsCountKey(words []string) [][]string {
 }
 
 func longestConsecutive(nums []int) int {
-	values := newSet(nums...)
+	values := make(map[int]struct{}, len(nums))
+	for _, value := range nums {
+		values[value] = struct{}{}
+	}
 	best := 0
 	for value := range values {
-		if values.contains(value - 1) {
+		if _, exists := values[value-1]; exists {
 			continue
 		}
 		end := value
-		for values.contains(end) {
+		for {
+			if _, exists := values[end]; !exists {
+				break
+			}
 			end++
 		}
 		best = max(best, end-value)
@@ -1464,20 +1483,21 @@ func levelOrder(root *TreeNode) [][]int {
 	}
 
 	answer := make([][]int, 0)
-	queue := Queue[*TreeNode]{}
-	queue.push(root)
+	queue := []*TreeNode{root}
+	head := 0
 
-	for queue.len() > 0 {
-		levelSize := queue.len()
+	for head < len(queue) {
+		levelSize := len(queue) - head
 		level := make([]int, 0, levelSize)
 		for levelIndex := 0; levelIndex < levelSize; levelIndex++ {
-			node, _ := queue.pop()
+			node := queue[head]
+			head++
 			level = append(level, node.Val)
 			if node.Left != nil {
-				queue.push(node.Left)
+				queue = append(queue, node.Left)
 			}
 			if node.Right != nil {
-				queue.push(node.Right)
+				queue = append(queue, node.Right)
 			}
 		}
 		answer = append(answer, level)
@@ -1494,21 +1514,21 @@ func topologicalSortKahn(n int, edges [][2]int) []int {
 		indegree[course]++
 	}
 
-	queue := Queue[int]{}
+	queue := make([]int, 0, n)
 	for node, degree := range indegree {
 		if degree == 0 {
-			queue.push(node)
+			queue = append(queue, node)
 		}
 	}
 
 	order := make([]int, 0, n)
-	for queue.len() > 0 {
-		node, _ := queue.pop()
+	for head := 0; head < len(queue); head++ {
+		node := queue[head]
 		order = append(order, node)
 		for _, neighbor := range graph[node] {
 			indegree[neighbor]--
 			if indegree[neighbor] == 0 {
-				queue.push(neighbor)
+				queue = append(queue, neighbor)
 			}
 		}
 	}
@@ -1611,17 +1631,26 @@ func (s *MinStack) push(value int) {
 	s.stack = append(s.stack, [2]int{value, currentMin})
 }
 
-func (s *MinStack) pop() int {
+func (s *MinStack) pop() (int, bool) {
+	if len(s.stack) == 0 {
+		return 0, false
+	}
 	top := s.stack[len(s.stack)-1]
 	s.stack = s.stack[:len(s.stack)-1]
-	return top[0]
+	return top[0], true
 }
 
-func (s *MinStack) minimum() int {
-	return s.stack[len(s.stack)-1][1]
+func (s *MinStack) minimum() (int, bool) {
+	if len(s.stack) == 0 {
+		return 0, false
+	}
+	return s.stack[len(s.stack)-1][1], true
 }
 
 func kadaneMaxSubarray(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
 	best, current := nums[0], nums[0]
 	for _, value := range nums[1:] {
 		current = max(value, current+value)
@@ -1762,11 +1791,757 @@ func singleNumberXOR(nums []int) int {
 }
 
 // ===================================================================
-// 12. Main / Local Script Pattern
+// 12. General Algorithm Pattern Add-ons
+// ===================================================================
+
+type TrieNode struct {
+	children map[rune]*TrieNode
+	isWord   bool
+}
+
+type Trie struct {
+	root *TrieNode
+}
+
+func newTrie() *Trie {
+	return &Trie{
+		root: &TrieNode{children: make(map[rune]*TrieNode)},
+	}
+}
+
+func (t *Trie) insert(word string) {
+	node := t.root
+	for _, char := range word {
+		if node.children[char] == nil {
+			node.children[char] = &TrieNode{
+				children: make(map[rune]*TrieNode),
+			}
+		}
+		node = node.children[char]
+	}
+	node.isWord = true
+}
+
+func (t *Trie) walk(text string) *TrieNode {
+	node := t.root
+	for _, char := range text {
+		node = node.children[char]
+		if node == nil {
+			return nil
+		}
+	}
+	return node
+}
+
+func (t *Trie) search(word string) bool {
+	node := t.walk(word)
+	return node != nil && node.isWord
+}
+
+func (t *Trie) startsWith(prefix string) bool {
+	return t.walk(prefix) != nil
+}
+
+func (t *Trie) wildcardSearch(pattern string) bool {
+	patternRunes := []rune(pattern)
+	var search func(int, *TrieNode) bool
+	search = func(index int, node *TrieNode) bool {
+		if index == len(patternRunes) {
+			return node.isWord
+		}
+		char := patternRunes[index]
+		if char != '.' {
+			child := node.children[char]
+			return child != nil && search(index+1, child)
+		}
+		for _, child := range node.children {
+			if search(index+1, child) {
+				return true
+			}
+		}
+		return false
+	}
+	return search(0, t.root)
+}
+
+func topKFrequent(nums []int, k int) []int {
+	if k <= 0 {
+		return nil
+	}
+
+	frequency := make(map[int]int)
+	for _, value := range nums {
+		frequency[value]++
+	}
+
+	buckets := make([][]int, len(nums)+1)
+	for value, count := range frequency {
+		buckets[count] = append(buckets[count], value)
+	}
+
+	answer := make([]int, 0, min(k, len(frequency)))
+	for count := len(buckets) - 1; count > 0 && len(answer) < k; count-- {
+		for _, value := range buckets[count] {
+			answer = append(answer, value)
+			if len(answer) == k {
+				break
+			}
+		}
+	}
+	return answer // Ties may appear in any order.
+}
+
+func coinChangeTopDown(coins []int, amount int) int {
+	impossible := amount + 1
+	memo := make(map[int]int)
+
+	var dp func(int) int
+	dp = func(remaining int) int {
+		switch {
+		case remaining == 0:
+			return 0
+		case remaining < 0:
+			return impossible
+		}
+		if cached, ok := memo[remaining]; ok {
+			return cached
+		}
+
+		best := impossible
+		for _, coin := range coins {
+			best = min(best, 1+dp(remaining-coin))
+		}
+		memo[remaining] = best
+		return best
+	}
+
+	answer := dp(amount)
+	if answer >= impossible {
+		return -1
+	}
+	return answer
+}
+
+func medianTwoSortedPartition(a, b []int) float64 {
+	if len(a) > len(b) {
+		return medianTwoSortedPartition(b, a)
+	}
+	if len(a)+len(b) == 0 {
+		panic("at least one input must be non-empty")
+	}
+
+	maxInt := int(^uint(0) >> 1)
+	minInt := -maxInt - 1
+	m, n := len(a), len(b)
+	half := (m + n + 1) / 2
+	left, right := 0, m
+
+	for left <= right {
+		aCut := left + (right-left)/2
+		bCut := half - aCut
+
+		aLeft, aRight := minInt, maxInt
+		bLeft, bRight := minInt, maxInt
+		if aCut > 0 {
+			aLeft = a[aCut-1]
+		}
+		if aCut < m {
+			aRight = a[aCut]
+		}
+		if bCut > 0 {
+			bLeft = b[bCut-1]
+		}
+		if bCut < n {
+			bRight = b[bCut]
+		}
+
+		if aLeft <= bRight && bLeft <= aRight {
+			if (m+n)%2 == 1 {
+				return float64(max(aLeft, bLeft))
+			}
+			leftMax := float64(max(aLeft, bLeft))
+			rightMin := float64(min(aRight, bRight))
+			return (leftMax + rightMin) / 2
+		}
+		if aLeft > bRight {
+			right = aCut - 1
+		} else {
+			left = aCut + 1
+		}
+	}
+	panic("inputs must be sorted")
+}
+
+func meetingRoomsTwoPointer(intervals []Interval) int {
+	if len(intervals) == 0 {
+		return 0
+	}
+
+	starts := make([]int, 0, len(intervals))
+	ends := make([]int, 0, len(intervals))
+	for _, interval := range intervals {
+		if interval.start >= interval.end {
+			continue
+		}
+		starts = append(starts, interval.start)
+		ends = append(ends, interval.end)
+	}
+	if len(starts) == 0 {
+		return 0
+	}
+	slices.Sort(starts)
+	slices.Sort(ends)
+
+	rooms, best := 0, 0
+	startIndex, endIndex := 0, 0
+	for startIndex < len(starts) {
+		if starts[startIndex] < ends[endIndex] {
+			rooms++
+			best = max(best, rooms)
+			startIndex++
+		} else {
+			rooms--
+			endIndex++
+		}
+	}
+	return best
+}
+
+func insertInterval(
+	intervals []Interval,
+	newInterval Interval,
+) []Interval {
+	answer := make([]Interval, 0, len(intervals)+1)
+	index := 0
+	for index < len(intervals) &&
+		intervals[index].end < newInterval.start {
+		answer = append(answer, intervals[index])
+		index++
+	}
+	for index < len(intervals) &&
+		intervals[index].start <= newInterval.end {
+		newInterval.start = min(newInterval.start, intervals[index].start)
+		newInterval.end = max(newInterval.end, intervals[index].end)
+		index++
+	}
+	answer = append(answer, newInterval)
+	return append(answer, intervals[index:]...)
+}
+
+func eraseOverlapIntervals(intervals []Interval) int {
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i].end < intervals[j].end
+	})
+
+	removed, previousEnd := 0, 0
+	hasPrevious := false
+	for _, interval := range intervals {
+		if !hasPrevious || interval.start >= previousEnd {
+			previousEnd = interval.end
+			hasPrevious = true
+		} else {
+			removed++
+		}
+	}
+	return removed
+}
+
+func removeNthFromEnd(head *ListNode, n int) *ListNode {
+	if n <= 0 {
+		return head
+	}
+
+	dummy := &ListNode{Next: head}
+	fast, slow := dummy, dummy
+	for step := 0; step < n; step++ {
+		fast = fast.Next
+		if fast == nil {
+			return head
+		}
+	}
+	for fast.Next != nil {
+		fast = fast.Next
+		slow = slow.Next
+	}
+	slow.Next = slow.Next.Next
+	return dummy.Next
+}
+
+type LRUNode struct {
+	key   int
+	value int
+	prev  *LRUNode
+	next  *LRUNode
+}
+
+type LRUCache struct {
+	capacity int
+	nodes    map[int]*LRUNode
+	head     *LRUNode
+	tail     *LRUNode
+}
+
+func newLRUCache(capacity int) *LRUCache {
+	head, tail := &LRUNode{}, &LRUNode{}
+	head.next = tail
+	tail.prev = head
+	return &LRUCache{
+		capacity: capacity,
+		nodes:    make(map[int]*LRUNode),
+		head:     head,
+		tail:     tail,
+	}
+}
+
+func (c *LRUCache) remove(node *LRUNode) {
+	node.prev.next = node.next
+	node.next.prev = node.prev
+}
+
+func (c *LRUCache) addMostRecent(node *LRUNode) {
+	previous := c.tail.prev
+	node.prev, node.next = previous, c.tail
+	previous.next = node
+	c.tail.prev = node
+}
+
+func (c *LRUCache) get(key int) int {
+	node, ok := c.nodes[key]
+	if !ok {
+		return -1
+	}
+	c.remove(node)
+	c.addMostRecent(node)
+	return node.value
+}
+
+func (c *LRUCache) put(key, value int) {
+	if node, ok := c.nodes[key]; ok {
+		c.remove(node)
+		delete(c.nodes, key)
+	}
+
+	node := &LRUNode{key: key, value: value}
+	c.nodes[key] = node
+	c.addMostRecent(node)
+
+	if len(c.nodes) > c.capacity {
+		victim := c.head.next
+		c.remove(victim)
+		delete(c.nodes, victim.key)
+	}
+}
+
+func gridBFSDistance(grid [][]int, start Point) [][]int {
+	if len(grid) == 0 || len(grid[0]) == 0 {
+		return nil
+	}
+
+	rows, cols := len(grid), len(grid[0])
+	distance := make([][]int, rows)
+	for row := range distance {
+		distance[row] = make([]int, cols)
+		for col := range distance[row] {
+			distance[row][col] = -1
+		}
+	}
+	if start.Row < 0 || start.Row >= rows ||
+		start.Col < 0 || start.Col >= cols ||
+		grid[start.Row][start.Col] != 0 {
+		return distance
+	}
+
+	queue := []Point{start}
+	distance[start.Row][start.Col] = 0
+	for head := 0; head < len(queue); head++ {
+		current := queue[head]
+		for _, direction := range directions4 {
+			next := Point{
+				Row: current.Row + direction[0],
+				Col: current.Col + direction[1],
+			}
+			if next.Row < 0 || next.Row >= rows ||
+				next.Col < 0 || next.Col >= cols ||
+				grid[next.Row][next.Col] != 0 ||
+				distance[next.Row][next.Col] != -1 {
+				continue
+			}
+			distance[next.Row][next.Col] =
+				distance[current.Row][current.Col] + 1
+			queue = append(queue, next) // Marked before enqueue, so no duplicates.
+		}
+	}
+	return distance
+}
+
+type ArrayCursor struct {
+	value      int
+	arrayIndex int
+	valueIndex int
+}
+
+type ArrayCursorHeap []ArrayCursor
+
+func (h ArrayCursorHeap) Len() int           { return len(h) }
+func (h ArrayCursorHeap) Less(i, j int) bool { return h[i].value < h[j].value }
+func (h ArrayCursorHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+
+func (h *ArrayCursorHeap) Push(value any) {
+	*h = append(*h, value.(ArrayCursor))
+}
+
+func (h *ArrayCursorHeap) Pop() any {
+	old := *h
+	value := old[len(old)-1]
+	*h = old[:len(old)-1]
+	return value
+}
+
+func mergeKSortedArrays(arrays [][]int) []int {
+	pq := &ArrayCursorHeap{}
+	totalLength := 0
+	for arrayIndex, values := range arrays {
+		totalLength += len(values)
+		if len(values) > 0 {
+			heap.Push(pq, ArrayCursor{
+				value:      values[0],
+				arrayIndex: arrayIndex,
+			})
+		}
+	}
+
+	answer := make([]int, 0, totalLength)
+	for pq.Len() > 0 {
+		current := heap.Pop(pq).(ArrayCursor)
+		answer = append(answer, current.value)
+		nextIndex := current.valueIndex + 1
+		values := arrays[current.arrayIndex]
+		if nextIndex < len(values) {
+			heap.Push(pq, ArrayCursor{
+				value:      values[nextIndex],
+				arrayIndex: current.arrayIndex,
+				valueIndex: nextIndex,
+			})
+		}
+	}
+	return answer
+}
+
+func combinationSum(candidates []int, target int) [][]int {
+	slices.Sort(candidates)
+	answer := make([][]int, 0)
+	path := make([]int, 0)
+
+	var backtrack func(int, int)
+	backtrack = func(start, remaining int) {
+		if remaining == 0 {
+			answer = append(answer, slices.Clone(path))
+			return
+		}
+		for index := start; index < len(candidates); index++ {
+			value := candidates[index]
+			if value > remaining {
+				break
+			}
+			path = append(path, value)
+			backtrack(index, remaining-value)
+			path = path[:len(path)-1]
+		}
+	}
+
+	backtrack(0, target)
+	return answer
+}
+
+func applyRangeAdditions(length int, updates [][3]int) []int {
+	if length <= 0 {
+		return nil
+	}
+	difference := make([]int, length+1)
+	for _, update := range updates {
+		left, right, delta := update[0], update[1], update[2]
+		if left < 0 || left >= length || right < left || right >= length {
+			continue
+		}
+		difference[left] += delta
+		difference[right+1] -= delta
+	}
+
+	result := make([]int, length)
+	running := 0
+	for index := range result {
+		running += difference[index]
+		result[index] = running
+	}
+	return result
+}
+
+func multiSourceGridDistance(grid [][]int, sources []Point) [][]int {
+	if len(grid) == 0 || len(grid[0]) == 0 {
+		return nil
+	}
+	rows, cols := len(grid), len(grid[0])
+	distance := make([][]int, rows)
+	for row := range distance {
+		distance[row] = make([]int, cols)
+		for col := range distance[row] {
+			distance[row][col] = -1
+		}
+	}
+
+	queue := make([]Point, 0, len(sources))
+	for _, source := range sources {
+		if source.Row < 0 || source.Row >= rows ||
+			source.Col < 0 || source.Col >= cols ||
+			grid[source.Row][source.Col] != 0 ||
+			distance[source.Row][source.Col] != -1 {
+			continue
+		}
+		distance[source.Row][source.Col] = 0
+		queue = append(queue, source)
+	}
+
+	for head := 0; head < len(queue); head++ {
+		current := queue[head]
+		for _, direction := range directions4 {
+			next := Point{
+				Row: current.Row + direction[0],
+				Col: current.Col + direction[1],
+			}
+			if next.Row < 0 || next.Row >= rows ||
+				next.Col < 0 || next.Col >= cols ||
+				grid[next.Row][next.Col] != 0 ||
+				distance[next.Row][next.Col] != -1 {
+				continue
+			}
+			distance[next.Row][next.Col] =
+				distance[current.Row][current.Col] + 1
+			queue = append(queue, next)
+		}
+	}
+	return distance
+}
+
+func dailyTemperatures(temperatures []int) []int {
+	answer := make([]int, len(temperatures))
+	stack := make([]int, 0, len(temperatures))
+	for index, temperature := range temperatures {
+		for len(stack) > 0 &&
+			temperatures[stack[len(stack)-1]] < temperature {
+			previous := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			answer[previous] = index - previous
+		}
+		stack = append(stack, index)
+	}
+	return answer
+}
+
+func countComponents(n int, edges [][2]int) int {
+	dsu := newDSU(n)
+	for _, edge := range edges {
+		dsu.union(edge[0], edge[1])
+	}
+	return dsu.components
+}
+
+func findRedundantEdge(edges [][2]int) [2]int {
+	maxNode := 0
+	for _, edge := range edges {
+		maxNode = max(maxNode, edge[0], edge[1])
+	}
+	dsu := newDSU(maxNode + 1)
+	for _, edge := range edges {
+		if !dsu.union(edge[0], edge[1]) {
+			return edge
+		}
+	}
+	return [2]int{}
+}
+
+func maxOverlappingIntervals(intervals []Interval) int {
+	type event struct {
+		time  int
+		delta int
+	}
+	events := make([]event, 0, 2*len(intervals))
+	for _, interval := range intervals {
+		if interval.start >= interval.end {
+			continue
+		}
+		events = append(events,
+			event{time: interval.start, delta: 1},
+			event{time: interval.end, delta: -1},
+		)
+	}
+	slices.SortFunc(events, func(a, b event) int {
+		if a.time != b.time {
+			return cmp.Compare(a.time, b.time)
+		}
+		return cmp.Compare(a.delta, b.delta) // End before start on ties.
+	})
+
+	active, best := 0, 0
+	for _, current := range events {
+		active += current.delta
+		best = max(best, active)
+	}
+	return best
+}
+
+func buildBinaryTreeLevelOrder(values []*int) *TreeNode {
+	if len(values) == 0 || values[0] == nil {
+		return nil
+	}
+	root := &TreeNode{Val: *values[0]}
+	queue := []*TreeNode{root}
+	index := 1
+	for head := 0; head < len(queue) && index < len(values); head++ {
+		node := queue[head]
+		if index < len(values) && values[index] != nil {
+			node.Left = &TreeNode{Val: *values[index]}
+			queue = append(queue, node.Left)
+		}
+		index++
+		if index < len(values) && values[index] != nil {
+			node.Right = &TreeNode{Val: *values[index]}
+			queue = append(queue, node.Right)
+		}
+		index++
+	}
+	return root
+}
+
+func buildTreePreorderInorder(preorder, inorder []int) *TreeNode {
+	if len(preorder) == 0 || len(preorder) != len(inorder) {
+		return nil
+	}
+	inorderIndex := make(map[int]int, len(inorder))
+	for index, value := range inorder {
+		inorderIndex[value] = index
+	}
+	preorderIndex := 0
+	var build func(int, int) *TreeNode
+	build = func(left, right int) *TreeNode {
+		if left > right {
+			return nil
+		}
+		value := preorder[preorderIndex]
+		preorderIndex++
+		node := &TreeNode{Val: value}
+		split := inorderIndex[value]
+		node.Left = build(left, split-1)
+		node.Right = build(split+1, right)
+		return node
+	}
+	return build(0, len(inorder)-1)
+}
+
+func buildRootedTree(n int, edges [][2]int, root int) [][]int {
+	graph := make([][]int, n)
+	for _, edge := range edges {
+		a, b := edge[0], edge[1]
+		graph[a] = append(graph[a], b)
+		graph[b] = append(graph[b], a)
+	}
+	children := make([][]int, n)
+	type state struct {
+		node   int
+		parent int
+	}
+	stack := []state{{node: root, parent: -1}}
+	for len(stack) > 0 {
+		current := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		for _, neighbor := range graph[current.node] {
+			if neighbor == current.parent {
+				continue
+			}
+			children[current.node] = append(children[current.node], neighbor)
+			stack = append(stack, state{node: neighbor, parent: current.node})
+		}
+	}
+	return children
+}
+
+func memoizedGridPaths(rows, cols int) int {
+	memo := make(map[[2]int]int)
+	var count func(int, int) int
+	count = func(row, col int) int {
+		if row == rows-1 && col == cols-1 {
+			return 1
+		}
+		if row >= rows || col >= cols {
+			return 0
+		}
+		key := [2]int{row, col}
+		if cached, ok := memo[key]; ok {
+			return cached
+		}
+		memo[key] = count(row+1, col) + count(row, col+1)
+		return memo[key]
+	}
+	if rows <= 0 || cols <= 0 {
+		return 0
+	}
+	return count(0, 0)
+}
+
+func runLengthEncode(s string) string {
+	if s == "" {
+		return ""
+	}
+	var builder strings.Builder
+	for start := 0; start < len(s); {
+		end := start + 1
+		for end < len(s) && s[end] == s[start] {
+			end++
+		}
+		builder.WriteByte(s[start])
+		builder.WriteString(strconv.Itoa(end - start))
+		start = end
+	}
+	return builder.String()
+}
+
+func intFromBase10Digits(digits []int) (int, bool) {
+	value := 0
+	for _, digit := range digits {
+		if digit < 0 || digit > 9 {
+			return 0, false
+		}
+		value = value*10 + digit
+	}
+	return value, true
+}
+
+func primeFactorCounts(n int) map[int]int {
+	factors := make(map[int]int)
+	if n < 0 {
+		n = -n
+	}
+	for factor := 2; factor <= n/factor; factor++ {
+		for n%factor == 0 {
+			factors[factor]++
+			n /= factor
+		}
+	}
+	if n > 1 {
+		factors[n]++
+	}
+	return factors
+}
+
+// ===================================================================
+// 13. Main / Local Script Pattern
 // ===================================================================
 
 func solve(nums []int) int {
-	return sumValues(nums)
+	total := 0
+	for _, value := range nums {
+		total += value
+	}
+	return total
 }
 
 func assert(condition bool, message string) {
@@ -1787,6 +2562,129 @@ func runSmokeChecks() {
 	assert(validParentheses("([]{})"), "valid parentheses")
 	assert(kadaneMaxSubarray([]int{-2, 1, -3, 4, -1, 2, 1}) == 6, "Kadane")
 	assert(canPartition01Knapsack([]int{1, 5, 11, 5}), "0/1 knapsack")
+	assert(fixedWindowMaxSum([]int{1, 2, 3, 4}, 2) == 7, "fixed window")
+	assert(fixedWindowMaxSum([]int{1, 2}, 3) == 0, "invalid fixed window")
+	assert(kadaneMaxSubarray(nil) == 0, "empty Kadane")
+	assert(
+		slices.Equal(
+			applyRangeAdditions(
+				3,
+				[][3]int{{0, 1, 2}, {1, 2, 3}},
+			),
+			[]int{2, 5, 3},
+		),
+		"difference array",
+	)
+	assert(
+		slices.Equal(
+			dailyTemperatures([]int{73, 74, 75, 71, 69, 72, 76, 73}),
+			[]int{1, 1, 4, 2, 1, 1, 0, 0},
+		),
+		"daily temperatures",
+	)
+	assert(
+		countComponents(5, [][2]int{{0, 1}, {1, 2}, {3, 4}}) == 2,
+		"DSU components",
+	)
+	assert(
+		findRedundantEdge([][2]int{{1, 2}, {1, 3}, {2, 3}}) == [2]int{2, 3},
+		"redundant edge",
+	)
+	assert(
+		maxOverlappingIntervals(
+			[]Interval{{start: 0, end: 30}, {start: 5, end: 10}},
+		) == 2,
+		"interval sweep",
+	)
+	assert(memoizedGridPaths(3, 3) == 6, "memoized recursion")
+	assert(runLengthEncode("aaabb") == "a3b2", "run-length encoding")
+	parsedDigits, digitsOK := intFromBase10Digits([]int{1, 2, 3})
+	assert(parsedDigits == 123 && digitsOK, "digits to integer")
+	assert(maps.Equal(primeFactorCounts(12), map[int]int{2: 2, 3: 1}), "factors")
+	assert(
+		slices.Equal(
+			topKFrequent([]int{1, 1, 1, 2, 2, 3}, 2),
+			[]int{1, 2},
+		),
+		"top K frequent",
+	)
+	assert(coinChangeTopDown([]int{1, 2, 5}, 11) == 3, "coin change")
+	assert(
+		medianTwoSortedPartition([]int{1, 3}, []int{2}) == 2,
+		"median partition",
+	)
+	assert(
+		meetingRoomsTwoPointer(
+			[]Interval{{start: 0, end: 30}, {start: 5, end: 10}},
+		) == 2,
+		"meeting rooms",
+	)
+	assert(
+		slices.Equal(
+			insertInterval(
+				[]Interval{{start: 1, end: 3}, {start: 6, end: 9}},
+				Interval{start: 2, end: 5},
+			),
+			[]Interval{{start: 1, end: 5}, {start: 6, end: 9}},
+		),
+		"insert interval",
+	)
+	assert(
+		eraseOverlapIntervals(
+			[]Interval{
+				{start: 1, end: 2},
+				{start: 2, end: 3},
+				{start: 1, end: 3},
+			},
+		) == 1,
+		"erase overlap intervals",
+	)
+	assert(
+		slices.Equal(
+			mergeKSortedArrays(
+				[][]int{{1, 4}, {1, 3, 5}, {2, 6}},
+			),
+			[]int{1, 1, 2, 3, 4, 5, 6},
+		),
+		"merge K arrays",
+	)
+	assert(len(combinationSum([]int{2, 3, 6, 7}, 7)) == 2, "combination sum")
+
+	trie := newTrie()
+	trie.insert("apple")
+	assert(trie.search("apple"), "trie search")
+	assert(!trie.search("app") && trie.startsWith("app"), "trie prefix")
+	assert(trie.wildcardSearch("a..le"), "trie wildcard")
+
+	cache := newLRUCache(2)
+	cache.put(1, 1)
+	cache.put(2, 2)
+	assert(cache.get(1) == 1, "LRU get")
+	cache.put(3, 3)
+	assert(cache.get(2) == -1, "LRU eviction")
+
+	list := &ListNode{
+		Val:  1,
+		Next: &ListNode{Val: 2, Next: &ListNode{Val: 3}},
+	}
+	list = removeNthFromEnd(list, 2)
+	assert(list.Val == 1 && list.Next.Val == 3, "remove Nth from end")
+
+	distance := gridBFSDistance(
+		[][]int{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}},
+		Point{Row: 0, Col: 0},
+	)
+	assert(distance[2][2] == 4, "grid BFS distance")
+	multiDistance := multiSourceGridDistance(
+		[][]int{{0, 0, 0}, {0, 0, 0}},
+		[]Point{{Row: 0, Col: 0}, {Row: 1, Col: 2}},
+	)
+	assert(multiDistance[0][2] == 1, "multi-source BFS")
+	assert(mutexCounterPattern(4) == 4, "mutex counter")
+	assert(
+		slices.Equal(bufferedChannelPattern([]int{1, 2, 3}), []int{1, 2, 3}),
+		"buffered channel",
+	)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
