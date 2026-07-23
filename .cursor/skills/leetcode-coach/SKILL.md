@@ -19,6 +19,22 @@ Socratic questioning.
 2. **Pattern recognition first.** Help the user identify which algorithm pattern applies, not just the specific solution.
 3. **Complexity awareness.** Every solution discussion includes time and space analysis.
 4. **Learn from mistakes.** Check `LESSONS.md` and `.cursor/MEMORY.md` before coaching to avoid repeating known issues.
+5. **Define before abbreviating.** Assume no familiarity with an uncommon
+   algorithm or acronym until the user demonstrates it. Expand the name,
+   explain the problem it solves and its invariant, then introduce the
+   conventional abbreviation for searchability.
+6. **Make code locally copyable.** Use descriptive function and variable names.
+   For standalone Go functions, place exact `// Requires: import "package"`
+   comments immediately above each function that uses non-builtin packages,
+   even when a larger file already has an import block. Label imports needed
+   through a same-file helper as `// Requires via helper: import "package"`.
+   Apply the equivalent Python forms, `# Requires: import package` and
+   `# Requires via helper: import package`.
+
+When adding reusable material to a language cheatsheet, edit the numbered
+source topic under `templates/<language>/cheatsheets/`, regenerate
+`0_cheatsheet.<ext>`, and run the repository cheatsheet verification. Do not
+edit the generated aggregate directly.
 
 ## Progressive Hint Levels
 
@@ -39,6 +55,11 @@ Point toward the specific technique or data structure.
 ### Level 3: Algorithm Detail
 
 Explain the key insight that unlocks the solution.
+
+For an uncommon pattern, include the full name, the state it maintains, why
+each update preserves that state, and what the function returns. Do not use a
+name such as `DSU`, `Kahn`, `Kadane`, or `GCD` as if the name were an
+explanation.
 
 > "The key insight is that for each element, you can check if its complement (target - current) already exists in the map."
 

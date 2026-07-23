@@ -11,6 +11,7 @@ A self-evolving LeetCode practice environment in Cursor: **your** machine runs a
 | **LeetCode MCP** | A Node process Cursor starts from **`.cursor/mcp.json`** (you create this file locally; it is **not** committed). | Copy `.cursor/mcp-example.json` → `.cursor/mcp.json`, fill in paths, reload Cursor. |
 | **Cursor rules** | Always-on guidance in `.cursor/rules/` (problem-solving steps, memory, banned tools). | Nothing special — they steer the agent automatically. |
 | **Skills** | `leetcode-coach`, `interview-simulator`, and `language-coach` under `.cursor/skills/`. | Hints/reviews, interview follow-ups, or language/syntax deep-dives with tracked progress in `language-coach/learning/`. |
+| **Language cheatsheets** | Numbered Go and Python topic files in `templates/<language>/cheatsheets/` (with `0_cheatsheet.<ext>` generated at the top). | Edit a numbered topic, then run `npm run cheatsheets:generate` and `npm run cheatsheets:verify`. |
 | **System design guide** | `system-design/` study notes for senior+ system design interviews. | Start with `system-design/cheatsheet.md`, then use `system-design/databases/cheatsheet.md` or `system-design/cache/cheatsheet.md` under time pressure. |
 | **`.cursor/MEMORY.md`** | Gitignored file the agent updates with durable preferences, weak areas, and progress patterns. | Optional: skim it; let the agent maintain it after substantive sessions. |
 | **`progress.md`** | Committed tracker table for problems and languages. | Update with the agent or by hand as you solve problems. |
@@ -148,6 +149,9 @@ solutions/                 # One folder per language; files: NNNN-slug.ext
     solved/
     unsolved/
   golang/
+templates/
+  golang/cheatsheets/      # 0_cheatsheet.go (generated) + numbered Go topics
+  python/cheatsheets/      # 0_cheatsheet.py (generated) + numbered Python topics
 system-design/             # Senior+ system design study guide and database choice cheatsheets
 .cursor/
   mcp-example.json         # Committed template — copy to mcp.json locally

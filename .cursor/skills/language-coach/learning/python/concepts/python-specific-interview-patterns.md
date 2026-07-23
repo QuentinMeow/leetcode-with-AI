@@ -95,18 +95,27 @@ These additions fill the gap between algorithm templates and common-library note
 
 ## Addenda
 
-### 2026-06-09
+### 2026-07-23
 
-Added `templates/python/cheatsheet.py` as a compact pre-interview scan sheet that compresses the existing language-specific and algorithm templates into adjacent Python idioms: container initialization, copying, sorting, heaps, iteration, strings/numbers/bits, function scope, nodes/dataclasses, common algorithm skeletons, and the local `main()` guard pattern.
-
-### 2026-06-09
-
-Expanded `templates/python/cheatsheet.py` after mining existing Python solutions and local hot-pattern references. Added compact snippets for custom sorting (`key`, named key, `cmp_to_key`, `__lt__`), `bisect`, set-based sliding windows, 3Sum, rotated search, two-array median partition, 1D/2D prefix sums, interval insertion/meeting rooms, linked-list rewiring, LRU via both doubly linked list and `OrderedDict`, tree/grid BFS, Kahn topological sort, Dijkstra, stack variants, merge-k, Kadane, rolling/2D/knapsack DP, permutations/combination sum, 32-bit integer clamps, abbreviation/record parsing, and matrix gravity/simulation patterns.
-
-### 2026-06-09
-
-Refined `templates/python/cheatsheet.py` with a "Python Idiom Decoder" section and more inline comments for constructs that differ from other languages. The sorting section now explicitly distinguishes key extractors from pairwise comparators and documents `sorted(<iterable>, key=lambda <element>: <sort_key>)`, `itemgetter`, `attrgetter`, tuple sort keys, and `cmp_to_key`. Added similar compact explanations near `defaultdict`, `Counter`, comprehensions, generator expressions, star unpacking, `nonlocal`, `@cache`, and `@dataclass`.
+Replaced the monolithic Python source with numbered topics under
+`templates/python/cheatsheets/` (numbered topic files) and a generated
+`templates/python/cheatsheets/0_cheatsheet.py`. The revision expands
+non-basic algorithm names, invariants, return meanings, complexity notes, and
+per-function or per-class import requirements. Duplicate node definitions and
+private duplicate helpers were removed.
 
 ### 2026-06-09
 
-Refactored `templates/python/cheatsheet.py` comments to keep explanations next to the relevant code instead of in a detached decoder block. Removed the standalone idiom section and retained local comments beside sorting keys, `defaultdict`, `Counter`, comprehensions, generator expressions, `nonlocal`, `@cache`, and dataclass examples.
+Added a compact Python pre-interview scan sheet that compresses the existing language-specific and algorithm templates into adjacent Python idioms: container initialization, copying, sorting, heaps, iteration, strings/numbers/bits, function scope, nodes/dataclasses, common algorithm skeletons, and the local `main()` guard pattern.
+
+### 2026-06-09
+
+Expanded the Python cheatsheet after mining existing Python solutions and local hot-pattern references. Added compact snippets for custom sorting (`key`, named key, `cmp_to_key`, `__lt__`), `bisect`, set-based sliding windows, 3Sum, rotated search, two-array median partition, 1D/2D prefix sums, interval insertion/meeting rooms, linked-list rewiring, LRU via both doubly linked list and `OrderedDict`, tree/grid BFS, Kahn topological sort, Dijkstra, stack variants, merge-k, Kadane, rolling/2D/knapsack DP, permutations/combination sum, 32-bit integer clamps, abbreviation/record parsing, and matrix gravity/simulation patterns.
+
+### 2026-06-09
+
+Refined the Python cheatsheet with a "Python Idiom Decoder" section and more inline comments for constructs that differ from other languages. The sorting section now explicitly distinguishes key extractors from pairwise comparators and documents `sorted(<iterable>, key=lambda <element>: <sort_key>)`, `itemgetter`, `attrgetter`, tuple sort keys, and `cmp_to_key`. Added similar compact explanations near `defaultdict`, `Counter`, comprehensions, generator expressions, star unpacking, `nonlocal`, `@cache`, and `@dataclass`.
+
+### 2026-06-09
+
+Refactored the Python cheatsheet comments to keep explanations next to the relevant code instead of in a detached decoder block. Removed the standalone idiom section and retained local comments beside sorting keys, `defaultdict`, `Counter`, comprehensions, generator expressions, star unpacking, `nonlocal`, `@cache`, and dataclass examples.

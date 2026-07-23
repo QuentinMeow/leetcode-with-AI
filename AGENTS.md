@@ -14,6 +14,8 @@ This repo is a LeetCode practice environment with AI coaching. Solutions live un
 | Path | Purpose |
 |------|---------|
 | `solutions/<language>/` | Solution files, one per problem, named `<NNNN>-<slug>.<ext>`; Python uses `solved/` and `unsolved/` subfolders |
+| `templates/<language>/cheatsheets/` | Numbered learner-facing cheatsheet topic sources (`01_…`–`NN_…`) plus generated `0_cheatsheet.<ext>` |
+| `templates/<language>/cheatsheets/0_cheatsheet.<ext>` | Generated all-in-one cheatsheet; never edit directly |
 | `.cursor/mcp-example.json` | **Committed** template for LeetCode MCP — copy to `.cursor/mcp.json` and edit (see README). |
 | `.cursor/mcp.json` | **Gitignored** — your real MCP config (paths, optional `LEETCODE_SESSION`). Cursor reads this file name only after you create it. |
 | `.cursor/rules/<name>/RULE.md` | Cursor project rules |
@@ -43,6 +45,10 @@ ls solutions/golang/
 # Fetch catalog JSON → data/leetcode/… then generate solution stubs
 npm run leetcode:fetch-lists
 npm run leetcode:generate-skeletons
+
+# Regenerate and verify Go/Python cheatsheet aggregates
+npm run cheatsheets:generate
+npm run cheatsheets:verify
 ```
 
 ## Guidance to AI Agent Tasks
