@@ -3,7 +3,7 @@ concept_id: py-data-structure-crud-patterns
 title: Python Data Structure CRUD Patterns
 lang: python
 depth: standard
-last_session: 2026-06-25
+last_session: 2026-07-23
 related_slugs:
   - python-specific-interview-patterns
   - common-libraries
@@ -17,7 +17,10 @@ related_slugs:
 - `pop*` methods return the removed element; `remove`, `discard`, `del`, `clear`, `sort`, and `reverse` mutate without returning a useful value.
 - `list`, `set`, `dict`, `heapq`, `deque`, and `queue.Queue` share concepts but use different verbs.
 - The cheat sheet prefers module-qualified calls such as `collections.Counter(...)`, `heapq.heappush(...)`, and `bisect.bisect_left(...)` so examples teach where helpers come from.
-- The compact reference now lives in `templates/python/cheatsheet.py` section 2.
+- The focused reference lives in
+  `templates/python/cheatsheets/03_data-structures-create-read-update-delete_list-set-dict-heap-deque.py`;
+  the generated all-in-one scan is
+  `templates/python/cheatsheets/0_cheatsheet.py`.
 
 ## What you already know
 
@@ -35,7 +38,8 @@ related_slugs:
 
 ### 2026-06-25
 
-Reorganized `templates/python/cheatsheet.py` section 2 into a "Python Data Structures - CRUD Cheat Sheet" modeled after a visual table style:
+Reorganized the Python cheatsheet's data-structures section into a "Python
+Data Structures - CRUD Cheat Sheet" modeled after a visual table style:
 
 - Big naming logic table for add/read/update/delete verbs.
 - Master memory table comparing `list`, `set`, `dict`, `heapq`, and `deque`.
@@ -44,7 +48,8 @@ Reorganized `templates/python/cheatsheet.py` section 2 into a "Python Data Struc
 
 ### 2026-06-25
 
-Updated `templates/python/cheatsheet.py` to prefer module-qualified standard-library usage:
+Updated the Python cheatsheet to prefer module-qualified standard-library
+usage:
 
 - Use `import module` instead of `from module import helper`.
 - Write calls as `collections.Counter(...)`, `collections.deque(...)`, `heapq.heappush(...)`, `bisect.bisect_left(...)`, `functools.cache(...)`, `operator.itemgetter(...)`, `dataclasses.dataclass`, and `collections.abc.Iterable`.
@@ -72,4 +77,11 @@ Updated `templates/python/cheatsheet.py` to prefer module-qualified standard-lib
 - [common-libraries](common-libraries.md) - standard-library modules used by the CRUD patterns.
 
 ## Addenda
+
+### 2026-07-23
+
+Moved the CRUD examples into a numbered, independently parseable topic file.
+The aggregate is generated from an ordered manifest, and every function that
+uses the standard library now carries an exact local `# Requires: import ...`
+comment.
 

@@ -1,5 +1,8 @@
 {
   "scripts": {
+    "cheatsheets:generate": "node scripts/generate-cheatsheets.mjs",
+    "cheatsheets:check": "node scripts/generate-cheatsheets.mjs --check",
+    "cheatsheets:verify": "npm run cheatsheets:check && GO111MODULE=off go test ./templates/golang/cheatsheets && go run templates/golang/cheatsheets/0_cheatsheet.go && python3 -m compileall -q templates/python/cheatsheets && python3 templates/python/cheatsheets/0_cheatsheet.py",
     "leetcode:fetch-lists": "node scripts/fetch-leetcode-problem-lists.mjs",
     "leetcode:generate-skeletons": "node scripts/generate-leetcode-skeletons.mjs"
   },

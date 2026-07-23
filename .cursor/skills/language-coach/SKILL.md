@@ -52,6 +52,64 @@ Weave in as appropriate (do not force every bullet every time):
 
 Extended checklist: [references/interview-language-topics.md](references/interview-language-topics.md).
 
+## Learner-facing code artifacts
+
+When creating or revising a cheatsheet, template, concept note, or standalone
+snippet for a learner who has not demonstrated prior knowledge:
+
+- Define every non-basic term, acronym, algorithm name, and invariant before its
+  first use. For example, expand “greatest common divisor” before using `GCD`,
+  and explain what the result means rather than only presenting the recurrence.
+- Prefer names that state purpose (`greatestCommonDivisor`,
+  `disjointSetUnion`) over unexplained abbreviations (`gcd`, `DSU`). If the
+  abbreviated term is conventional and searchable, show it after the full name.
+- Explain uncommon syntax and style locally, including why it is used and what
+  a simpler alternative would mean. Do not assume a compact idiom is familiar.
+- Make copyable functions self-contained. Immediately above every function that
+  directly uses a non-builtin package, add exact Go-style import syntax such as
+  `// Requires: import "sort"`; list multiple imports separately or in an
+  import block comment. A file-level import block is not a substitute. If the
+  function delegates package-dependent work to a same-file helper, also show
+  `// Requires via helper: import "package"` so copying the complete snippet
+  does not hide a transitive dependency.
+- For algorithms, state the trigger, maintained invariant, return meaning, and
+  time/space complexity unless the operation is genuinely basic.
+- For a refactor inspired by an external reference, audit technical topic
+  coverage section by section. Adopting only the outline is insufficient unless
+  the user explicitly requests structure without content parity.
+
+### Cheatsheet repository layout
+
+For large language cheatsheets:
+
+- Store editable topics as numbered files in
+  `templates/<language>/cheatsheets/` beside the generated aggregate.
+- Name each source
+  `<order>_<topic>_<touched-structures-or-libraries>.<ext>` with a numeric
+  prefix so `0_cheatsheet.<ext>` sorts first in the folder listing.
+  The name must tell a learner both what is taught and which containers,
+  language structures, or libraries appear.
+- Generate `templates/<language>/cheatsheets/0_cheatsheet.<ext>` by
+  concatenating manifest-ordered topic files. Numbered sources are the source
+  of truth; never hand-edit the generated aggregate.
+- Keep each numbered file syntactically valid with its own package/module
+  header and only the imports that file directly needs. The generator removes
+  those wrappers and emits one combined package/module and deduplicated imports.
+- Put the aggregate smoke harness in the final numbered section so generation
+  preserves the same executable verification.
+- Verify section compilation, aggregate regeneration, aggregate execution, and
+  a no-drift regeneration check after edits.
+- Readability outranks compactness. Do not enforce a narrow line-width or
+  “fast scan” goal when it would remove definitions, invariants, import
+  requirements, or beginner-facing explanations.
+
+For Python, apply the same import rule as Go:
+
+- Use `# Requires: import <module>` immediately above each function or class
+  that directly uses a non-builtin module.
+- Use `# Requires via helper: import <module>` for a visible transitive
+  dependency.
+
 ## Relation to other repo artifacts
 
 - **`.cursor/MEMORY.md`**: preferences and habits; optional cross-link to slugs, but **authoritative mastery lives in `learning/`**.

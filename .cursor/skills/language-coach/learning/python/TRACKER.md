@@ -20,8 +20,8 @@ Add a row when a new concept is introduced. **Do not remove rows** when depth in
 | Concept | Slug | Depth | Updated | Summary | Gap / next |
 |---------|------|-------|---------|---------|------------|
 | Interview Algorithm Templates | interview-algorithm-templates | standard | 2026-06-09 | Ranked Python algorithm-pattern templates for interview prep, with variants and complexity notes | Add advanced patterns and Python idiom notes as they come up |
-| Python-Specific Interview Patterns | python-specific-interview-patterns | deep | 2026-06-09 | Python syntax, inline idiom comments, common containers/libraries, custom sorting, parsing, OOP, strings/numbers/bits, and an expanded interview cheatsheet | Add protocol/performance notes as they appear in problems |
+| Python-Specific Interview Patterns | python-specific-interview-patterns | deep | 2026-07-23 | Python syntax, inline idiom comments, descriptive algorithm references, local import requirements, and numbered generated cheatsheets | Add protocol/performance notes as they appear in problems |
 | Python Common Libraries | common-libraries | standard | 2026-06-09 | Standard-library helpers for interviews and daily tasks: collections, heapq, bisect, itertools, functools, math, re, json, csv, pathlib, datetime, and dataclasses | Practice choosing helpers by invariant and add more daily-task modules as needed |
-| Python Data Structure CRUD Patterns | data-structure-crud-patterns | standard | 2026-06-25 | CRUD naming logic and side-by-side examples using module-qualified standard-library calls for containers and helpers | Practice choosing containers by ordering, uniqueness, priority, FIFO/LIFO, and concurrency constraints |
+| Python Data Structure CRUD Patterns | data-structure-crud-patterns | standard | 2026-07-23 | Numbered CRUD reference with side-by-side examples and local module-qualified import requirements | Practice choosing containers by ordering, uniqueness, priority, FIFO/LIFO, and concurrency constraints |
 
 Keep **one row per concept** for the life of the corpus.

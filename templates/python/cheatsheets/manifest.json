@@ -1,0 +1,33 @@
+{
+  "language": "python",
+  "output": "0_cheatsheet.py",
+  "intro": [
+    "Python interview cheatsheet.",
+    "",
+    "Read numbered sections in order or open one source topic in this folder alongside 0_cheatsheet.*.",
+    "Examples target modern Python 3 and explain non-basic syntax locally."
+  ],
+  "sections": [
+    "01_version-syntax-map_typing-match-walrus.py",
+    "02_common-imports_collections-heapq-bisect.py",
+    "03_data-structures-create-read-update-delete_list-set-dict-heap-deque.py",
+    "04_copying-binding-mutability_list-slice-matrix.py",
+    "05_sorting-comparison-heap_bisect-functools-operator.py",
+    "06_iteration-comprehensions_itertools-range-zip.py",
+    "07_strings-numbers-bits_re-math-Counter.py",
+    "08_functions-scope-decorators_functools-cache-nonlocal.py",
+    "09_classes-nodes-dataclasses_ListNode-TreeNode-Trie.py",
+    "10_core-algorithms_map-window-graph-heap-union-find.py",
+    "11_sliding-window-two-pointers-palindromes_set-map.py",
+    "12_strings-advanced-binary-search_math-partition.py",
+    "13_hashing-prefix-sums-intervals_defaultdict-math.py",
+    "14_linked-list-patterns_ListNode.py",
+    "15_cache-design_OrderedDict-doubly-linked-list.py",
+    "16_trees-graphs-shortest-path_deque-heapq.py",
+    "17_stacks-heap-merging_MinStack-heapq.py",
+    "18_dynamic-programming-backtracking_cache-knapsack.py",
+    "19_math-primes-parsing_math-sys.py",
+    "20_matrix-simulation-recursion_list-sys.py",
+    "21_main-guard-smoke-check___main__-file-io.py"
+  ]
+}
